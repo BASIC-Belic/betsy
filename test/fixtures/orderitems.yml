@@ -1,7 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  quantity_per_item: 1
-
-two:
-  quantity_per_item: 1
