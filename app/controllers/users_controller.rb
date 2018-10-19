@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   before_action :find_user_products, only: :shop
   before_action :find_searched_user, only: :show
 
-
-  #PROFILE, PURCHASE HISTORY
+  #PROFILE
   def show
     # head: not_found unless @user
     head: not_found unless @user
@@ -32,8 +31,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  #PUT IN MODEL?
   def find_user_products
-    @user_products = User.find_by(@current_user).products
+    @user_products = @user.find_products
   end
 end
