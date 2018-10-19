@@ -86,8 +86,8 @@ class UsersController < ApplicationController
 
   #PUT IN MODEL?
   def find_user_products
-    if session[:user_id]
-      @user_products = User.find_by(id: params[:user_id]).products
+    if @current_user
+      @user_products = User.find_by(id: session[:user_id]).products
     elsif session[:guest_user_id]
       @user_products = nil
     end
@@ -95,8 +95,8 @@ class UsersController < ApplicationController
 
   #PUT IN MODEL?
   def find_user_orders
-    if session[:user_id]
-      @user_orders = User.find_by(id: params[:user_id]).orders
+    if @current_user
+      @user_orders = User.find_by(id: session[:user_id]).orders
     elsif session[:guest_user_id]
       @user_orders = nil
     end
