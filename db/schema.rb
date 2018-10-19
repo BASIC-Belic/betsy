@@ -30,15 +30,14 @@ ActiveRecord::Schema.define(version: 2018_10_18_220256) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "orderitems", force: :cascade do |t|
-    t.integer "quantity_per_item"
+  create_table "order_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "shipped", default: false
     t.bigint "order_id"
     t.bigint "item_id"
-    t.index ["item_id"], name: "index_orderitems_on_item_id"
-    t.index ["order_id"], name: "index_orderitems_on_order_id"
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -81,8 +80,8 @@ ActiveRecord::Schema.define(version: 2018_10_18_220256) do
   end
 
   add_foreign_key "items", "users"
-  add_foreign_key "orderitems", "items"
-  add_foreign_key "orderitems", "orders"
+  add_foreign_key "order_items", "items"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "items"
   add_foreign_key "reviews", "users"
