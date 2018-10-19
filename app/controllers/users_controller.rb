@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_user, only: :show
+  # before_action :find_user, only: :show
 
   #PUT THIS IN METHOD IN MODEL?
   before_action :find_user_products, only: :shop
@@ -13,7 +13,8 @@ class UsersController < ApplicationController
 
   #PROFILE, PURCHASE HISTORY
   def show
-    head: not_found unless @user
+    # head: not_found unless @user
+    head: not_found unless @current_user
     # render 'layouts/invalid_page', status: :not_found
   end
 
@@ -79,9 +80,9 @@ class UsersController < ApplicationController
     )
   end
 
-  def find_user
-    @user = User.find_by(id: params[:id])
-  end
+  # def find_user
+  #   @user = User.find_by(id: params[:id])
+  # end
 
   #PUT IN MODEL?
   def find_user_products
