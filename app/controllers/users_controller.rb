@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
   # before_action :find_user, only: :show
-
-  #PUT THIS IN METHOD IN MODEL?
+  
   before_action :find_user_products, only: :shop
   before_action :find_user_orders, only: :orders
 
