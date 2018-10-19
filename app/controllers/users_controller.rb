@@ -34,7 +34,6 @@ class UsersController < ApplicationController
 
   #PUT IN MODEL?
   def find_user_products
-
     @user_products = User.find_by(@current_user).products
   end
 end
