@@ -9,8 +9,8 @@ class User < ApplicationRecord
 
   private
 
-  #instance method to find products for this user
-  def find_products
-    return self.products
+  #instance method to find items this user sells
+  def find_items
+    return self.items
   end
 end

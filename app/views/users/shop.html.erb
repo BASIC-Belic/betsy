@@ -1,0 +1,22 @@
+<main>
+<%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile'", style: 'float:right;'%>
+<ul>
+<li><%= @current_user.id %></li>
+<li><%= @current_user.name %></li>
+<li><%= @current_user.nickname %></li>
+<li><%= @current_user.email %></li>
+</ul>
+
+<section>
+  <h2>My Shop</h2>
+  <ul>
+    <%@current_user_items.each do |item| %>
+    <li><%=item.name%></li>
+    <li><%=item.quantity_available%></li>
+    <li><%=item.price%></li>
+    <li><%=item.category_id%></li>
+    <%end%>
+  </ul>
+</section>
+
+</main>
