@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-
-  before_action :find_current_user_items, only: :shop
   #remove shop from below filter once conenct user_login
-  before_action :find_searched_user, only: [:show, :shop]
+  before_action :find_searched_user, only: [:show]
+  before_action :find_current_user_items, only: [:shop]
 
   #PROFILE
   def show
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def shop
-    redirect_to root_path unless current_user
+    redirect_to root_path unless @current_user
   end
 
   private
@@ -32,10 +31,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  #instance method to find items this user sells
   def find_current_user_items
-    #ncomment and use this code once have user_login
-    # @current_user_items = current_user_items
-    @current_user = User.find(19)
-    @current_user_items = User.find(19).items
+    if @current_user
+      @current_user_items = @current_user.items
+    end
   end
 end

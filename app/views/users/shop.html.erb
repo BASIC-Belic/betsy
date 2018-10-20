@@ -1,22 +1,25 @@
 <main>
-<%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile'", style: 'float:right;'%>
+
+<%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile pic", style: 'float:right;'%>
 <ul>
-<li><%= @current_user.id %></li>
-<li><%= @current_user.name %></li>
-<li><%= @current_user.nickname %></li>
-<li><%= @current_user.email %></li>
+<li><strong>Id: </strong><%= @current_user.id %></li>
+<li><strong>Name: </strong><%= @current_user.name %></li>
+<li><strong>Username: </strong><%= @current_user.nickname %></li>
+<li><strong>Contact: </strong><%= @current_user.email %></li>
 </ul>
 
 <section>
-  <h2>My Shop</h2>
-  <ul>
-    <%@current_user_items.each do |item| %>
-    <li><%=item.name%></li>
-    <li><%=item.quantity_available%></li>
-    <li><%=item.price%></li>
-    <li><%=item.category_id%></li>
-    <%end%>
-  </ul>
+  <h2><%=@current_user.name%>'s Shop</h2>
+  <div class="product">
+    <ul>
+      <%@current_user_items.each do |item| %>
+      <li><strong>For sale: </strong><%=item.name%></li>
+      <li><strong>Stock: </strong><%=item.quantity_available%></li>
+      <li><strong>Price: </strong>$<%=item.price%></li>
+      <li><strong>Category:  </strong><%=item.category_id%></li>
+      <%end%>
+    </ul>
+  </div>
 </section>
 
 </main>
