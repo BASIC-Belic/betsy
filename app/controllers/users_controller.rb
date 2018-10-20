@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   #PROFILE
   def show
-    head: not_found unless @user
+    head :not_found unless @user
     # render 'layouts/invalid_page', status: :not_found
   end
 
