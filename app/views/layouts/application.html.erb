@@ -11,25 +11,31 @@
 
   <body>
     <header>
+      <section class = "top_of_page">
+        <ul>
 
-      <% if session[:user_id] %>
-        <% current_user = User.find_by(id: session[:user_id]) %>
-        <p>
-          Welcome, <%= current_user.nickname %>
-        </p>
-      <% end %>
+            <% if session[:user_id] %>
+              <% current_user = User.find_by(id: session[:user_id]) %>
+                <li><p>
+                  Welcome, <%= current_user.nickname %>
+                </li></p>
+            <% end %>
 
-      <ul>
-        <li>
-          <%= link_to "Log Out", logout_path, method: :post %>
-        </li>
-        <li>
-          <%= link_to "Log In", "/auth/github" %>
-        </li>
-      </ul>
+          <% if session[:user_id] %>
+            <li>
+              <%= link_to "Log Out", logout_path, method: :post %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Log In", "/auth/github" %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
 
       <h1>Store Name</h1>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+      <nav class="navbar navbar-expand-lg navbar-light ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,14 +49,12 @@
                 Categories
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Accessories</a>
-                <a class="dropdown-item" href="#">Books</a>
-                <a class="dropdown-item" href="#">Clothing</a>
-                <a class="dropdown-item" href="#">Horror</a>
-                <a class="dropdown-item" href="#">Luggage</a>
-                <a class="dropdown-item" href="#">Shoes</a>
-                <a class="dropdown-item" href="#">Tech</a>
-                <a class="dropdown-item" href="#">Miscellaneous</a>
+
+                <% categories = Category.all %>
+                <% categories.each do |category| %>
+                  <a class="dropdown-item" href="#"><%= link_to "#{category.category_type}", category_path(category.id)%></a>
+                <% end %>
+
               </div>
             </li>
             <li class="nav-item dropdown">

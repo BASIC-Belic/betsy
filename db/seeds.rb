@@ -3,5 +3,15 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   movies = Movie.create(
+#[
+#  { name: 'Star Wars' },
+#  { name: 'Lord of the Rings' }
+#  ]
+#)
 #   Character.create(name: 'Luke', movie: movies.first)
+
+x = ["accessories", "books", "clothing", "horror", "luggage", "shoes", "tech", "miscellaneous"]
+x.each do |category|
+  Category.create(category_type: category)
+end
