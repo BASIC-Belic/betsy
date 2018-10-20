@@ -2,6 +2,15 @@ class OrderitemsController < ApplicationController
 
   def create
 
+
+    if session[:order_id]
+      @order = Order.find(session[:order_id])
+    else
+      @order = Order.new
+    end
+  
+
+
     @order_item = @order.order_items.new(order_item_params)
     @order.save
 
