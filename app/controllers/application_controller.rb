@@ -24,20 +24,18 @@ class ApplicationController < ActionController::Base
   end
 
 
-    def require_login
-      unless @current_user
-        flash[:failure] = "You must be logged in to do that."
-        redirect_to root_path
-      end
+  def require_login
+    unless @current_user
+      flash[:failure] = "You must be logged in to do that."
+      redirect_to root_path
     end
   end
+end
 
-  def current_order
-    if session[:order_id]
-      @order = Order.find(session[:order_id])
-    else
-      @order = Order.new
-    end
+def current_order
+  if session[:order_id]
+    @order = Order.find(session[:order_id])
+  else
+    @order = Order.new
   end
-
 end
