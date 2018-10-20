@@ -58,8 +58,11 @@
                 Merchants
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">#Loop through sellers</a>
-              </div>
+               <% @merchant_ids.each do |id| %>
+                 <% merchant = User.find_by(id: id) %>
+                 <a class="dropdown-item" href="#"><%= merchant.nickname %></a>
+               <% end %>
+             </div>
             </li>
           </ul>
         </div>

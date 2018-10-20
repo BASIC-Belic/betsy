@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_current_user
   before_action :find_all_merchants
-  before_action :require_login, except: :index
+  # before_action :require_login, except: :index
 
   private
 
@@ -12,14 +12,21 @@ class ApplicationController < ActionController::Base
   end
 
   #find all merchants
+  # @merchants = User.where(products: [])
+  #find all merchants
   def find_all_merchants
-    @merchants = User.where(products: [])
-  end
-
-  def require_login
-    unless @current_user
-      flash[:failure] = "You must be logged in to do that."
-      redirect_to root_path
+    active_products = Item.where(active: true)
+    distinct_merchant_objects = active_products.select(:user_id).distinct
+    @merchant_ids = distinct_merchant_objects.map do |merchant|
+      merchant.user_id
     end
   end
-end
+
+
+    def require_login
+      unless @current_user
+        flash[:failure] = "You must be logged in to do that."
+        redirect_to root_path
+      end
+    end
+  end
