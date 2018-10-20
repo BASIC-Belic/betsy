@@ -65,7 +65,8 @@ class ItemsController < ApplicationController
   end
 
   def find_item_category
-    find_searched_item
-    @item_category = Category.find(@item.category_id).category_type
+    if @item.category_id
+      @item_category = Category.find(@item.category_id).category_type
+    end
   end
 end
