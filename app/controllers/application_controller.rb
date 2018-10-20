@@ -39,5 +39,3 @@ class ApplicationController < ActionController::Base
       @order = Order.new
     end
   end
-
-end
