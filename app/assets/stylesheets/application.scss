@@ -17,6 +17,20 @@
 /* Import scss content */
 @import "**/*";
 
-header > ul > li{
-  list-style: none;
+
+.navbar{
+  background-color: none;
+  border-top: .25px solid lightgrey;
+  border-bottom: .25px solid lightgrey;
+}
+
+.top_of_page > ul >li{
+  list-style-type: none;
+  float: right;
+  padding-right: 30px;
+}
+
+.top_of_page{
+  // border-bottom: .25px solid lightgrey;
+  background-color: blue;
 }
