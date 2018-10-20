@@ -49,14 +49,12 @@
                 Categories
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Accessories</a>
-                <a class="dropdown-item" href="#">Books</a>
-                <a class="dropdown-item" href="#">Clothing</a>
-                <a class="dropdown-item" href="#">Horror</a>
-                <a class="dropdown-item" href="#">Luggage</a>
-                <a class="dropdown-item" href="#">Shoes</a>
-                <a class="dropdown-item" href="#">Tech</a>
-                <a class="dropdown-item" href="#">Miscellaneous</a>
+
+                <% categories = Category.all %>
+                <% categories.each do |category| %>
+                  <a class="dropdown-item" href="#"><%= link_to "#{category.category_type}", category_path(category.id)%></a>
+                <% end %>
+
               </div>
             </li>
             <li class="nav-item dropdown">

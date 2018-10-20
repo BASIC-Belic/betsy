@@ -1,0 +1,12 @@
+<section>
+  <h2>
+    <%=  @category.category_type.capitalize %>
+  </h2>
+
+
+  <% @items_in_category.each do |item| %>
+    <p>
+      <%= item.name %>: <%= item.description %>
+    </p>
+  <% end %>
+</section>
