@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def shop
+    redirect_to root_path unless current_user
   end
 
   private
@@ -33,8 +34,8 @@ class UsersController < ApplicationController
 
   def find_current_user_items
     #ncomment and use this code once have user_login
-    # @current_user_items = @current_user.find_items
-    @current_user = User.find(19)
-    @current_user_items = User.find(19).items
+    @current_user_items = current_user_items
+    # @current_user = User.find(19)
+    # @current_user_items = User.find(19).items
   end
 end
