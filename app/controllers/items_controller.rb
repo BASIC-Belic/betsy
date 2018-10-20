@@ -65,8 +65,6 @@ class ItemsController < ApplicationController
   end
 
   def find_item_category
-    if @item.category_id
       @item_category = Category.find(@item.category_id).category_type
-    end
   end
 end
