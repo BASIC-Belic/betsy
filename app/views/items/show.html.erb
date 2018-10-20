@@ -1,6 +1,6 @@
 <h2> Product Details</h2>
 Item name: <%= @item.name %><br>
-Category: <%= @item.category %></br>
+Category: <%= Category.find(@item.category_id).category_type %></br>
 Price: <%= @item.price.to_f %></br>
 <%= @item.image %>
 <%= @item.avg_rating %>
