@@ -7,14 +7,10 @@ class User < ApplicationRecord
   #   user = User.new(provider: auth_hash['provider'], uid: auth_hash['uid'], nickname: auth_hash['info']['nickname'], name: auth_hash['info']['name'], email: auth_hash['info']['email'], image_url: auto_hash['info']['image'])
   # end
 
-  # def current_user_items
-  #   return find_current_items(@current_user)
-  # end
-  #
-  # private
-  #
-  # #instance method to find items this user sells
-  # def find_current_items(self)
-  #   return self.items
-  # end
+  #instance method to find items this user sells
+  def current_user_items
+    return @current_user.items
+  end
+
+  private
 end
