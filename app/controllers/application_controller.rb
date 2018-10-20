@@ -22,4 +22,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def current_order
+    if session[:order_id]
+      @order = Order.find(session[:order_id])
+    else
+      @order = Order.new
+    end
+  end
+
 end
