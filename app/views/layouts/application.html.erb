@@ -57,6 +57,8 @@
 
               </div>
             </li>
+
+            <% if @current_user && @current_user.is_a_merchant?(@merchant_ids) %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Merchants
@@ -68,6 +70,8 @@
                <% end %>
              </div>
             </li>
+            <% end %>
+
           </ul>
         </div>
       </nav>

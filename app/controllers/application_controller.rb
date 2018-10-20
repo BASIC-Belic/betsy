@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_current_user
   before_action :find_all_merchants
+  # before_action :is_a_merchant?
   before_action :current_order
   # before_action :require_login, except: :index
 
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
       merchant.user_id
     end
   end
+
+  # def is_a_merchant?
+  #   @merchant = @merchant_ids.include?(@current_user.id)
+  # end
 
   def require_login
     unless @current_user
