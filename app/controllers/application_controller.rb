@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_current_user
   before_action :find_all_merchants
+  before_action :current_order
   # before_action :require_login, except: :index
 
   private
