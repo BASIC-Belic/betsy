@@ -6,8 +6,8 @@
 <% @items.each do |item| %>
 
 
+ <img src= <%= item.image %> class="img-thumbnail, item_show" alt="cat_mask" >
 <td class = "table_grid"><%= item.name %></td>
-<td class = "table_grid"><%= item.image %></td>
 <td class = "table_grid"><%= item.price %></td>
 <td class = "table_grid"><%= item.quantity_available %></td>
 <td class = "table_grid"><%= item.avg_rating %></td>
