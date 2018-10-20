@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
-
+  before_action :find_item_category, only: [:show]
+  before_action :find_searched_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all
   end
 
   def edit
-    @item = Item.find_by(id: params[:id])
   end
 
   def new
@@ -14,14 +14,13 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find_by(id: params[:id])
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
 
   # a name must be unique
   def create
-    not_unique_name = Item.find_by(name: params[:name])
+    not_unique_name = Item.find_by(id: params[:id])
     if not_unique_name
       flash[:error]= "A Problem Occured: item with this name already exists"
     else
@@ -37,32 +36,36 @@ class ItemsController < ApplicationController
     end
   end
 
-    def show
-      item_id = params[:id]
-      @item = Item.find_by(id: item_id)
-      if @item.nil?
-        head :not_found
-      end
-    end
-
-    def update
-      @item = Item.find(params[:id])
-      @item.update(item_params)
-      redirect_to items_path
-    end
-
-    private
-
-    def item_params
-      return params.require(:item).permit(
-        :name,
-        :category,
-        :price,
-        :quantity_available,
-        :description,
-        :image,
-        :active
-
-      )
-    end
+  def show
+    head :not_found unless @item
   end
+
+  def update
+    @item.update(item_params)
+    redirect_to items_path
+  end
+
+  private
+
+  def item_params
+    return params.require(:item).permit(
+      :name,
+      :category,
+      :price,
+      :quantity_available,
+      :description,
+      :image,
+      :active
+
+    )
+  end
+
+  def find_searched_item
+    @item = Item.find_by(id: params[:id])
+  end
+
+  def find_item_category
+    find_searched_item
+    @item_category = Category.find(@item.category_id).category_type
+  end
+end
