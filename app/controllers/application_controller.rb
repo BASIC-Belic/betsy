@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_current_user
   before_action :find_all_merchants
+  before_action :current_order
   # before_action :require_login, except: :index
 
   private
@@ -30,3 +31,13 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def current_order
+    if session[:order_id]
+      @order = Order.find(session[:order_id])
+    else
+      @order = Order.new
+    end
+  end
+
+end

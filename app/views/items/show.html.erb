@@ -1,9 +1,7 @@
 <h2> Product Details</h2>
-
- <img src= <%= @item.image %> class="img-thumbnail, item_display" alt="cat_mask" >
- <br>
- <br>
-<%= @item.name %>
-<%= @item.price %>
+Item name: <%= @item.name %><br>
+Category: <%= @item.category %></br>
+Price: <%= @item.price.to_f %></br>
+<%= @item.image %>
 <%= @item.avg_rating %>
 <%= @item.description %>
