@@ -65,6 +65,7 @@ class ItemsController < ApplicationController
   end
 
   def find_item_category
-      @item_category = Category.find(@item.category_id).category_type
+    @item = Item.find_by(id: params[:id])
+    @item_category = Category.find(@item.category_id).category_type
   end
 end
