@@ -1,0 +1,33 @@
+<%= render partial: 'layouts/form_errors',
+locals: {
+  model: @item
+}
+%>
+
+:name,
+:price,
+:quantity_available,
+:description,
+:image,
+:active
+
+<%= form_with model: @item, class: 'item-form' do |f| %>
+
+  <%= f.label :Name %>
+  <%= f.text_field :name %>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <%= f.label :quantity_available %>
+  <%= f.text_field :quantity_available %>
+  <%= f.label :image %>
+  <%= f.text_field :image %>
+  <%= f.label :active %>
+  <%= f.text_field :active %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+
+
+  <%= f.submit action_type, class: "item-form-submit-button" %>
+
+<% end %>
