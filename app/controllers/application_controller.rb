@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_current_user
   before_action :find_all_merchants
-  before_action :current_order
+  helper_method :current_order
   # before_action :require_login, except: :index
 
   private
@@ -32,9 +32,9 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if session[:order_id]
-      @order = Order.find(session[:order_id])
+      Order.find(session[:order_id])
     else
-      @order = Order.new
+      Order.new
     end
   end
 end

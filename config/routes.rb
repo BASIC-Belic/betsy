@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root 'homepage#index'
 
   resources :users, only: [:show, :shop, :orders]
-  resources :orders, :orderitems, :items, :reviews, :category
+  resources :orders, :items, :reviews, :category
+
+  resources :items do
+    resources :order_items, only: [:create]
+  end
 
   get "/auth/:provider/callback", to: "sessions#create"
   post '/logout', to: 'sessions#logout', as: 'logout'

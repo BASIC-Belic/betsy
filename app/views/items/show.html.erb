@@ -6,4 +6,6 @@ Price: <%= @item.price.to_f %></br>
 <%= @item.avg_rating %>
 <%= @item.description %>
 
-<%= link_to "test", method: :post %>
+Order: <%= @order %>
+
+<%= link_to "Add to Cart", item_order_items_path(@item.id), method: :post %>

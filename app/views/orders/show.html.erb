@@ -1,3 +1,5 @@
-order: <% @order_items.each do |item| %>
-<%= item.name %>
+<% @order_items.each do |item| %>
+
+Order Item: <%= item.id %>
+<br>
 <% end %>
