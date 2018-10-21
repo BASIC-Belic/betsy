@@ -14,8 +14,8 @@
       <section class = "top_of_page">
         <ul>
 
-<!-- Merchant vs User/Guest Views -->
-          <% if @current_user.nil? || !@current_user.is_a_merchant?(@merchant_ids)%>
+<!-- User vs. Merchant Shop Views -->
+          <% if @current_user && !@current_user.is_a_merchant?(@merchant_ids)%>
           <li>
             <%= link_to "Become a Merchant", shop_path %>
           </li>
@@ -25,7 +25,7 @@
           </li>
           <%end%>
 
-<!-- User vs Guest vs Login View -->
+<!-- User vs Guest Login / Logout View -->
           <% if @current_user %>
           <li><p>
             Welcome, <%= @current_user.nickname %>
@@ -84,6 +84,12 @@
     </header>
 
     <main>
+      <section class="flash">
+        <% flash.each do |key_word, message| %>
+        <div class="<%= key_word %>"><%=message%></div>
+        <% end %>
+      </section>
+
       <%= yield %>
     </main>
 

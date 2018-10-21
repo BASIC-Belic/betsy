@@ -1,28 +1,37 @@
 <main>
 
-<%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile pic", style: 'float:right;'%>
-<ul>
-<li><strong>Id: </strong><%= @current_user.id %></li>
-<li><strong>Name: </strong><%= @current_user.name %></li>
-<li><strong>Username: </strong><%= @current_user.nickname %></li>
-<li><strong>Contact: </strong><%= @current_user.email %></li>
-</ul>
+  <section><!-- Merchant View & User View -->
+    <%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile pic", style: 'float:right;'%>
+    <ul>
+      <li><strong>Id: </strong><%= @current_user.id %></li>
+      <li><strong>Name: </strong><%= @current_user.name %></li>
+      <li><strong>Username: </strong><%= @current_user.nickname %></li>
+      <li><strong>Contact: </strong><%= @current_user.email %></li>
+    </ul>
+  </section>
 
-<section>
-  <h2><%=@current_user.name%>'s Shop</h2>
-  <div class="product">
-    <ul>
-      <li><%=link_to "Add New Product", new_item_path%></li>
-    </ul>
-    <ul>
-      <%@current_user_items.each do |item| %>
-      <li><strong>For sale: </strong><%=item.name%><%= link_to "(details)", item_path(item)%><%= link_to "(edit)", edit_item_path(item)%></li>
-      <li><strong>Stock: </strong><%=item.quantity_available%></li>
-      <li><strong>Price: </strong>$<%=item.price%></li>
-      <li><strong>Category:  </strong><%=item.category_id%></li>
-      <%end%>
-    </ul>
-  </div>
-</section>
+  <%if @current_user.is_a_merchant?(@merchant_ids)%>
+  <section><!-- Merchant View Only-->
+    <h2><%=@current_user.name%>'s Shop</h2>
+    <div class="product">
+      <ul>
+        <li><%=link_to "Add New Product", new_item_path%></li>
+      </ul>
+      <ul>
+        <%@current_user_items.each do |item| %>
+        <li><strong>For sale: </strong><%=item.name%><%= link_to "(details)", item_path(item)%><%= link_to "(edit)", edit_item_path(item)%></li>
+        <li><strong>Stock: </strong><%=item.quantity_available%></li>
+        <li><strong>Price: </strong>$<%=item.price%></li>
+        <li><strong>Category:  </strong><%=item.category_id%></li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+  <%else%>
+  <section>
+    <h2>Create your first product in your shop!</h2>
+    <p><%= link_to "Add Product", new_item_path %></p>
+  </section>
+  <%end%>
 
 </main>

@@ -11,7 +11,10 @@ class UsersController < ApplicationController
 
   #merchant view that is visible to just merchants
   def shop
-    redirect_to root_path unless @current_user
+    unless @current_user
+      flash[:error] = "You need to sign up to create a shop."
+      redirect_to root_path
+    end
   end
 
   private
