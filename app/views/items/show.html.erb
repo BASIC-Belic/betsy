@@ -8,7 +8,6 @@ Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 
 
-
   <%= form_with model: @order_item, method: :post, :url => item_order_items_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
