@@ -35,7 +35,7 @@
   background-color: blue;
 }
 
-section .success, section .form_errors, section .failure {
+section .success, section .form_errors, section .error {
   text-align: center;
   padding: 0.75rem 1.25rem;
   margin: 1em;
@@ -49,7 +49,7 @@ section .success {
   border-color: #c3e6cb;
 }
 
-section .failure, section .form_errors{
+section .error, section .form_errors{
   color: #856404;
   background-color: #fff3cd;
   border-color: #ffeeba;
