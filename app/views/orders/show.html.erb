@@ -1,5 +1,6 @@
 <% @order_items.each do |item| %>
-
+<% x = Item.find_by(id: item.id) %>
+<%= x.name %>
 Order Item: <%= item.id %>
 <br>
 <% end %>

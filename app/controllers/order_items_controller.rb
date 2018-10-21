@@ -8,7 +8,7 @@ class OrderItemsController < ApplicationController
 
     @order_item = @order.order_items.new(item_id: @item.id)
 
-    if @order.save
+    if @order_item.save
       session[:order_id] = @order.id
       redirect_to order_path(@order.id)
     end
