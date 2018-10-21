@@ -19,10 +19,10 @@ class OrderItemsController < ApplicationController
 
   def update
     @order = current_order
-    @order_item = @order.order_items.find(params[:id])
+    @order_item = @order.order_items.find_by(id: params[:id])
 
-    @order_item.update_attributes(quantity_per_item: params[:quantity_per_item])
-    @order_items = @order.order_items
+    @order_item.update(quantity_per_item: params[:quantity_per_item])
+
 
     redirect_to order_path(@order)
   end
@@ -32,7 +32,6 @@ class OrderItemsController < ApplicationController
     @order = current_order
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
-    @order_items = @order.order_items
 
     redirect_to order_path(@order)
   end

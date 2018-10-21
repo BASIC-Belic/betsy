@@ -1,9 +1,19 @@
 <h2> Product Details</h2>
+<%= @item.image %><br>
+
 Item name: <%= @item.name %><br>
 Category: <%= @item_category %></br>
 Price: <%= @item.price.to_f %></br>
-<%= @item.image %>
-<%= @item.avg_rating %>
-<%= @item.description %>
+Rating: <%= @item.avg_rating %><br>
+Description:<%= @item.description %><br>
 
-<%= render partial: "form", locals: { action_name: "Add to Cart", requested_method: :post} %>
+
+
+  <%= form_with model: @order_item, method: :post, :url => item_order_items_path(@item.id) do |f| %>
+
+  <%= f.label "Quantity:" %>
+  <%= f.text_field :quantity_per_item %>
+
+
+  <%= f.submit "Add to Cart" %>
+  <% end %>

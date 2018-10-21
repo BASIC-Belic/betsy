@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
 
   def show
     head :not_found unless @item
+    @order = current_order
   end
 
   def update
