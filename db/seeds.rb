@@ -46,3 +46,4 @@ CSV.foreach(USER_FILE, :headers => true) do |row|
   end
 end
 ##############################################################
+Item.create(name: "Bowsii MJ", description: "A delightfully fancy pair of shoes to wear to your next tea paaarte", price: 60, image: "https://cdn.shopify.com/s/files/1/0758/2735/products/TB1slR3JVXXXXbsXVXXXXXXXXXX__0-item_pic.jpg?v=1534937389", quantity_available: 10, user_id: 1, active: true, category_id: 6)

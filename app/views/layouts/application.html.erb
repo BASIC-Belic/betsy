@@ -7,12 +7,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
   </head>
 
   <body>
     <header>
       <section class = "top_of_page">
         <ul>
+          <li>
+            <a href="#"><i class="fas fa-lg fa-shopping-cart"></i></a>
+          </li>
 
             <% if session[:user_id] %>
               <% current_user = User.find_by(id: session[:user_id]) %>
@@ -69,7 +73,6 @@
                <% end %>
              </div>
            </li>
-
           </ul>
         </div>
       </nav>
