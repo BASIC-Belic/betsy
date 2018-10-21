@@ -2,6 +2,25 @@
 <% x = Item.find_by(id: item.item_id) %>
 <%= x.name%>
 Quantity: <%= item.quantity_per_item %>
+
+<br>
+
+TEST:
+
+
+<%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
+
+<%= f.label :quantity_per_item %><br>
+<%= f.text_field :quantity_per_item %>
+
+
+<%= f.submit action_name %>
+<% end %>
+
+
+
+
 <%= link_to "Delete Item", order_item_path(item.id), method: :delete, data: { confirm: "are you sure you want to delete this item?" } %>
+
 <br>
 <% end %>

@@ -6,4 +6,4 @@ Price: <%= @item.price.to_f %></br>
 <%= @item.avg_rating %>
 <%= @item.description %>
 
-<%= render partial: "form", locals: { action_name: "Add to Cart"} %>
+<%= render partial: "form", locals: { action_name: "Add to Cart", requested_method: :post} %>
