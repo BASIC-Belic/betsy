@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def find_current_user
-    @current_user |= User.find_by(id: session[:user_id])
+    @current_user = User.find_by(id: session[:user_id])
   end
 
   #find all merchants
@@ -23,14 +23,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def require_login
     unless @current_user
       flash[:failure] = "You must be logged in to do that."
       redirect_to root_path
     end
   end
-
 
   def current_order
     if session[:order_id]

@@ -8,6 +8,5 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create"
   post '/logout', to: 'sessions#logout', as: 'logout'
 
-
-  # get '/shop', to: 'user#shop', as: shop_path
+  get '/shop', to: 'users#shop', as: 'shop'
 end

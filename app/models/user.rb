@@ -7,10 +7,7 @@ class User < ApplicationRecord
   #   user = User.new(provider: auth_hash['provider'], uid: auth_hash['uid'], nickname: auth_hash['info']['nickname'], name: auth_hash['info']['name'], email: auth_hash['info']['email'], image_url: auto_hash['info']['image'])
   # end
 
-  private
-
-  #instance method to find products for this user
-  def find_products
-    return self.products
+  def is_a_merchant?(given_ids)
+    return given_ids.include?(self.id)
   end
 end
