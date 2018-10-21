@@ -19,7 +19,7 @@
           <li>
             <%= link_to "Become a Merchant", shop_path %>
           </li>
-          <%else%>
+          <%elsif @current_user && @current_user.is_a_merchant?(@merchant_ids)%>
           <li>
             <%= link_to "Manage Shop", shop_path %>
           </li>

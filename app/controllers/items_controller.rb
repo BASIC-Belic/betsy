@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :find_searched_item, only: [:show, :edit, :update, :destroy, :find_item_category,]
   before_action :find_item_category, only: [:show]
-  before_action :find_searched_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all
