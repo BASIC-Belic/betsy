@@ -40,6 +40,7 @@ header > h1{
   background-color: none;
   border-top: .25px solid lightgrey;
   border-bottom: .25px solid lightgrey;
+  padding-left: 100px;
 }
 
 
@@ -50,6 +51,16 @@ footer{
   padding-right: 70px;
   padding-top: 110px;
   padding-bottom: 110px;
+  display: flex;
+  flex-direction: row;
+}
+
+.footer_left, .footer_right{
+  display: block;
+}
+
+.footer_left{
+  margin-right: 5vw;
 }
 
 li{
