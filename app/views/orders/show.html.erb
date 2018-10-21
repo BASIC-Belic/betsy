@@ -1,5 +1,7 @@
 <% @order_items.each do |item| %>
 <% x = Item.find_by(id: item.item_id) %>
-<%= x.name %>
+<%= x.name%>
+<% y = item.quantity_per_item %>
+Quantity: <%= y %>
 <br>
 <% end %>

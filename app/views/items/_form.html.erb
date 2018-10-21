@@ -1,0 +1,22 @@
+<%= form_with model: @order_item, :url => item_order_items_path(@item.id) do |f| %>
+
+<%= f.label :quantity_per_item %><br>
+<%= f.text_field :quantity_per_item %>
+
+
+<%= f.submit action_name %>
+<% end %>
+
+
+<!-- <% x = 1 %>
+<select name = "order_item[:quantity_per_item]">
+<% @item.quantity_available.times do %>
+
+<f.option value = <%= x %> ><%= x %></option>
+<% x += 1 %>
+
+<% end %>
+</select> -->
+
+
+<!-- :url => item_order_items_path(@item.id) -->

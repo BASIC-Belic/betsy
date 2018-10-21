@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
     @item = Item.find_by(id: params[:item_id])
 
 
-    @order_item = @order.order_items.new(item_id: @item.id)
+    @order_item = @order.order_items.new(item_id: @item.id, quantity_per_item: params[:quantity_per_item])
 
     if @order_item.save
       session[:order_id] = @order.id
