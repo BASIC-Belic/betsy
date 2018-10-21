@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
 
   def find_current_user
     @current_user = User.find_by(id: session[:user_id])
+    # else
+    # @guest_user = #allocated guest or User.find_by()
+    # end
   end
 
   #find all merchants
