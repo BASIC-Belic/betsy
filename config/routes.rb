@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :shop, :orders]
   resources :orders, :items, :reviews, :category
 
+  resources :order_items, only: [:update, :destroy]
+
   resources :items do
     resources :order_items, only: [:create]
   end
