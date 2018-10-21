@@ -17,11 +17,8 @@
 /* Import scss content */
 @import "**/*";
 
-
-.navbar{
-  background-color: none;
-  border-top: .25px solid lightgrey;
-  border-bottom: .25px solid lightgrey;
+body{
+  font-family: 'Quicksand', sans-serif;
 }
 
 .top_of_page > ul >li{
@@ -30,7 +27,31 @@
   padding-right: 30px;
 }
 
-.top_of_page{
-  // border-bottom: .25px solid lightgrey;
-  background-color: blue;
+header > h1{
+  color: grey;
+  text-align: center;
+  font-family: 'Mali', cursive;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-size: 3em;
+}
+
+.navbar{
+  background-color: none;
+  border-top: .25px solid lightgrey;
+  border-bottom: .25px solid lightgrey;
+}
+
+
+
+footer{
+  border-top: .25px solid lightgrey;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 110px;
+  padding-bottom: 110px;
+}
+
+li{
+  list-style-type: none;
 }

@@ -17,6 +17,8 @@ require 'csv'
 USER_FILE = Rails.root.join('db', 'user_seeds.csv')
 puts "Loading raw  data from #{USER_FILE}"
 
+ITEM_SHOES_MISC_FILE = Rails.root.join('db', 'item_seeds.csv')
+
 #############################################################
 #seeding categories
 x = ["accessories", "books", "clothing", "horror", "luggage", "shoes", "tech", "miscellaneous"]
@@ -46,4 +48,18 @@ CSV.foreach(USER_FILE, :headers => true) do |row|
   end
 end
 ##############################################################
-Item.create(name: "Bowsii MJ", description: "A delightfully fancy pair of shoes to wear to your next tea paaarte", price: 60, image: "https://cdn.shopify.com/s/files/1/0758/2735/products/TB1slR3JVXXXXbsXVXXXXXXXXXX__0-item_pic.jpg?v=1534937389", quantity_available: 10, user_id: 1, active: true, category_id: 6)
+
+# Seeding items
+
+CSV.foreach(ITEM_SHOES_MISC_FILE, :headers => true) do |row|
+  item = Item.new
+  item.price = row['price']
+  item.image = row['image']
+  item.quantity_available = row['quantity_available']
+  item.name = row['name']
+  item.description = row['description']
+  item.avg_rating = row['avg_rating']
+  item.user_id = row['user_id']
+  item.category_id = row['category_id']
+  item.save
+end
