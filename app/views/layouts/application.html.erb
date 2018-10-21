@@ -64,8 +64,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                <% @merchant_ids.each do |id| %>
-                 <% merchant = User.find_by(id: id) %>
-                 <a class="dropdown-item" href="#"><%= merchant.nickname %></a>
+                 <% merchant = User.find_by(id: id) %><%=link_to "#{merchant.nickname}", user_path(merchant.id), class: "dropdown-item"%>
                <% end %>
              </div>
            </li>
