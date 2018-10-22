@@ -17,11 +17,16 @@ require 'csv'
 USER_FILE = Rails.root.join('db', 'user_seeds.csv')
 puts "Loading raw  data from #{USER_FILE}"
 
+<<<<<<< HEAD
+ITEM_FILE = Rails.root.join('db', 'item_seeds.csv')
+puts "Loading raw  data from #{ITEM_FILE}"
+=======
 ITEM_SHOES_MISC_FILE = Rails.root.join('db', 'item_seeds.csv')
+>>>>>>> 1863a53561e9962ca9db47ef8e87a96c40ee85d1
 
 #############################################################
 #seeding categories
-x = ["accessories", "books", "clothing", "horror", "luggage", "shoes", "tech", "miscellaneous"]
+x = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
 x.each do |category|
   Category.create(category_type: category)
 end
@@ -48,3 +53,29 @@ CSV.foreach(USER_FILE, :headers => true) do |row|
   end
 end
 ##############################################################
+
+
+#Seeding items
+
+item_failures = []
+CSV.foreach(ITEM_FILE, :headers => true) do |row|
+
+  item = Item.new
+  item.price = row['price']
+  item.image = row['image']
+  item.quantity_available = row['quantity_available']
+  item.name  = row['name']
+  item.description = row['description']
+  item.avg_rating = row['provider']
+  item.user_id = row['user_id']
+  item.active = row['active']
+  item.category_id = row['category_id']
+
+  successful = item.save
+  if !successful
+    item_failures << item
+    puts "Failed to save item: #{item.inspect}"
+  else
+    puts "Created item: #{item.inspect}"
+  end
+end

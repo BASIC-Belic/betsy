@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+
     @item = Item.new
   end
 
@@ -19,52 +20,63 @@ class ItemsController < ApplicationController
   end
 
   # a name must be unique
+  # NOTE: change redirect in line 42 to something appropriate after I figure out what that is with team
   def create
-    not_unique_name = Item.find_by(id: params[:id])
-    if not_unique_name
-      flash[:error]= "A Problem Occured: item with this name already exists"
-    else
-      filtered_params = item_params()
-      @item = Item.new(filtered_params)
-      save_success = @item.save
-      if save_success
-        redirect_to items_path
+    if is_authenticated_user?
+      not_unique_name = Item.find_by(id: params[:id])
+      if not_unique_name
+        flash[:error]= "A Problem Occured: item with this name already exists"
       else
-        flash.now[:error] =  "Invalid item entry"
-        render :new, status: :bad_request
+        filtered_params = item_params()
+        @item = Item.new(filtered_params)
+        save_success = @item.save
+        if save_success
+          redirect_to items_path
+        else
+          flash.now[:error] =  "Invalid item entry"
+          render :new, status: :bad_request
+        end
       end
+    else
+      flash.now[:error] =  "You must be a merchant to create a product"
+        redirect_to root_path
     end
   end
 
   def show
     head :not_found unless @item
+    @order = current_order
   end
 
-  def update
-    @item.update(item_params)
-    redirect_to items_path
-  end
+   def update
+  #   if is_authenticated_user? && user_created_product?
+      @item.update(item_params)
+      redirect_to items_path
+    else
+    #   flash.now[:error] =  "You must be a merchant to update"
+    # end
+    end
 
-  private
+    private
 
-  def item_params
-    return params.require(:item).permit(
-      :name,
-      :category,
-      :price,
-      :quantity_available,
-      :description,
-      :image,
-      :active
+    def item_params
+      return params.require(:item).permit(
+        :name,
+        :category,
+        :price,
+        :quantity_available,
+        :description,
+        :image,
+        :active
 
-    )
-  end
+      )
+    end
 
-  def find_searched_item
-    @item = Item.find_by(id: params[:id])
-  end
+    def find_searched_item
+      @item = Item.find_by(id: params[:id])
+    end
 
-  def find_item_category
+    def find_item_category
       @item_category = Category.find(@item.category_id).category_type
+    end
   end
-end
