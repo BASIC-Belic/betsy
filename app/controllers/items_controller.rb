@@ -22,26 +22,25 @@ class ItemsController < ApplicationController
       flash[:error] = "Item not deleted."
       redirect_back fallback_location: root_path
     end
-
   end
 
   # a name must be unique
   # NOTE: change redirect in line 42 to something appropriate after I figure out what that is with team
   def create
-    filtered_params = item_params()
 
-    category = Category.find_by(category_type: filtered_params[:category_type])
+    category = Category.find_by(category_type: item_params[:category_type])
 
-    @item = Item.new(name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id)
+    @item = Item.new(get_filtered_params(item_params, category))
 
     save_success = @item.save
     if save_success
       flash[:success] = "Item #{@item.name} successfully saved."
-      redirect_to items_path
+      redirect_to shop_path
     else
       flash.now[:error] =  "Item was not saved."
       render :new, status: :bad_request
     end
+
   end
 
   def show
@@ -52,15 +51,13 @@ class ItemsController < ApplicationController
 
   def update
 
-    filtered_params = item_params()
+    category = Category.find_by(category_type: item_params[:category_type])
 
-    category = Category.find_by(category_type: filtered_params[:category_type])
-
-    success_save = @item.update(name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id)
+    success_save = @item.update(get_filtered_params(item_params, category))
 
     if success_save
       flash[:success] = "Item #{@item.name} successfully updated."
-      redirect_to item_path(@item.id)
+      redirect_to shop_path
     else
       flash.now[:error] =  "Error in updating product"
       render :edit, status: 400
@@ -85,6 +82,10 @@ class ItemsController < ApplicationController
 
   def find_searched_item
     @item = Item.find_by(id: params[:id])
+  end
+
+  def get_filtered_params(filtered_params, category)
+    return { name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id }
   end
 
   def find_item_category
