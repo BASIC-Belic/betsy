@@ -6,6 +6,7 @@ locals: {
 
 <%= form_with model: @item, class: 'item-form' do |f| %>
 
+
   <%= f.label :Name %>
   <%= f.text_field :name %>
   <%= f.label :price %>
@@ -16,8 +17,8 @@ locals: {
   <%= f.text_field :image %>
   <%= f.label :active %>
   <%= f.text_field :active %>
-  <%= f.label :category %>
-  <%= f.select :category, selections: Item::VALID_CATEGORIES %>
+  <%= f.label :categories%>
+  <%= f.select :category_type, selections: Item::VALID_CATEGORIES %>
   <%= f.label :description %>
   <%= f.text_area :description %>
 
