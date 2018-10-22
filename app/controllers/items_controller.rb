@@ -51,11 +51,15 @@ class ItemsController < ApplicationController
 
   def update
 
-    success_save = @item.update(item_params)
+    filtered_params = item_params()
+
+    category = Category.find_by(category_type: filtered_params[:category_type])
+
+    success_save = @item.update(name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id)
 
     if success_save
       flash[:success] = "Item #{@item.name} successfully updated."
-      redirect_to items_path
+      redirect_to item_path(@item.id)
     else
       flash.now[:error] =  "Error in updating product"
       render :edit, status: 400
