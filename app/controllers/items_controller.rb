@@ -29,8 +29,11 @@ class ItemsController < ApplicationController
   # NOTE: change redirect in line 42 to something appropriate after I figure out what that is with team
   def create
     filtered_params = item_params()
-    @item = Item.new(filtered_params)
-    @item.user_id = @current_user.id
+
+    category = Category.find_by(category_type: filtered_params[:category_type])
+
+    @item = Item.new(name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id)
+
     save_success = @item.save
     if save_success
       flash[:success] = "Item #{@item.name} successfully saved."
@@ -49,11 +52,15 @@ class ItemsController < ApplicationController
 
   def update
 
-    success_save = @item.update(item_params)
+    filtered_params = item_params()
+
+    category = Category.find_by(category_type: filtered_params[:category_type])
+
+    success_save = @item.update(name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id)
 
     if success_save
       flash[:success] = "Item #{@item.name} successfully updated."
-      redirect_to items_path
+      redirect_to item_path(@item.id)
     else
       flash.now[:error] =  "Error in updating product"
       render :edit, status: 400
@@ -66,7 +73,7 @@ class ItemsController < ApplicationController
   def item_params
     return params.require(:item).permit(
       :name,
-      :category,
+      :category_type,
       :price,
       :quantity_available,
       :description,
