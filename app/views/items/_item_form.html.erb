@@ -4,13 +4,6 @@ locals: {
 }
 %>
 
-:name,
-:price,
-:quantity_available,
-:description,
-:image,
-:active
-
 <%= form_with model: @item, class: 'item-form' do |f| %>
 
   <%= f.label :Name %>
@@ -19,12 +12,15 @@ locals: {
   <%= f.text_field :price %>
   <%= f.label :quantity_available %>
   <%= f.text_field :quantity_available %>
-  <%= f.label :image %>
+  <%= f.label :image_url %>
   <%= f.text_field :image %>
   <%= f.label :active %>
   <%= f.text_field :active %>
+  <%= f.label :category %>
+  <%= f.select :category, selections: Item::VALID_CATEGORIES %>
   <%= f.label :description %>
   <%= f.text_area :description %>
+
 
 
 

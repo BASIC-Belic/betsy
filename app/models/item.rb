@@ -4,14 +4,15 @@ class Item < ApplicationRecord
   has_many :reviews
   belongs_to :category
 
-   validates :name, presence: true, uniqueness: {
-     scope: [:user, :category], message: "User: has already added this item in this category. Please change item inventory."
-   }
+  VALID_CATEGORIES = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
+
+  validates :name, presence: true, uniqueness: {
+    scope: [:user, :category], message: "User: has already added this item in this category. Please change item inventory."
+  }
 
   # guest login set to 0
   def is_authenticated_user?
     session[:user_id] != 0 ? true: false
-
   end
 
   def user_created_product?
