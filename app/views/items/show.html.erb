@@ -22,7 +22,7 @@ Description:<%= @item.description %><br>
 <% else %>
 
 
-  <%= form_with model: @order_item, method: :post, :url => item_increment_quantity_path(@item.id) do |f| %>
+  <%= form_with model: @order_item, method: :patch, :url => item_increment_quantity_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
   <%= f.text_field :quantity_per_item %>
