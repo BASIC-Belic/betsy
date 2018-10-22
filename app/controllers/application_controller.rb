@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
 
   def find_current_user
     @current_user = User.find_by(id: session[:user_id])
+    # else
+    # @guest_user = #allocated guest or User.find_by()
+    # end
   end
 
   #find all merchants
@@ -25,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless @current_user
-      flash[:failure] = "You must be logged in to do that."
+      flash[:error] = "You must be logged in to do that."
       redirect_to root_path
     end
   end
