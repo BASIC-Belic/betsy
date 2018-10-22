@@ -17,12 +17,9 @@ require 'csv'
 USER_FILE = Rails.root.join('db', 'user_seeds.csv')
 puts "Loading raw  data from #{USER_FILE}"
 
-<<<<<<< HEAD
+
 ITEM_FILE = Rails.root.join('db', 'item_seeds.csv')
 puts "Loading raw  data from #{ITEM_FILE}"
-=======
-ITEM_SHOES_MISC_FILE = Rails.root.join('db', 'item_seeds.csv')
->>>>>>> 1863a53561e9962ca9db47ef8e87a96c40ee85d1
 
 #############################################################
 #seeding categories
