@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
 
   def create
 
-    @order = current_order
+    @order = Order.find_by(id: session[:order_id])
     @item = Item.find_by(id: params[:item_id])
 
 
@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
 
 
   def update
-    @order = current_order
+    @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(id: params[:id])
 
     @order_item.update(quantity_per_item: params[:quantity_per_item])
@@ -31,7 +31,7 @@ class OrderItemsController < ApplicationController
 
 
   def increment_quantity
-    @order = current_order
+    @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(item_id: params[:item_id])
 
     additional_quantity = params[:quantity_per_item].to_i
@@ -45,7 +45,7 @@ class OrderItemsController < ApplicationController
 
 
   def destroy
-    @order = current_order
+    @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
 
