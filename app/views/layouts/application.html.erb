@@ -81,10 +81,10 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                <% @merchant_ids.each do |id| %>
 
-                 
+
 
                  <% merchant = User.find_by(id: id) %>
-                 <a class="dropdown-item" href="#"><%= link_to  merchant.nickname, root_path, class: "header_links" %></a>
+                 <%= link_to  merchant.nickname, user_path(merchant.id), class: "dropdown-item header_links" %>
 
                <% end %>
              </div>
