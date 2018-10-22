@@ -6,7 +6,10 @@ class OrderItemsController < ApplicationController
     @item = Item.find_by(id: params[:item_id])
 
 
-    @order_item = @order.order_items.new(item_id: @item.id, quantity_per_item: params[:quantity_per_item])
+    @order_item = @order.order_items.new(
+      item_id: @item.id,
+      quantity_per_item: params[:quantity_per_item]
+    )
 
     if @order_item.save
       session[:order_id] = @order.id
@@ -16,10 +19,20 @@ class OrderItemsController < ApplicationController
   end
 
 
-
   def update
     @order = current_order
     @order_item = @order.order_items.find_by(id: params[:id])
+
+    @order_item.update(quantity_per_item: params[:quantity_per_item])
+
+
+    redirect_to order_path(@order)
+  end
+
+
+  def increment_quantity
+    @order = current_order
+    @order_item = @order.order_items.find_by(id: params[:item_id])
 
     @order_item.update(quantity_per_item: params[:quantity_per_item])
 

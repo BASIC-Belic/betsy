@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
       Order.find(session[:order_id])
     else
       Order.new
-
     end
   end
 end
