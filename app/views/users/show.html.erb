@@ -1,7 +1,7 @@
 <main>
 
   <section>
-    <h2><%=@current_user.name%>'s Shop</h2>
+    <h2><%=@user.name%>'s Shop</h2>
     <%= image_tag "#{@user.image_url}", alt: "user image", title: "#{@user.name}'s profile'", style: 'float:right;'%>
     <div class="product">
       <h3> Product List</h3>
