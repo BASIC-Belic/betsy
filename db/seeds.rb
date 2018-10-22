@@ -22,7 +22,6 @@ ITEM_FILE = Rails.root.join('db', 'item_seeds.csv')
 puts "Loading raw  data from #{ITEM_FILE}"
 
 
-
 #############################################################
 #seeding categories
 x = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
