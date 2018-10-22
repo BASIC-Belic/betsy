@@ -8,9 +8,7 @@ Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 
 
-
 <% if @order.order_items.find_by(item_id: @item.id).nil? %>
-
 
   <%= form_with model: @order_item, method: :post, :url => item_order_items_path(@item.id) do |f| %>
 
@@ -24,9 +22,7 @@ Description:<%= @item.description %><br>
 <% else %>
 
 
-  <%= form_with model: @order_item, method: :post, :url => item_order_items_path(@item.id) do |f| %>
-
-
+  <%= form_with model: @order_item, method: :post, :url => item_increment_quantity_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
   <%= f.text_field :quantity_per_item %>
