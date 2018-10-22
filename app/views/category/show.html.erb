@@ -7,7 +7,8 @@
   <% @items_in_category.each do |item| %>
     <p>
       <img src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %><%= item.description %>">
-      <%= item.name %>: <%= item.description %>
+
+      <%= link_to item.name, item_path(item.id) %>: <%= link_to item.description, item_path(item.id) %>
     </p>
 
 
