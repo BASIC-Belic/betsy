@@ -17,11 +17,12 @@
 /* Import scss content */
 @import "**/*";
 
+body{
+  font-family: 'Quicksand', sans-serif;
+}
 
-.navbar{
-  background-color: none;
-  border-top: .25px solid lightgrey;
-  border-bottom: .25px solid lightgrey;
+.top_of_page{
+  padding-right: 100px;
 }
 
 .top_of_page > ul >li{
@@ -30,9 +31,55 @@
   padding-right: 30px;
 }
 
-.top_of_page{
-  // border-bottom: .25px solid lightgrey;
-  background-color: blue;
+.fas, .header_links, #home_link{
+  color: grey;
+}
+
+.header_links:hover, .fas:hover, #home_link:hover{
+  color: #ffa791;
+  text-decoration: none;
+}
+
+header > h1{
+  color: grey;
+  text-align: center;
+  font-family: 'Mali', cursive;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-size: 3em;
+}
+
+.navbar{
+  background-color: none;
+  border-top: .25px solid lightgrey;
+  border-bottom: .25px solid lightgrey;
+  padding-left: 100px;
+}
+
+.dropdown-menu-right {
+    padding-left: 10px;
+}
+
+footer{
+  border-top: .25px solid lightgrey;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 110px;
+  padding-bottom: 110px;
+  display: flex;
+  flex-direction: row;
+}
+
+.footer_left, .footer_right{
+  display: block;
+}
+
+.footer_left{
+  margin-right: 5vw;
+}
+
+li{
+  list-style-type: none;
 }
 
 section .success, section .form_errors, section .error {
