@@ -32,10 +32,13 @@ class OrderItemsController < ApplicationController
 
   def increment_quantity
     @order = current_order
-    @order_item = @order.order_items.find_by(id: params[:item_id])
+    @order_item = @order.order_items.find_by(item_id: params[:item_id])
 
-    @order_item.update(quantity_per_item: params[:quantity_per_item])
+    additional_quantity = params[:quantity_per_item].to_i
 
+    new_quantity = @order_item.quantity_per_item + additional_quantity
+
+    @order_item.update(quantity_per_item: new_quantity)
 
     redirect_to order_path(@order)
   end

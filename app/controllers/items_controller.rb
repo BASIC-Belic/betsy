@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
   def create
     filtered_params = item_params()
     @item = Item.new(filtered_params)
+    @item.user_id = @current_user.id
     save_success = @item.save
     if save_success
       flash[:success] = "Item #{@item.name} successfully saved."
