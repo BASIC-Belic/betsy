@@ -51,15 +51,15 @@ end
 
 # Seeding items
 
-CSV.foreach(ITEM_SHOES_MISC_FILE, :headers => true) do |row|
-  item = Item.new
-  item.price = row['price']
-  item.image = row['image']
-  item.quantity_available = row['quantity_available']
-  item.name = row['name']
-  item.description = row['description']
-  item.avg_rating = row['avg_rating']
-  item.user_id = row['user_id']
-  item.category_id = row['category_id']
-  item.save
-end
+# CSV.foreach(ITEM_SHOES_MISC_FILE, :headers => true) do |row|
+#   item = Item.new
+#   item.price = row['price']
+#   item.image = row['image']
+#   item.quantity_available = row['quantity_available']
+#   item.name = row['name']
+#   item.description = row['description']
+#   item.avg_rating = row['avg_rating']
+#   item.user_id = row['user_id']
+#   item.category_id = row['category_id']
+#   item.save
+# end
