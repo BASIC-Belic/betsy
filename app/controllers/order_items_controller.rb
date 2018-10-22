@@ -12,7 +12,7 @@ class OrderItemsController < ApplicationController
     )
 
     if @order_item.save
-      session[:order_id] = @order.id
+      # session[:order_id] = @order.id
       redirect_to order_path(@order.id)
     end
 
