@@ -43,7 +43,8 @@ class ItemsController < ApplicationController
 
   def show
     head :not_found unless @item
-    @order = current_order
+    # @order = current_order
+    @order = Order.find_by(id: session[:order_id])
   end
 
   def update
