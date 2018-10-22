@@ -14,14 +14,22 @@
       <section class = "top_of_page">
         <ul>
 
-            <% if session[:user_id] %>
-              <% current_user = User.find_by(id: session[:user_id]) %>
-                <li><p>
-                  Welcome, <%= current_user.nickname %>
-                </li></p>
-            <% end %>
+<!-- User vs. Merchant Shop Views -->
+          <% if @current_user && !@current_user.is_a_merchant?(@merchant_ids)%>
+          <li>
+            <%= link_to "Become a Merchant", shop_path %>
+          </li>
+          <%elsif @current_user && @current_user.is_a_merchant?(@merchant_ids)%>
+          <li>
+            <%= link_to "Manage Shop", shop_path %>
+          </li>
+          <%end%>
 
-          <% if session[:user_id] %>
+<!-- User vs Guest Login / Logout View -->
+          <% if @current_user %>
+          <li><p>
+            Welcome, <%= @current_user.nickname %>
+          </li></p>
             <li>
               <%= link_to "Log Out", logout_path, method: :post %>
             </li>
@@ -75,6 +83,12 @@
     </header>
 
     <main>
+      <section class="flash">
+        <% flash.each do |key_word, message| %>
+        <div class="<%= key_word %>"><%=message%></div>
+        <% end %>
+      </section>
+
       <%= yield %>
     </main>
 
