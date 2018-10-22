@@ -3,14 +3,18 @@ class UsersController < ApplicationController
   before_action :find_searched_user, only: [:show]
   before_action :find_current_user_items, only: [:shop]
 
-  #PROFILE
+  #user profile / merchant page that is visible to all
   def show
     head :not_found unless @user
     # render 'layouts/invalid_page', status: :not_found
   end
 
+  #merchant view that is visible to just merchants
   def shop
-    redirect_to root_path unless @current_user
+    unless @current_user
+      flash[:error] = "You need to sign up to create a shop."
+      redirect_to root_path
+    end
   end
 
   private
