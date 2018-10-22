@@ -10,36 +10,33 @@ class ItemsController < ApplicationController
   end
 
   def new
-
     @item = Item.new
   end
 
   def destroy
-    @item.destroy
-    redirect_to root_path
+    success = @item.destroy
+    if success
+      flash[:success] = "Item successfully deleted."
+      redirect_to root_path
+    else
+      flash[:error] = "Item not deleted."
+      redirect_back fallback_location: root_path
+    end
+
   end
 
   # a name must be unique
   # NOTE: change redirect in line 42 to something appropriate after I figure out what that is with team
   def create
-    if is_authenticated_user?
-      not_unique_name = Item.find_by(id: params[:id])
-      if not_unique_name
-        flash[:error]= "A Problem Occured: item with this name already exists"
-      else
-        filtered_params = item_params()
-        @item = Item.new(filtered_params)
-        save_success = @item.save
-        if save_success
-          redirect_to items_path
-        else
-          flash.now[:error] =  "Invalid item entry"
-          render :new, status: :bad_request
-        end
-      end
+    filtered_params = item_params()
+    @item = Item.new(filtered_params)
+    save_success = @item.save
+    if save_success
+      flash[:success] = "Item #{@item.name} successfully saved."
+      redirect_to items_path
     else
-      flash.now[:error] =  "You must be a merchant to create a product"
-        redirect_to root_path
+      flash.now[:error] =  "Item was not saved."
+      render :new, status: :bad_request
     end
   end
 
@@ -48,35 +45,40 @@ class ItemsController < ApplicationController
     @order = current_order
   end
 
-   def update
-  #   if is_authenticated_user? && user_created_product?
-      @item.update(item_params)
+  def update
+
+    success_save = @item.update(item_params)
+
+    if success_save
+      flash[:success] = "Item #{@item.name} successfully updated."
       redirect_to items_path
     else
-    #   flash.now[:error] =  "You must be a merchant to update"
-    # end
+      flash.now[:error] =  "Error in updating product"
+      render :edit, status: 400
     end
 
-    private
-
-    def item_params
-      return params.require(:item).permit(
-        :name,
-        :category,
-        :price,
-        :quantity_available,
-        :description,
-        :image,
-        :active
-
-      )
-    end
-
-    def find_searched_item
-      @item = Item.find_by(id: params[:id])
-    end
-
-    def find_item_category
-      @item_category = Category.find(@item.category_id).category_type
-    end
   end
+
+  private
+
+  def item_params
+    return params.require(:item).permit(
+      :name,
+      :category,
+      :price,
+      :quantity_available,
+      :description,
+      :image,
+      :active
+
+    )
+  end
+
+  def find_searched_item
+    @item = Item.find_by(id: params[:id])
+  end
+
+  def find_item_category
+    @item_category = Category.find(@item.category_id).category_type
+  end
+end
