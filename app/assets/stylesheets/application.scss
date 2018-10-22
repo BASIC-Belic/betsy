@@ -21,10 +21,23 @@ body{
   font-family: 'Quicksand', sans-serif;
 }
 
+.top_of_page{
+  padding-right: 100px;
+}
+
 .top_of_page > ul >li{
   list-style-type: none;
   float: right;
   padding-right: 30px;
+}
+
+.fas, .header_links, #home_link{
+  color: grey;
+}
+
+.header_links:hover, .fas:hover, #home_link:hover{
+  color: #ffa791;
+  text-decoration: none;
 }
 
 header > h1{
@@ -43,7 +56,9 @@ header > h1{
   padding-left: 100px;
 }
 
-
+.dropdown-menu-right {
+    padding-left: 10px;
+}
 
 footer{
   border-top: .25px solid lightgrey;
