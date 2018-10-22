@@ -43,4 +43,5 @@ class ApplicationController < ActionController::Base
       @current_shopper_order_id = session[:order_id]
     end
   end
+
 end
