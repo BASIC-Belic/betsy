@@ -44,6 +44,8 @@ class ReviewsController < ApplicationController
     return params.require(:review).permit(
       :description,
       :rating
+      :item_id
+      :user_id
     )
 
   end
