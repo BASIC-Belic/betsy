@@ -8,7 +8,7 @@ Price: <%= '%.2f' % @item.price %></br>
 Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 Quantity Avaliable: <%= @item.quantity_available %>
-<li><%=link_to "Leave a Review", new_review_path%></li>
+<li><%=link_to "Leave a Review", new_item_review_path(@item.id)%></li>
 
 
 <% if @order.order_items.find_by(item_id: @item.id).nil? %>
