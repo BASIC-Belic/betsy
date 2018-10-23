@@ -1,1 +1,5 @@
 <h2>Order Details</h2>
+<%= @order.name %>
+<% @items_purchased.each do |item| %>
+  <%= item.name %>
+<% end %>

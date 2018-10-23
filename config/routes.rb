@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :orders, :items, :reviews, :category
 
   resources :order_items, only: [:update, :destroy]
-  resources :status, only: [:show]
+  get "/status/:id", to: 'status#show'
 
   resources :items do
     post '/order_items', to: 'order_items#create'
