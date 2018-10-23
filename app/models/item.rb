@@ -24,4 +24,6 @@ class Item < ApplicationRecord
     return can_change
   end
 
+
+
 end
