@@ -13,6 +13,7 @@ class OrderItemsController < ApplicationController
 
     if @order_item.save
       # session[:order_id] = @order.id
+      flash[:success] = "Item successfully added to your cart!"
       redirect_to order_path(@order.id)
     end
 
@@ -23,33 +24,46 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(id: params[:id])
 
-    @order_item.update(quantity_per_item: params[:quantity_per_item])
+    success = @order_item.update(quantity_per_item: params[:quantity_per_item])
 
-
-    redirect_to order_path(@order)
+    if success
+      flash[:success] = "Item successfully updated."
+      redirect_to order_path(@order)
+    end
   end
 
 
   def increment_quantity
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(item_id: params[:item_id])
+    @item = Item.find_by(id: @order_item.item_id)
 
     additional_quantity = params[:quantity_per_item].to_i
 
     new_quantity = @order_item.quantity_per_item + additional_quantity
 
-    @order_item.update(quantity_per_item: new_quantity)
-
-    redirect_to order_path(@order)
+    if new_quantity > @item.quantity_available
+      flash[:error] = "Whoops! You already have a few of these babies in your cart and we only have #{@item.quantity_available} available. Please check your quantity and try again."
+      redirect_to order_path(@order)
+    else
+      success = @order_item.update(quantity_per_item: new_quantity)
+      if success
+        flash[:success] = "Item quantity updated."
+        redirect_to order_path(@order)
+      end
+    end
   end
 
 
   def destroy
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
-    @order_item.destroy
+    success = @order_item.destroy
 
-    redirect_to order_path(@order)
+    if success
+      flash[:success] = "Item successfully deleted."
+      redirect_to order_path(@order)
+    end
   end
 
 

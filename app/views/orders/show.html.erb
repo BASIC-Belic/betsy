@@ -2,15 +2,17 @@
 Item:<% x = Item.find_by(id: item.item_id) %>
 <%= x.name%>
 <br>
-Quantity: <%= item.quantity_per_item %>
+Quantity available: <%= x.quantity_available %>
+<br>
+Quantity currently in cart: <%= item.quantity_per_item %>
+
 
 <br>
 
 
 <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
 
-<%= f.text_field :quantity_per_item %>
-
+<%= f.select :quantity_per_item, x.return_quantity_selection %>
 
 <%= f.submit "update quantity" %>
 <% end %>

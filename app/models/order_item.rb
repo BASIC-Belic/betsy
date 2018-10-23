@@ -3,4 +3,5 @@ class OrderItem < ApplicationRecord
   validates :item_id, presence: true
 
 
+
 end

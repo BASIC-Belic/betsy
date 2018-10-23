@@ -24,4 +24,18 @@ class Item < ApplicationRecord
     return can_change
   end
 
+
+  def return_quantity_selection
+
+    iterations = self.quantity_available
+
+    quantity_options = []
+
+    iterations.times do |number|
+      quantity_options << number + 1
+    end
+
+    return quantity_options
+  end
+
 end
