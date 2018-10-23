@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
 
   def define_order_user
     if @current_user
-      User.find(@current_user)
+      User.find(@current_user.id)
     else
       #reserved guest
       User.find(id:0)

@@ -12,6 +12,9 @@ class Item < ApplicationRecord
 
   def decrement_quantity_available(num)
     self.quantity_available -= num
+    # if self.quantity_available < 0
+    #   #error message here
+    # end
   end
 
   # guest login set to 0
