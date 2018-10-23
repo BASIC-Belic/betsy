@@ -1,5 +1,4 @@
-<h2>All done?</h2>
-<div><%= link_to "Checkout", edit_order_path(@current_shopper_order_id), data: { confirm: "Are you sure you're done shopping?" }, class: "btn btn-success" %></div>
+
 
 <article id="cart">
 
@@ -41,7 +40,7 @@
   <% end %>
   <div class="subtotal">
     <h3>Subtotal: $<%= '%.2f' % cart_subtotal.sum %></h3><br>
-    <button type="button"><%= link_to "Checkout", root_path %></button>
+    <button type="button"><%= link_to "Checkout", edit_order_path(@current_shopper_order_id) %></button>
   </div>
 
 </article>
