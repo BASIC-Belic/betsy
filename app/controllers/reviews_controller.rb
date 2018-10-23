@@ -43,8 +43,8 @@ class ReviewsController < ApplicationController
   def filtered_params
     return params.require(:review).permit(
       :description,
-      :rating
-      :item_id
+      :rating,
+      :item_id,
       :user_id
     )
 
