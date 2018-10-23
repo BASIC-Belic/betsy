@@ -27,7 +27,8 @@ class OrdersController < ApplicationController
     end
 
     if successful
-    # session[:order_id] = nil
+      #clear session data
+    session[:order_id] = nil
       flash[:success] = "Order #{@order.id} for #{@order.name} has been successfully received. Look out for an email with order confirmation."
       redirect_to order_path(@order)
     else
