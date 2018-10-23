@@ -10,6 +10,9 @@ class Item < ApplicationRecord
     scope: [:user, :category], message: "User: has already added this item in this category. Please change item inventory."
   }
 
+  validates :price, presence: true
+  validates :quantity_available, presence: true
+
   def decrement_quantity_available(num)
     # if self.quantity_available.nil?
     #   #error message here, user this self.name item is sold out?
