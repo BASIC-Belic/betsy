@@ -13,6 +13,7 @@ class OrderItemsController < ApplicationController
 
     if @order_item.save
       # session[:order_id] = @order.id
+      flash[:success] = "Item successfully added to your cart!"
       redirect_to order_path(@order.id)
     end
 
