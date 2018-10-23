@@ -15,12 +15,14 @@ class ReviewsController < ApplicationController
       user_id: 3
     )
 
-    @review.save
-    flash[:sucess] = "Thank you for your review!"
-    redirect_back fallback_location: '/', allow_other_host: false
-    # else
-    #   flash[:error] = "A problem occurred: Could not post review"
-    #   redirect_back fallback_location: '/', allow_other_host: false
+    good_review = @review.save
+    if good_review
+      flash[:sucess] = "Thank you for your review!"
+      redirect_back fallback_location: '/', allow_other_host: false
+    else
+      flash[:error] = "A problem occurred: Could not post review"
+      redirect_back fallback_location: '/', allow_other_host: false
+    end
 
   end
 
