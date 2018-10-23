@@ -1,3 +1,28 @@
 // Place all the styles related to the category controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.item_by_category{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.detail_button{
+  border: .5px solid lightgrey;
+  padding: 2px;
+  background-color: #fbe6e2;
+  border-radius: 3px;
+  color: grey;
+}
+
+p{
+  margin-bottom: 2px;
+}
+
+.details_by_category > a{
+  text-decoration: none;
+}
+
+.details_by_category > a:hover{
+  color: purple;
+}

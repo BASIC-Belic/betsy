@@ -4,7 +4,7 @@
 
 Item name: <%= @item.name %><br>
 Category: <%= @item_category %></br>
-Price: <%= @item.price.to_f %></br>
+Price: <%= '%.2f' % @item.price %></br>
 Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 Quantity Avaliable: <%= @item.quantity_available %>
