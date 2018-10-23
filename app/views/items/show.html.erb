@@ -1,13 +1,14 @@
-<h2> Product Details</h2>
+<h2><%= @item.name %></h2>
 
 <img src= <%= @item.image %> class="img-thumbnail, item_show" ><br>
 
-Item name: <%= @item.name %><br>
+
 Category: <%= @item_category %></br>
-Price: <%= @item.price.to_f %></br>
+Price: <%= '%.2f' % @item.price %></br>
 Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
-Quantity Available: <%= @item.quantity_available %><br>
+Quantity Avaliable: <%= @item.quantity_available %>
+<li><%=link_to "Leave a Review", new_review_path%></li>
 
 
 <% if @order.order_items.find_by(item_id: @item.id).nil? %>
@@ -26,12 +27,7 @@ Quantity Available: <%= @item.quantity_available %><br>
   <%= form_with model: @order_item, method: :patch, :url => item_increment_quantity_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
-<<<<<<< HEAD
-  <%= f.text_field :quantity_per_item%>
-
-=======
   <%= f.select :quantity_per_item, @item.return_quantity_selection %>
->>>>>>> quantity_logic
 
   <%= f.submit "Add to Cart" %>
 
@@ -39,4 +35,4 @@ Quantity Available: <%= @item.quantity_available %><br>
   <% end %>
 
 
-  <% end %>
+<% end %>
