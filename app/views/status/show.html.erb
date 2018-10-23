@@ -1,5 +1,7 @@
 <h2>Order Details</h2>
-<%= @order.name %>
-<% @items_purchased.each do |item| %>
-  <%= item.name %>
+
+
+
+<% @order_info.each do |item, qty| %>
+  Qty: <%= qty %>, <%= item.name %> <br>
 <% end %>

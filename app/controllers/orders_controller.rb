@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     temp_id = session[:order_id]
     session[:order_id] = nil
       flash[:success] = "Thank you for your order. Order confirmation number: #{@order.id}. Please save this number to view your order status. Disclaimer: This site is for demonstration purposes only."
-      redirect_to order_item_path(temp_id)
+      redirect_to status_path(temp_id)
     else
 
       flash.now[:error] =  "Error in submitting order."

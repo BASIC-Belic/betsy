@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homepage#index'
-
+  get "/status/:id", to: 'status#show', as: 'status'
   resources :users, only: [:show, :shop, :orders]
   resources :orders, :items, :reviews, :category
 
   resources :order_items, only: [:update, :destroy]
-  get "/status/:id", to: 'status#show'
+
 
   resources :items do
     post '/order_items', to: 'order_items#create'
