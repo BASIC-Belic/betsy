@@ -21,7 +21,7 @@
           Qty: <%= item.quantity_per_item %>
 
           <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
-            <%= f.text_field :quantity_per_item %><br>
+            <%= f.select :quantity_per_item, x.return_quantity_selection %><br>
             <%= f.submit "update quantity" %>
           <% end %>
         </div>
