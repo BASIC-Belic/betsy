@@ -12,10 +12,10 @@
       </div>
       <div class="details_by_category">
         <p>
-          Item: <%= link_to item.name, item_path(item.id) %><br>
-          Description: <%= item.description %><br>
-          Price: $<%= '%.2f' % item.price %>
+          <strong><%= item.name %></strong>
         </p>
+          <%= link_to "Details", item_path(item.id), class: "detail_button" %>
+
       </div>
     </div>
 
