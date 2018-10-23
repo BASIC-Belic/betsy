@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   }
 
   validates :price, presence: true
+  validates :quantity_available, presence: true
 
   def decrement_quantity_available(num)
     # if self.quantity_available.nil?
