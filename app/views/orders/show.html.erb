@@ -1,7 +1,9 @@
 <article id="cart">
-  <strong><h1>Shopping Cart</h1></strong>
 
   <% cart_subtotal = [] %>
+
+  <strong><h1>Shopping Cart</h1></strong>
+
   <% @order_items.order('created_at').each do |item| %>
     <div class="item_display">
 
@@ -15,6 +17,7 @@
       <section class="item_subtotal">
         <div class="column">
           Qty: <%= item.quantity_per_item %>
+
           <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
             <%= f.text_field :quantity_per_item %><br>
             <%= f.submit "update quantity" %>
