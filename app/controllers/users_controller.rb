@@ -41,4 +41,9 @@ class UsersController < ApplicationController
       @current_user_items = @current_user.items
     end
   end
+
+  # def find_current_user_unfulfilled_items
+  #   @current_user_unfulfilled_items =
+  # OrderItem.where(shipped: "false")
+  # end
 end
