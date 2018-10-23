@@ -12,11 +12,20 @@
       </section>
 
       <section class="item_subtotal">
-        Qty: <%= item.quantity_per_item %>
-        <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
-          <%= f.text_field :quantity_per_item %><br>
-          <%= f.submit "update quantity" %>
-        <% end %>
+        <div class="column">
+          Qty: <%= item.quantity_per_item %>
+          <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
+            <%= f.text_field :quantity_per_item %><br>
+            <%= f.submit "update quantity" %>
+          <% end %>
+        </div>
+        <div class="column">
+          Item Price: $<%= x.price %>
+        </div>
+        <div class="column">
+          Total: $<%= x.item_subtotal(x.price, item.quantity_per_item) %>
+        </div>
+
       </section>
 
     </div>
