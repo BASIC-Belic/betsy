@@ -8,7 +8,7 @@ class OrderItem < ApplicationRecord
 
     item.decrement_quantity_available(self.quantity_per_item)
     #change order item status
-    self.status = "ordered"
+    self.status = "paid"
     self.save
   end
 
