@@ -10,7 +10,7 @@ class Order < ApplicationRecord
 
   validates :credit_card_exp_year, :in => @valid_years, on: :update
 
-  validates :order_items, numericality: { greater_than_zero: 0 }, on: :update
+  validates :order_items, numericality: :greater_than_zero, on: :update
 
   def valid_years
 
