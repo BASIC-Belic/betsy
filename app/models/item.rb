@@ -10,6 +10,10 @@ class Item < ApplicationRecord
     scope: [:user, :category], message: "User: has already added this item in this category. Please change item inventory."
   }
 
+  def decrement_quantity_available(num)
+    self.quantity_available -= num
+  end
+
   # guest login set to 0
   def is_authenticated_user?
     session[:user_id] != 0 ? true: false
