@@ -2,7 +2,10 @@
 Item:<% x = Item.find_by(id: item.item_id) %>
 <%= x.name%>
 <br>
-Quantity: <%= item.quantity_per_item %>
+Quantity available: <%= x.quantity_available %>
+<br>
+Quantity currently in cart: <%= item.quantity_per_item %>
+
 
 <br>
 

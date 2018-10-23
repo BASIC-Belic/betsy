@@ -42,7 +42,7 @@ class OrderItemsController < ApplicationController
     new_quantity = @order_item.quantity_per_item + additional_quantity
 
     if new_quantity > @item.quantity_available
-      flash[:error] = "Not enough inventory in stock. Please try again."
+      flash[:error] = "Whoops! You already have a few of these babies in your cart and we only have #{@item.quantity_available} available. Please check your quantity and try again."
       redirect_to order_path(@order)
     else
       success = @order_item.update(quantity_per_item: new_quantity)
