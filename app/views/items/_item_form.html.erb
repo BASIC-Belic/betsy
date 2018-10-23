@@ -4,7 +4,7 @@ locals: {
 }
 %>
 
-<%= form_with model: @item, class: 'item-form' do |f| %>
+<%= form_with model: @review, method: :post, :url => item_reviews_path(@item.id) do |f| %>
 
 
   <%= f.label :Name %>
