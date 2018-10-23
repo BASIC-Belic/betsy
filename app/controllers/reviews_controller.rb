@@ -8,13 +8,21 @@ class ReviewsController < ApplicationController
   def create
     # session[:user_id] != @current_user ? can_review = true : can_review = false
     # if can_review
-    @review = Review.new(filtered_params)
-    @review.save
-    flash[:sucess] = "Thank you for your review!"
-    redirect_back fallback_location: '/', allow_other_host: false
-    # else
-    #   flash[:error] = "A problem occurred: Could not post review"
-    #   redirect_back fallback_location: '/', allow_other_host: false
+    @review = Review.new(
+      description: params[:review][:description],
+      rating:params[:review][:rating],
+      item_id: params[:id],
+      user_id: 3
+    )
+
+    good_review = @review.save
+    if good_review
+      flash[:sucess] = "Thank you for your review!"
+      redirect_back fallback_location: '/', allow_other_host: false
+    else
+      flash[:error] = "A problem occurred: Could not post review"
+      redirect_back fallback_location: '/', allow_other_host: false
+    end
 
   end
 
@@ -27,7 +35,12 @@ class ReviewsController < ApplicationController
 
   def update
 
-    success_save = @review.update(filtered_params)
+    success_save = @review.update(
+      description: params[:review][:description],
+      rating:params[:review][:rating],
+      item_id: params[:id],
+      user_id: session[:user_id]
+    )
 
     if success_save
       flash[:success] = "Review of #{@item.name} successfully reviewed."
@@ -38,14 +51,12 @@ class ReviewsController < ApplicationController
     end
   end
 
-  private
-
-  def filtered_params
-    return params.require(:review).permit(
-      :description,
-      :rating
-    )
-
-  end
+  # def filtered_params
+  #   return params.require(:review).permit(
+  #     :description,
+  #     :rating,
+  #     :item_id sessions[:item_id]
+  #     :user_id session[:user_id]
+  #   )
 
 end

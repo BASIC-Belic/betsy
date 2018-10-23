@@ -55,4 +55,11 @@ class Item < ApplicationRecord
 
     return item_subtotal
   end
+
+  def total_reviews
+    reviews = []
+    reviews << self.reviews.all
+    return reviews
+  end
+
 end
