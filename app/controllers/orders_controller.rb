@@ -21,15 +21,15 @@ class OrdersController < ApplicationController
 
     successful = @order.update(parsed_order_data(order_params))
 
+    #to do --> MOVE logic into instance method in Order
     @order.order_items.each do |order_item|
       order_item.decrement_quantity_available_of_item
     end
 
     if successful
-
+    # session[:order_id] = nil
       flash[:success] = "Order #{@order.id} for #{@order.name} has been successfully received. Look out for an email with order confirmation."
       redirect_to order_path(@order)
-      # session[:order_id] = nil 
     else
 
       flash.now[:error] =  "Error in submitting order."

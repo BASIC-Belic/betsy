@@ -26,11 +26,16 @@ class Item < ApplicationRecord
 
   def user_created_product?
     if session[:user_id] == @item.user_id
-      can_change = true
+      user_created = true
     else
-      can_change == false
+      user_created = false
     end
-    return can_change
+    return user_created
   end
 
+  def item_subtotal(price,qty)
+    item_subtotal = price * qty
+
+    return item_subtotal
+  end
 end

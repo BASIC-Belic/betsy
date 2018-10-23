@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:update, :destroy]
 
+
   resources :items do
     post '/order_items', to: 'order_items#create'
     patch 'order_items', to: 'order_items#increment_quantity', as: 'increment_quantity'
+    resources :reviews
   end
 
   get "/auth/:provider/callback", to: "sessions#create"

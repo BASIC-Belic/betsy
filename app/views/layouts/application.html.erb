@@ -7,7 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css?family=Mali|Quicksand" rel="stylesheet">
 
   </head>
@@ -17,10 +17,8 @@
       <section class = "top_of_page">
         <ul>
           <li>
-            <a href="#"><i class="fas fa-lg fa-shopping-cart"></i></a>
-            <%if @current_shopper_order_id %>
-            <%= link_to "Cart", order_path(@current_shopper_order_id) %>
-            <%end%>
+
+            <%= link_to "Cart", order_path(@current_shopper_order_id), class: "header_links" %>
           </li>
 
 <!-- User vs. Merchant Shop Views -->
@@ -103,8 +101,10 @@
         <div class="<%= key_word %>"><%=message%></div>
         <% end %>
       </section>
+      <section class = "body_main">
+        <%= yield %>
+      </section>
 
-      <%= yield %>
     </main>
 
     <footer>

@@ -21,7 +21,7 @@
         <%@current_user_items.each do |item| %>
         <li><strong>For sale: </strong><%=item.name%><%= link_to "(details)", item_path(item)%><%= link_to "(edit)", edit_item_path(item)%><%= link_to "(delete)", item_path(item), method: :delete, data: { confirm: "Are you sure you want to delete this product: #{item.name}? You have #{item.quantity_available} of them"} %></li>
         <li><strong>Stock: </strong><%=item.quantity_available%></li>
-        <li><strong>Price: </strong>$<%=item.price%></li>
+        <li><strong>Price: </strong>$<%= '%.2f' % item.price%></li>
         <li><strong>Category:  </strong><%=item.category_id%></li>
         <% end %>
       </ul>
