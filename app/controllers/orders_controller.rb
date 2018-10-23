@@ -6,6 +6,65 @@ class OrdersController < ApplicationController
 
     @order_items = OrderItem.where(order_id: current_order.id)
     # @order_items = current_order.order_items
-
   end
+
+  #fill out order details
+  def edit
+
+    @order = Order.find_by(id: params[:id])
+  end
+
+  #submit order button
+  def update
+
+    @order = Order.find_by(id: params[:id])
+
+    successful = @order.update(parsed_order_data(order_params))
+
+    #to do --> MOVE logic into instance method in Order
+    @order.order_items.each do |order_item|
+      order_item.decrement_quantity_available_of_item
+    end
+
+    if successful
+    # session[:order_id] = nil
+      flash[:success] = "Order #{@order.id} for #{@order.name} has been successfully received. Look out for an email with order confirmation."
+      redirect_to order_path(@order)
+    else
+
+      flash.now[:error] =  "Error in submitting order."
+      render :edit, status: 400
+    end
+  end
+
+  private
+
+  def order_params
+    return params.require(:order).permit(
+      :name,
+      :email,
+      :mailing_address,
+      :name_on_card,
+      :credit_card_num,
+      :credit_card_exp_year,
+      :credit_card_exp_month,
+      :cvv_num,
+      :zipcode
+    )
+  end
+
+  def parsed_order_data(order_params)
+    return { name: order_params[:name], email: order_params[:email], mailing_address: order_params[:mailing_address], name_on_card: order_params[:name_on_card], credit_card_num: order_params[:credit_card_num],  credit_card_exp_year: order_params[:credit_card_exp_year], credit_card_exp_month: order_params[:credit_card_exp_month], status: "paid"
+    }
+  end
+
+  # how to match user (customer) to order?
+  # def define_order_user
+  #   if @current_user
+  #     User.find(@current_user.id)
+  #   else
+  #     #reserved guest
+  #     User.find(id:0)
+  #   end
+  # end
 end
