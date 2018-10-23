@@ -9,8 +9,7 @@ Quantity: <%= item.quantity_per_item %>
 
 <%= form_with model: @order_item, method: :patch, :url => order_item_path(item.id) do |f| %>
 
-<%= f.text_field :quantity_per_item %>
-
+<%= f.select :quantity_per_item, x.return_quantity_selection %>
 
 <%= f.submit "update quantity" %>
 <% end %>

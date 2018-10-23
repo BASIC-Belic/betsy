@@ -23,10 +23,12 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(id: params[:id])
 
-    @order_item.update(quantity_per_item: params[:quantity_per_item])
+    success = @order_item.update(quantity_per_item: params[:quantity_per_item])
 
-
-    redirect_to order_path(@order)
+    if success
+      flash[:success] = "Item successfully updated."
+      redirect_to order_path(@order)
+    end
   end
 
 
