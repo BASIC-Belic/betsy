@@ -58,9 +58,12 @@ class OrderItemsController < ApplicationController
   def destroy
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
-    @order_item.destroy
+    success = @order_item.destroy
 
-    redirect_to order_path(@order)
+    if success
+      flash[:success] = "Item successfully deleted."
+      redirect_to order_path(@order)
+    end
   end
 
 
