@@ -11,10 +11,10 @@ class Item < ApplicationRecord
   }
 
   def decrement_quantity_available(num)
-    self.quantity_available -= num
-    # if self.quantity_available < 0
-    #   #error message here
+    # if self.quantity_available.nil?
+    #   #error message here, user this self.name item is sold out? 
     # end
+    self.quantity_available -= num
   end
 
   # guest login set to 0

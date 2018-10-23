@@ -18,7 +18,9 @@
         <ul>
           <li>
             <a href="#"><i class="fas fa-lg fa-shopping-cart"></i></a>
+            <%if @current_shopper_order_id %>
             <%= link_to "Cart", order_path(@current_shopper_order_id) %>
+            <%end%>
           </li>
 
 <!-- User vs. Merchant Shop Views -->

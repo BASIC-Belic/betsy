@@ -17,11 +17,13 @@ class OrdersController < ApplicationController
   #submit order button
   def update
 
+    @order = Order.find_by(id: params[:id])
+
+    successful = @order.update(parsed_order_data(order_params))
+
     @order.order_items.each do |order_item|
       order_item.decrement_quantity_available_of_item
     end
-
-    successful = @order.update(parsed_data)
 
     if successful
 
@@ -37,7 +39,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:user).permit(
+    return params.require(:order).permit(
       :name,
       :email,
       :mailing_address,
@@ -50,8 +52,8 @@ class OrdersController < ApplicationController
     )
   end
 
-  def parsed_order_data
-    return { name: order_params[:name], email: order_params[:email], mailing_address: order_params[:mailing_address], name_on_card: order_params[:name_on_card], credit_card_num: order_params[:credit_card_num],  credit_card_exp_year: order_params[:credit_card_exp_year], credit_card_exp_month: order_params[:credit_card_exp_month], user: define_order_user, status: "paid"
+  def parsed_order_data(order_params)
+    return { name: order_params[:name], email: order_params[:email], mailing_address: order_params[:mailing_address], name_on_card: order_params[:name_on_card], credit_card_num: order_params[:credit_card_num],  credit_card_exp_year: order_params[:credit_card_exp_year], credit_card_exp_month: order_params[:credit_card_exp_month], status: "paid"
     }
   end
 
