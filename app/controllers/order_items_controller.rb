@@ -35,14 +35,22 @@ class OrderItemsController < ApplicationController
   def increment_quantity
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(item_id: params[:item_id])
+    @item = Item.find_by(id: @order_item.item_id)
 
     additional_quantity = params[:quantity_per_item].to_i
 
     new_quantity = @order_item.quantity_per_item + additional_quantity
 
-    @order_item.update(quantity_per_item: new_quantity)
-
-    redirect_to order_path(@order)
+    if new_quantity > @item.quantity_available
+      flash[:error] = "Not enough inventory in stock. Please try again."
+      redirect_to order_path(@order)
+    else
+      success = @order_item.update(quantity_per_item: new_quantity)
+      if success
+        flash[:success] = "Item quantity updated."
+        redirect_to order_path(@order)
+      end
+    end
   end
 
 
