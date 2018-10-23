@@ -1,23 +1,23 @@
 <section>
+
   <h2>
     <%=  @category.category_type.capitalize %>
   </h2>
 
+  <div class="item_by_category">
+    <% @items_in_category.each do |item| %>
 
-  <% @items_in_category.each do |item| %>
-    <div class="item_by_category">
-      <div class="image_by_category">
-        <img src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %>
-        <%= item.description %>">
-      </div>
-      <div class="details_by_category">
-        <p>
-          <strong><%= item.name %></strong>
-        </p>
-          <%= link_to "Details", item_path(item.id), class: "detail_button" %>
+    <!-- <div class="image_by_category"> -->
+    <div>
+      <img class = "category_images" src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %>
+      <%= item.description %>">
 
-      </div>
+      <p class="title"><%= item.name %></p>
+      <div class="overlay"></div>
+      <div><%= link_to "Details", item_path(item.id), class: "button" %></div>
+
     </div>
 
-  <% end %>
+    <% end %>
+  </div>
 </section>
