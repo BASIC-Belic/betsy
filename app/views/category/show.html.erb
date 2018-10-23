@@ -5,12 +5,19 @@
 
 
   <% @items_in_category.each do |item| %>
-    <p>
-      <img src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %><%= item.description %>">
-
-      <%= link_to item.name, item_path(item.id) %>: <%= link_to item.description, item_path(item.id) %>
-    </p>
-
+    <div class="item_by_category">
+      <div class="image_by_category">
+        <img src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %>
+        <%= item.description %>">
+      </div>
+      <div class="details_by_category">
+        <p>
+          Item: <%= link_to item.name, item_path(item.id) %><br>
+          Description: <%= item.description %><br>
+          Price: $<%= '%.2f' % item.price %>
+        </p>
+      </div>
+    </div>
 
   <% end %>
 </section>
