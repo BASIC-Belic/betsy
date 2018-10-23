@@ -34,9 +34,11 @@
 
     <ul>
 
-      <li><% @current_merchant_unfulfilled_items.each do |order_item| %>
-        <%=order_item.item_id.name%>
-        <%=order_item.quantity_per_item %>
+      <li><% @current_merchant_unfulfilled_order_items.each do |order_item| %>
+        Item Name<%=order_item.item_id.name%>
+        Num Ordered: <%=order_item.quantity_per_item %>
+        Customer Name: [QUERY ORDER_ITEM FOR NAME]
+        Customer Address: [QUERY ORDER_ITEM FOR ADDRESS]
         <% end %></li>
 
       </ul>
