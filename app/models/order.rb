@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   validates :credit_card_exp_year, :in => @valid_years, on: :update
 
   validates :order_items, numericality: :greater_than_zero, on: :update
+  #shorter way to do the above?
+  # validates :order_items, length: { minimum: 1 }
 
   def valid_years
 
