@@ -2,7 +2,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   validates :item_id, presence: true
 
-  def submit_order
+  def submit_order_item
 
     item = Item.find_by(id: self.item_id)
 

@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 
     #to do --> MOVE logic into instance method in Order
     @order.order_items.each do |order_item|
-      order_item.submit_order
+      order_item.submit_order_item
     end
 
     if successful
