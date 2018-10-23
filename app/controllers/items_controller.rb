@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   # a name must be unique
-  # NOTE: change redirect in line 42 to something appropriate after I figure out what that is with team
+
   def create
 
     category = Category.find_by(category_type: item_params[:category_type])
@@ -45,7 +45,6 @@ class ItemsController < ApplicationController
 
   def show
     head :not_found unless @item
-    # @order = current_order
     @order = Order.find_by(id: session[:order_id])
   end
 
@@ -64,6 +63,7 @@ class ItemsController < ApplicationController
     end
 
   end
+
 
   private
 
