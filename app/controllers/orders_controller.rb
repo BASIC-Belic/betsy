@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
 
-  before_action :define_order_user
-
   def show
     current_order = Order.find_by(id: params[:id])
     # @order_items = @current_order.order_items
@@ -57,12 +55,13 @@ class OrdersController < ApplicationController
     }
   end
 
-  def define_order_user
-    if @current_user
-      User.find(@current_user.id)
-    else
-      #reserved guest
-      User.find(id:0)
-    end
-  end
+  # how to match user (customer) to order?
+  # def define_order_user
+  #   if @current_user
+  #     User.find(@current_user.id)
+  #   else
+  #     #reserved guest
+  #     User.find(id:0)
+  #   end
+  # end
 end
