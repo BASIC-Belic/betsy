@@ -26,6 +26,7 @@ class Item < ApplicationRecord
 
   def item_subtotal(price,qty)
     item_subtotal = price * qty
+
     return item_subtotal
   end
 

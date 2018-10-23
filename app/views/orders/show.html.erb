@@ -1,6 +1,7 @@
 <article id="cart">
   <strong><h1>Shopping Cart</h1></strong>
 
+  <% cart_subtotal = [] %>
   <% @order_items.order('created_at').each do |item| %>
     <div class="item_display">
 
@@ -20,14 +21,21 @@
           <% end %>
         </div>
         <div class="column">
-          Item Price: $<%= x.price %>
+          Item Price: $<%= '%.2f' % x.price %>
         </div>
         <div class="column">
-          Total: $<%= x.item_subtotal(x.price, item.quantity_per_item) %>
+          <% item_sub = x.item_subtotal(x.price, item.quantity_per_item) %>
+          <% cart_subtotal << item_sub %>
+            Total: $<%= '%.2f' % item_sub %>
         </div>
 
       </section>
 
     </div>
   <% end %>
+  <div class="subtotal">
+    <h3>Subtotal: $<%= '%.2f' % cart_subtotal.sum %></h3><br>
+    <button type="button"><%= link_to "Checkout", root_path %></button>
+  </div>
+
 </article>
