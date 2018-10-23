@@ -10,11 +10,19 @@ class Order < ApplicationRecord
 
   validates :credit_card_exp_year, :in => @valid_years, on: :update
 
+  validates :order_items, numericality: { greater_than_zero: 0 }, on: :update
+
   def valid_years
 
     two_digit_date = Date.today.year % 1000
     @valid_years = (two_digit_date .. two_digit_date + 8).to_a
     return @valid_years
+  end
 
+
+  def greater_than_zero
+    if self.field_name < 1
+      self.errors.add(:field_name, "#{field_name} can't less than one")
+    end
   end
 end
