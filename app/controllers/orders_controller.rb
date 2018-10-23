@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
 
       flash[:success] = "Order #{@order.id} for #{@order.name} has been successfully received. Look out for an email with order confirmation."
       redirect_to order_path(@order)
+      # session[:order_id] = nil 
     else
 
       flash.now[:error] =  "Error in submitting order."
