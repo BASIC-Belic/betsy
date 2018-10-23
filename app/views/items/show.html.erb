@@ -4,7 +4,7 @@
 
 
 Category: <%= @item_category %></br>
-Price: <%= @item.price.to_f %></br>
+Price: <%= '%.2f' % @item.price %></br>
 Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 Quantity Avaliable: <%= @item.quantity_available %>
@@ -16,22 +16,22 @@ Quantity Avaliable: <%= @item.quantity_available %>
   <%= form_with model: @order_item, method: :post, :url => item_order_items_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
-  <%= f.text_field :quantity_per_item %>
-
+  <%= f.select :quantity_per_item, @item.return_quantity_selection %>
 
   <%= f.submit "Add to Cart" %>
+
   <% end %>
 
-<% else %>
-
+  <% else %>
 
   <%= form_with model: @order_item, method: :patch, :url => item_increment_quantity_path(@item.id) do |f| %>
 
   <%= f.label "Quantity:" %>
-  <%= f.text_field :quantity_per_item%>
-
+  <%= f.select :quantity_per_item, @item.return_quantity_selection %>
 
   <%= f.submit "Add to Cart" %>
+
+
   <% end %>
 
 

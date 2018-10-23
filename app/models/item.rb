@@ -10,7 +10,16 @@ class Item < ApplicationRecord
     scope: [:user, :category], message: "User: has already added this item in this category. Please change item inventory."
   }
 
+  def decrement_quantity_available(num)
+    # if self.quantity_available.nil?
+    #   #error message here, user this self.name item is sold out?
+    # end
 
+    self.quantity_available -= num
+    self.save
+  end
+
+  # guest login set to 0
   def is_authenticated_user?
     session[:user_id] != 0 ? true: false
   end
@@ -25,4 +34,22 @@ class Item < ApplicationRecord
   end
 
 
+  def return_quantity_selection
+
+    iterations = self.quantity_available
+
+    quantity_options = []
+
+    iterations.times do |number|
+      quantity_options << number + 1
+    end
+
+    return quantity_options
+  end
+
+  def item_subtotal(price,qty)
+    item_subtotal = price * qty
+
+    return item_subtotal
+  end
 end
