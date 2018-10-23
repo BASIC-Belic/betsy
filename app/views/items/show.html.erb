@@ -1,13 +1,15 @@
-<h2> Product Details</h2>
+<h2><%= @item.name %></h2>
 
 <img src= <%= @item.image %> class="img-thumbnail, item_show" ><br>
 
-Item name: <%= @item.name %><br>
+
 Category: <%= @item_category %></br>
 Price: <%= '%.2f' % @item.price %></br>
 Rating: <%= @item.avg_rating %><br>
 Description:<%= @item.description %><br>
 Quantity Avaliable: <%= @item.quantity_available %>
+<li><%=link_to "Leave a Review", new_review_path%></li>
+
 
 <% if @order.order_items.find_by(item_id: @item.id).nil? %>
 
@@ -31,5 +33,6 @@ Quantity Avaliable: <%= @item.quantity_available %>
 
   <%= f.submit "Add to Cart" %>
   <% end %>
+
 
 <% end %>
