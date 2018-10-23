@@ -6,7 +6,7 @@ class Order < ApplicationRecord
 
   attr_reader :valid_years
 
-  validates_inclusion_of :credit_card_exp_month, :in => VALID_MONTHS, message: "Please enter a valid month."
+  # validates_inclusion_of :credit_card_exp_month, :in => VALID_MONTHS, message: "Please enter a valid month."
 
   def valid_years
 
