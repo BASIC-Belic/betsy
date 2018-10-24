@@ -3,7 +3,7 @@ class StatusController < ApplicationController
   end
 
   def detail
-    # @test = params[:shoe]
+    @order = Order.find_by(id: params[:id])
     orderitems = OrderItem.where(order_id: params[:id])
     ids_items_purchased = orderitems.map do |item|
       item.item_id
@@ -30,7 +30,7 @@ class StatusController < ApplicationController
   end
 
   def show
-    # @order = Order.find_by(id: params[:id])
+    @order = Order.find_by(id: params[:id])
     orderitems = OrderItem.where(order_id: params[:id])
 
     ids_items_purchased = orderitems.map do |item|
