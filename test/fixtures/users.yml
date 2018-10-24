@@ -15,3 +15,11 @@ two:
   email: MyString
   image_url: MyString
   provider: MyString
+
+june:
+  uid: 333
+  name: june
+  nickname: june
+  email: june@gmail.com
+  image_url: nil
+  provider: github
