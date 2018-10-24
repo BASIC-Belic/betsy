@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 luggage:
-  type: luggage
+  category_type: luggage
 
 shoes:
-  type: shoes 
+  category_type: shoes

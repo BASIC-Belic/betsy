@@ -11,10 +11,9 @@ describe User do
   describe 'relations' do
     it "has a list of items" do
       @linda.must_respond_to :items
-      #NEED TO GIVE A YAML ITEM
-      # @linda.items.each do |item|
-      #   item.must_be_kind_of Item
-      # end
+      @linda.items.each do |item|
+        item.must_be_kind_of Item
+      end
     end
 
     it "has a list of reviews" do
