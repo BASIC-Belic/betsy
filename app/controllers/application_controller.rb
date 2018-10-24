@@ -34,13 +34,16 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
+    # raise
     if session[:order_id]
+      raise
       # Order.find_by(id: session[:order_id])
       @current_shopper_order_id = session[:order_id]
     else
       new_order = Order.create
       session[:order_id] = new_order.id
       @current_shopper_order_id = session[:order_id]
+      # raise
     end
   end
 

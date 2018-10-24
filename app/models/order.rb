@@ -12,7 +12,7 @@ class Order < ApplicationRecord
 
   # validates :order_items, numericality: :greater_than_zero, on: :update
   #shorter way to do the above?
-  validates :order_items, length: { minimum: 1 }
+  validates :order_items, length: { minimum: 1 }, on: :update
 
   def valid_years
 
