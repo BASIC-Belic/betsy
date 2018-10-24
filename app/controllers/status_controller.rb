@@ -2,6 +2,7 @@ class StatusController < ApplicationController
   def findform
   end
 
+  # post route
   def detail
     @order = Order.find_by(id: params[:id])
     orderitems = OrderItem.where(order_id: params[:id])
@@ -29,6 +30,7 @@ class StatusController < ApplicationController
 
   end
 
+  # get route
   def show
     @order = Order.find_by(id: params[:id])
     orderitems = OrderItem.where(order_id: params[:id])
