@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 
     #to do --> MOVE logic into instance method in Order
     @order.order_items.each do |order_item|
-      order_item.submit_order
+      order_item.submit_order_item
     end
 
     if successful
@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
   end
 
   def parsed_order_data(order_params)
-    return { name: order_params[:name], email: order_params[:email], mailing_address: order_params[:mailing_address], name_on_card: order_params[:name_on_card], credit_card_num: order_params[:credit_card_num],  credit_card_exp_year: order_params[:credit_card_exp_year], credit_card_exp_month: order_params[:credit_card_exp_month], status: "ordered"
+    return { name: order_params[:name], email: order_params[:email], mailing_address: order_params[:mailing_address], name_on_card: order_params[:name_on_card], credit_card_num: order_params[:credit_card_num],  credit_card_exp_year: order_params[:credit_card_exp_year], credit_card_exp_month: order_params[:credit_card_exp_month], status: "paid"
     }
   end
 

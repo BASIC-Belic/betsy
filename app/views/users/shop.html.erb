@@ -32,16 +32,19 @@
   <section>
     <h2>Orders Pending</h2>
 
-    <ul>
+    <div class="">
+      <ul>
 
-      <li><% @current_merchant_unfulfilled_order_items.each do |order_item| %>
-        Item Name<%=order_item.item_id.name%>
-        Num Ordered: <%=order_item.quantity_per_item %>
-        Customer Name: [QUERY ORDER_ITEM FOR NAME]
-        Customer Address: [QUERY ORDER_ITEM FOR ADDRESS]
-        <% end %></li>
+        <li><% @current_merchant_unfulfilled_order_items.each do |order_item| %>
+          <li>Item Name<%=Item.find_by(id: order_item.item_id).name%></li>
+          <li>Num Ordered: <%=order_item.quantity_per_item %></li>
+          <li>Customer Name: <%=Order.find_by(id: order_item.order_id).name%></li>
+          <li>Customer Address: <%=Order.find_by(id: order_item.order_id).mailing_address%></li>
+          <% end %>
+        </li>
 
       </ul>
+    </div>
 
   </section>
 
