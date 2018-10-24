@@ -1,7 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
-require "minitest/rails"require "minitest/reporters"  # for Colorized output
+require "minitest/rails"
+require "minitest/reporters"  # for Colorized output
 #  For colorful output!
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
@@ -29,11 +30,13 @@ class ActiveSupport::TestCase
   def mock_auth_hash(user)
     return{
       uid: user.uid,
-      name: user.name,
-      nickname: user.nickname,
-      email: user.email,
-      image_url: user.image_url,
-      provider: user.provider
+      provider: user.provider,
+      info: {
+        name: user.name,
+        nickname: user.nickname,
+        email: user.email,
+        image_url: user.image_url
+      }
     }
   end
 end
