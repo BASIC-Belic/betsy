@@ -4,13 +4,12 @@
     <%=  @category.category_type.capitalize %>
   </h2>
 
-  <div class="item_by_category">
+  <div class="item-by-category">
     <% @items_in_category.each do |item| %>
 
     <!-- <div class="image_by_category"> -->
-    <div class = "test">
-      <img class = "category_images" src= "<%= item.image %>" class="img-thumbnail item_show"  alt="<%= item.name %>
-      <%= item.description %>">
+    <div class = "item-block">
+      <img class = "category-images" src= "<%= item.image %>" alt="<%= item.name %>">
 
       <p class="title"><%= item.name %></p>
       <div class="overlay"></div>

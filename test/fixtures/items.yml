@@ -8,6 +8,7 @@ suitcase:
   name: Marron Case
   description: A bunch of suitcases
   avg_rating: 3
+  user: one
 
 shoes:
   category: shoes
@@ -17,3 +18,4 @@ shoes:
   name: Bunny Shoes
   description: Cute bunny shoes
   avg_rating: 4
+  user: two
