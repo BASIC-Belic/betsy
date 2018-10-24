@@ -12,6 +12,10 @@ class OrderItem < ApplicationRecord
     self.save
   end
 
-
+  def find_item_name(num)
+    item = Item.find_by(id: num)
+    item_name = item.name
+    return item_name
+  end
 
 end

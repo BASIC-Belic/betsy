@@ -2,6 +2,7 @@
 
   <section><!-- Merchant View & User View -->
     <%= image_tag "#{@current_user.image_url}", alt: "user image", title: "#{@current_user.name}'s profile pic", style: 'float:right;'%>
+    <%= link_to "Manage Orders", pending_path %>
     <ul>
       <li><strong>Id: </strong><%= @current_user.id %></li>
       <li><strong>Name: </strong><%= @current_user.name %></li>
@@ -30,7 +31,7 @@
 
 
   <section>
-    <h2>Orders Pending</h2>
+    
 
 
     <div class="">

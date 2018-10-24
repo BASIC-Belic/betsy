@@ -1,0 +1,11 @@
+<h2>Manage Orders</h2>
+
+
+  <% @pending_order_items.each do |order_item|%>
+    OrderItem Id: <%= order_item.id %><br>
+    CustomerOrder Id: <%= order_item.order_id %><br>
+    Item Name: <%= order_item.find_item_name(order_item.item_id) %><br>
+    Qty Ordered: <%= order_item.quantity_per_item %><br>
+    Status: <%= order_item.status %><br>
+    ------------------------------------------- <br>
+  <% end %>

@@ -18,6 +18,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def merchant_pending_orders
+    # @testing = "Shoe"
+    current_merchant = session[:user_id]
+# raise
+    items_sold_by_merchant = find_items_sold_by_merchant(current_merchant)
+    item_ids = items_sold_by_merchant.map do |item|
+      item.id
+    end
+
+    @pending_order_items = []
+    item_ids.each do |x|
+      order_items = OrderItem.where(item_id: x, status: "paid")
+
+      order_items.each do |order_item|
+        @pending_order_items << order_item
+      end
+    end
+
+  end
+
   private
 
   #strong params
@@ -51,5 +71,11 @@ class UsersController < ApplicationController
       OrderItem.where(item_id: item.id) && OrderItem.where(status: "ordered")
     end
     @current_merchant_unfulfilled_order_items.flatten!
+  end
+
+
+  def find_items_sold_by_merchant(merchant_id)
+    items = Item.where(user_id: merchant_id)
+    return items
   end
 end
