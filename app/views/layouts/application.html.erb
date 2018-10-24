@@ -18,17 +18,16 @@
         <ul>
           <li>
             <%= link_to "Cart", order_path(@current_shopper_order_id), class: "header_links" %>
-
           </li>
 
 <!-- User vs. Merchant Shop Views -->
           <% if @current_user && !@current_user.is_a_merchant?(@merchant_ids)%>
           <li>
-            <%= link_to "Become a Merchant", shop_path %>
+            <%= link_to "Become a Merchant", shop_path, class: "header_links" %>
           </li>
           <%elsif @current_user && @current_user.is_a_merchant?(@merchant_ids)%>
           <li>
-            <%= link_to "Manage Shop", shop_path %>
+            <%= link_to "Manage Shop", shop_path, class: "header_links" %>
           </li>
           <%end%>
 
