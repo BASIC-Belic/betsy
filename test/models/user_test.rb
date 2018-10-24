@@ -114,16 +114,26 @@ describe User do
     end
   end
 
+  let(:item_ids){
+    items = Item.all
+    item_ids = items.map { |item| item.user_id }
+  }
 
-  describe 'is_amerchant?(given_ids)' do
+  describe 'is_a_merchant?(given_ids)' do
+
+    it 'will return true if user has more than one or more items / is a merchant' do
+
+      #greater than or equal to 1
+      expect(@linda.items.length).must_be :>=, 1
+      expect(@linda.is_a_merchant?(item_ids)).must_equal true
+    end
+
+    it 'will return false if user has less than one item' do
+
+      #less than 1
+      expect(@june.items.length).must_be :<=, 1
+      expect(@june.is_a_merchant?(item_ids)).must_equal false
+    end
   end
-
-
-  #Merchant / Signed in User
-  # Username must be present
-  # Username must be unique
-  # Email Address must be present
-  # Email Address must be unique
-
 
 end
