@@ -2,9 +2,9 @@ class User < ApplicationRecord
   has_many :items
   # has_many :orders
   has_many :reviews
-  
+
   validates :nickname, presence: true, uniqueness: {
-    scope: :provider, message: "User: username already exists for this provider."
+    scope: :provider, message: "User: username already exists for this provider. Please login or reset password."
   }
 
   validates :email, presence: true, uniqueness: true
