@@ -10,9 +10,9 @@ class Order < ApplicationRecord
 
   validates :credit_card_exp_year, :in => @valid_years, on: :update
 
-  validates :order_items, numericality: :greater_than_zero, on: :update
+  # validates :order_items, numericality: :greater_than_zero, on: :update
   #shorter way to do the above?
-  # validates :order_items, length: { minimum: 1 }
+  validates :order_items, length: { minimum: 1 }
 
   def valid_years
 
@@ -22,9 +22,9 @@ class Order < ApplicationRecord
   end
 
 
-  def greater_than_zero
-    if self.field_name < 1
-      self.errors.add(:field_name, "#{field_name} can't less than one")
-    end
-  end
+  # def greater_than_zero
+  #   if self.field_name < 1
+  #     self.errors.add(:field_name, "#{field_name} can't less than one")
+  #   end
+  # end
 end
