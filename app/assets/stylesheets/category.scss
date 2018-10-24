@@ -6,7 +6,7 @@
 .item-by-category{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -49,6 +49,7 @@
   z-index: 1;
   transition: top .5s ease;
   padding: 1em;
+  width: 100%
 }
 
 .overlay {
