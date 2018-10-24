@@ -1,6 +1,11 @@
+<section>
+
+<img src= <%= @item.image %> class="img-thumbnail, item-image" >
+<div class = "category-tag"><%= @item_category %></div>
+
+
 <h2><%= @item.name %></h2>
 
-<img src= <%= @item.image %> class="img-thumbnail, item_show" ><br>
 
 
 Category: <%= @item_category %></br>
@@ -36,3 +41,6 @@ Quantity Avaliable: <%= @item.quantity_available %>
 
 
 <% end %>
+
+
+</section>

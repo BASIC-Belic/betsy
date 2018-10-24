@@ -7,10 +7,49 @@
   // [converter] extracted a&:hover, a&:focus, a&.active to a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active
 
   // Image captions
-.item_show{
-  height: 200px;
-  width: 200px;
+
+.section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+
+.item-image {
+  grid-row-start: 1;
+  grid-row-end: 7;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.item_info {
+  grid-row-start: 1;
+  grid-row-end: 7;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-color: pink;
+}
+
+.category-tag {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 25%;
+  padding: 12px 48px;
+  text-align: center;
+  background-color: #94dbd7;
+  border-radius: 120px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  z-index: 1;
+}
+
+
+
+
+
+
 
 .item_display{
   height: 400px;
