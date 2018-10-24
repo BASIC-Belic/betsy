@@ -58,7 +58,7 @@ class Item < ApplicationRecord
 
   def total_reviews
     reviews = []
-    reviews << self.reviews.all
+    reviews << self.reviews
     return reviews
   end
 
