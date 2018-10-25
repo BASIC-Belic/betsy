@@ -1,18 +1,23 @@
-<h2>Manage Orders</h2>
+<h2>Paid Orders</h2>
 
 
   <% @pending_order_items.each do |order_item|%>
 
   <section class = "pending_order">
     <div class="item_info">
+      <h5>Item Information</h5>
+      Order Date: <%= order_item.created_at.strftime("%B %d, %Y") %><br>
       OrderItem Id: <%= order_item.id %><br>
       Item Name: <%= order_item.find_item_name(order_item.item_id) %><br>
       Qty Ordered: <%= order_item.quantity_per_item %><br>
       Status: <%= order_item.status %><br>
     </div>
     <div class="customer_info">
+      <h5>Customer Information:</h5>
       <% order = order_item.find_order(order_item.order_id) %>
-      Customer Name: <%= order.name %>
+      Name: <%= order.name %><br>
+      Email: <%= order.email %><br>
+      Address: <%= order.mailing_address %><br>
     </div>
   </section>
 

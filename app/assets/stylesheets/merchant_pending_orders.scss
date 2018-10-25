@@ -2,3 +2,17 @@
   border: .5px solid lightgrey;
   margin-bottom: 15px;
 }
+
+.pending_order{
+  display: flex;
+  flex-direction: row;
+}
+
+.item_info{
+  margin-right: 30px;
+  width: 30vw;
+}
+
+.customer_info{
+  width: 30vw;
+}
