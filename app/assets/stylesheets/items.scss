@@ -65,12 +65,12 @@
   color: #772f33;
 }
 
-h2 {
+.item-name h2 {
   font-weight: bold;
   font-size: 3em;
 }
 
-h3 {
+.price h3 {
   color: #2a58a3;
   font-size: .7em;
   font-weight: bold;
@@ -116,7 +116,7 @@ h3 {
 }
 
 
-.btn {
+.form-group .btn {
   background-color: #fb8d96;
   width: 100%;
   grid-row-start: 6;
@@ -127,4 +127,10 @@ h3 {
   border-radius: 2em;
   border: none;
   margin-top: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.form-group .btn:hover {
+  background-color: #ab4652;
 }
