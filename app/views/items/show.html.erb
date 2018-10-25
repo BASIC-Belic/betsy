@@ -47,7 +47,10 @@
         <%= form_with model: @order_item, method: :patch, :url => item_increment_quantity_path(@item.id) do |f| %>
 
         <div class = "form-group">
-        <%= f.label "Quantity:" %><%= @item.quantity_available %>
+        <%= f.label "Quantity:" %>
+
+        (<%= @item.quantity_available %> available)
+        
         <%= f.select :quantity_per_item, @item.return_quantity_selection, {}, class: "form-control" %>
       </div>
 
