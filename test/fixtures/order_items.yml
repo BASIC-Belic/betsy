@@ -1,18 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 orderitem1:
-  order_id: one
-  item_id: shoes
+  order: one
+  item: shoes
   quantity_per_item: 1
   status: pending
 
 orderitem2:
-  order_id: one
-  item_id: suitcase
+  order: one
+  item: suitcase
   quantity_per_item: 1
   status: pending
 
 orderitem3:
-  order_id: two
-  item_id: suitcase
+  order: two
+  item: suitcase
   quantity_per_item: 2
   status: pending

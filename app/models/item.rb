@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_many :order_items
   has_many :reviews
   belongs_to :category
+  belongs_to :order_item
 
   VALID_CATEGORIES = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
 
@@ -49,7 +49,7 @@ class Item < ApplicationRecord
 
     return quantity_options
   end
-  
+
 
   def item_subtotal(price,qty)
     item_subtotal = price * qty
