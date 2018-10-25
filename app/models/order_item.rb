@@ -18,4 +18,9 @@ class OrderItem < ApplicationRecord
     return item_name
   end
 
+  def find_order(num)
+    order = Order.find_by(id: num)
+    return order
+  end
+
 end
