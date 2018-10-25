@@ -2,8 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :reviews
   belongs_to :category
-  belongs_to :order_item
-
+  has_many :order_items
 
   VALID_CATEGORIES = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
 

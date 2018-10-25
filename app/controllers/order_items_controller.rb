@@ -24,7 +24,6 @@ class OrderItemsController < ApplicationController
   end
 
 
-
   def update
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(id: params[:id])

@@ -39,24 +39,19 @@ describe OrderItemsController do
 
         order_item: {
           quantity_per_item: 1,
-          item_id: Item.last.id
+          item_id: Item.last.id,
         }
       }
 
-
       OrderItem.new(order_item_data[:order_item]).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
-
-      # binding.pry
-
 
       # Act
       expect {
-
         post item_order_items_path(Item.last.id),
         params: order_item_data
-
       }.wont_change('OrderItem.count')
 
+      binding.pry
       # Assert
       # must_respond_with :bad_request
     end
