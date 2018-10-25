@@ -89,7 +89,6 @@ describe Item do
         price: 30,
         quantity_available: 3,
         user: @user_one
-
       )
 
     end
@@ -123,7 +122,7 @@ describe Item do
     # end
 
     it 'is valid with same name, diff category' do
-      is_valid = @same_n ame_diff_cat.valid?
+      is_valid = @same_name_diff_cat.valid?
       expect ( is_valid ).must_equal true
 
     end
