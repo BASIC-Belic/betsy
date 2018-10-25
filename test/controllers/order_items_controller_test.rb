@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe OrderitemsController do
+describe OrderItemsController do
   # it "must be a real test" do
   #   flunk "Need real tests"
   # end
