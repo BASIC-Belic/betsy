@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   has_many :reviews
   belongs_to :category
 
+
   VALID_CATEGORIES = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
 
   validates :name, presence: true, uniqueness: {
@@ -11,30 +12,28 @@ class Item < ApplicationRecord
   }
 
   validates :price, presence: true
-  validates :quantity_available, presence: true
+  validates :quantity_available,   presence: true
+
 
   def decrement_quantity_available(num)
-    # if self.quantity_available.nil?
-    #   #error message here, user this self.name item is sold out?
-    # end
-
     self.quantity_available -= num
     self.save
   end
 
-  # guest login set to 0
-  def is_authenticated_user?
-    session[:user_id] != 0 ? true: false
-  end
 
-  def user_created_product?
-    if session[:user_id] == @item.user_id
-      user_created = true
-    else
-      user_created = false
-    end
-    return user_created
-  end
+  # guest login is set to 0
+  # def is_authenticated_user?
+  #   session[:user_id] != 0 ? true: false
+  #   return
+  # end
+
+  # user created the product
+  # def user_created_product?
+  #   if session[:user_id] == @self.user_id ? user_created = true: false
+  #     return user_created
+  #   end
+  # end
+
 
 
   def return_quantity_selection
@@ -57,10 +56,5 @@ class Item < ApplicationRecord
     return item_subtotal
   end
 
-  def total_reviews
-    reviews = []
-    reviews << self.reviews
-    return reviews
-  end
 
 end
