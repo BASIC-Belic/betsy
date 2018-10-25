@@ -14,14 +14,25 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    success = @item.destroy
-    if success
-      flash[:success] = "Item successfully deleted."
-      redirect_to root_path
+    item_id = @item.id
+    pending_order = OrderItem.find_by(item_id: item_id)
+
+    if pending_order
+      flash[:error] = "Item cannot be deleted. There is a pending order with this item"
+      redirect_back (fallback_location: root_path)
     else
-      flash[:error] = "Item not deleted."
-      redirect_back fallback_location: root_path
+      flash[:success] = "Item successfully deleted."
+      redirect_back (fallback_location: root_path)
     end
+
+    # success = @item.destroy
+    # if success
+    #   flash[:success] = "Item successfully deleted."
+    #   redirect_to root_path
+    # else
+    #   flash[:error] = "Item not deleted."
+    #   redirect_back fallback_location: root_path
+    # end
   end
 
   # a name must be unique
