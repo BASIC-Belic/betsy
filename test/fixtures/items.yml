@@ -5,10 +5,11 @@ suitcase:
   price: 150
   image: https://i03.hsncdn.com/is/image/HomeShoppingNetwork/prodgrid230/joy-lightweight-nylon-tufftech-luxury-pinstripe-3-piece-d-20180208141055963~590535_2L0.jpg
   quantity_available: 4
-  name: Marron Case
+  name: Maroon Case
   description: A bunch of suitcases
   avg_rating: 3
-  user: one
+  user: two
+
 
 shoes:
   category: shoes
@@ -18,4 +19,4 @@ shoes:
   name: Bunny Shoes
   description: Cute bunny shoes
   avg_rating: 4
-  user: two
+  user: one
