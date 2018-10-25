@@ -3,6 +3,7 @@ require "test_helper"
 describe Item do
 
 
+
   #relation tests: an order has many items, a category has many items
 
   describe 'relations' do
@@ -22,9 +23,23 @@ describe Item do
 
   end
 
+
+
+    let(:dup_name_category_user_item){
+      dup = Item.create(
+        name: Item.first.name,
+        category: Item.first.category,
+        price: 0,
+        quantity_available: 0,
+        user: Item.first.user)
+        dup
+      }
+
+
   describe 'validations' do
 
     before do
+
       @user_one = Item.first.user
       @category_one = Category.first
       @category_two = Category.first
@@ -56,22 +71,6 @@ describe Item do
         user: @user_one
       )
       # same name, same qty, same category (duplicate)
-
-      @thing_one = Item.new(
-        name: 'twin',
-        category: @category_one,
-        price: 30,
-        quantity_available: 2,
-        user: @user_one
-      )
-
-      @thing_two = Item.new(
-        name: 'twin',
-        category: @category_one,
-        price: 30,
-        quantity_available: 2,
-        user: @user_one
-      )
 
       # same everything diff category is valid
 
@@ -116,10 +115,21 @@ describe Item do
       expect( is_valid ).must_equal false
     end
 
-    # it 'is not valid with same name, quantity, and price' do
-    #   is_valid = @thing_two.valid?
-    #   expect( is_valid ).must_equal false
-    # end
+    it 'is not valid with same name, quantity, and price' do
+
+    starting_count = Item.count
+
+    dup_item = dup_name_category_user_item
+
+    ending_count = Item.count
+
+    expect(ending_count).must_equal starting_count
+    expect(Item.first.valid?).must_equal true
+    expect(dup_item.valid?).must_equal false
+    expect(dup_item.errors.messages).must_include :name
+
+
+  end
 
     it 'is valid with same name, diff category' do
       is_valid = @same_name_diff_cat.valid?
