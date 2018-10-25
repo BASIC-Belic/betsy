@@ -16,22 +16,23 @@ class Item < ApplicationRecord
 
   def decrement_quantity_available(num)
     self.quantity_available -= num
-    self.s ave
+    self.save
   end
 
-  # guest login set to 0
-  def is_authenticated_user?
-    session[:user_id] != 0 ? true: false
-  end
 
-  def user_created_product?
-    if session[:user_id] == @item.user_id
-      user_created = true
-    else
-      user_created = false
-    end
-    return user_created
-  end
+  # guest login is set to 0
+  # def is_authenticated_user?
+  #   session[:user_id] != 0 ? true: false
+  #   return
+  # end
+
+  # user created the product
+  # def user_created_product?
+  #   if session[:user_id] == @self.user_id ? user_created = true: false
+  #     return user_created
+  #   end
+  # end
+
 
 
   def return_quantity_selection

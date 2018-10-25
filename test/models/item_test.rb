@@ -22,14 +22,12 @@ describe Item do
 
   end
 
-
-
   describe 'validations' do
 
     before do
       @user_one = Item.first.user
-      @category_one = Item.first.category
-      @category_two = Item.second.category
+      @category_one = Category.first
+      @category_two = Category.first
 
       # no name
       @nameless_item = Item.new(
@@ -79,7 +77,7 @@ describe Item do
 
       @same_name_diff_cat = Item.new(
         name: 'cat',
-        category: @category_two,
+        category: Category.first,
         price: 30,
         quantity_available: 3,
         user: @user_one
@@ -87,7 +85,7 @@ describe Item do
 
       @diff_cat = Item.new(
         name: 'cat',
-        category: @category_one,
+        category: Category.first,
         price: 30,
         quantity_available: 3,
         user: @user_one
@@ -119,11 +117,10 @@ describe Item do
       expect( is_valid ).must_equal false
     end
 
-    # it 'is not valid with same name, quantity, and price' do
-    #   is_valid = @thing_two.valid?
-    #
-    #   expect( is_valid ).must_equal false
-    # end
+    it 'is not valid with same name, quantity, and price' do
+      is_valid = @thing_two.valid?
+      expect( is_valid ).must_equal false
+    end
 
     it 'is valid with same name, diff category' do
       is_valid = @same_name_diff_cat.valid?
@@ -133,6 +130,20 @@ describe Item do
 
 
   end
+
+  # describe 'custom methods' do
+  #
+  #   it 'decreases an item quantity by 1' do
+  #     test_item = Item.first
+  #     start_quantity = test_item.quantity_available
+  #     end_quantity = start_quantity.decrement_quantity_available(1)
+  #     decremented_quantity = start_quantity - 1
+  #
+  #     expect ( end_quantity ).must_equal decremented_quantity
+  #
+  #   end
+  #
+  # end
 
 
 end
