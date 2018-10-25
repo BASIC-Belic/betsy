@@ -38,13 +38,21 @@ describe OrderItemsController do
       order_item_data = {
 
         order_item: {
+          order_item_id: Order.first.id
           quantity_per_item: 1,
           item_id: Item.first.id
         }
       }
 
-      OrderItem.new(order_item_data[:order_item]).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
+      order = Order.first
 
+      order.destroy
+
+      new_order_item = order.order_items.new(
+        order_item_data[:order_item]
+        )
+
+      new_order_item.wont_be :valid?, "Data wasn't invalid. Please come fix this test."
 
       # Act
       expect {
