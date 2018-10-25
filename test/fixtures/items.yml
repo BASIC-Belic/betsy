@@ -8,12 +8,8 @@ suitcase:
   name: Maroon Case
   description: A bunch of suitcases
   avg_rating: 3
-<<<<<<< HEAD
-  user: one
-=======
   user: two
 
->>>>>>> item_testing
 
 shoes:
   category: shoes
@@ -23,8 +19,4 @@ shoes:
   name: Bunny Shoes
   description: Cute bunny shoes
   avg_rating: 4
-<<<<<<< HEAD
-  user: two
-=======
   user: one
->>>>>>> item_testing

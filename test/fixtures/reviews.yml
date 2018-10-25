@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyString
-  rating: 1
+good:
+  description: It's great
+  rating: 5
+  user: one
+  item: luggage
 
-two:
-  description: MyString
+bad:
+  description: Terrible, just terrible
   rating: 1
+  user: two
+  item: shoes

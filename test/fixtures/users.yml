@@ -6,7 +6,7 @@ one:
   nickname: linda-lucy
   email: linda-lucy@gmail.com
   image_url: https://www.gstatic.com/webp/gallery3/2.sm.png
-  provider: Gmail
+  provider: github
 
 two:
   uid: 2
