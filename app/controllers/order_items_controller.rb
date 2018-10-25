@@ -15,9 +15,14 @@ class OrderItemsController < ApplicationController
       # session[:order_id] = @order.id
       flash[:success] = "Item successfully added to your cart!"
       redirect_to order_path(@order.id)
+
+    else
+      flash.now[:error] = "Order item contains bad data."
+      redirect_to item_path(@item.id), status: :bad_request
     end
 
   end
+
 
 
   def update
