@@ -14,15 +14,17 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item_id = @item.id
-    pending_order = OrderItem.find_by(item_id: item_id)
+    in_order = OrderItem.find_by(item_id: @item.id)
 
-    if pending_order
+
+    if in_order
       flash[:error] = "Item cannot be deleted. There is a pending order with this item"
-      redirect_back (fallback_location: root_path)
+      # redirect_back (fallback_location: root_path)
+      redirect_back(fallback_location: root_path)
     else
+      success = @item.destroy
       flash[:success] = "Item successfully deleted."
-      redirect_back (fallback_location: root_path)
+      redirect_back(fallback_location: root_path)
     end
 
     # success = @item.destroy
