@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   }
 
   validates :price, presence: true
-  validates :quantity_available, presence: true
+  validates :quantity_available,   presence: true
 
   def decrement_quantity_available(num)
     # if self.quantity_available.nil?
@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     # end
 
     self.quantity_available -= num
-    self.save
+    self.s ave
   end
 
   # guest login set to 0
