@@ -3,6 +3,10 @@ require "pry"
 
 describe OrderItemsController do
 
+  let(:order_item_id) { OrderItem.first.destroy.id }
+
+  binding.pry
+
   describe "create" do
 
     it "can create an order item with good data" do
@@ -16,7 +20,7 @@ describe OrderItemsController do
         }
       }
 
-      order = Order.first
+      order = Order.last
 
       new_order_item = order.order_items.new(
         order_item_data[:order_item]
@@ -38,7 +42,6 @@ describe OrderItemsController do
       order_item_data = {
 
         order_item: {
-          order_item_id: Order.first.id
           quantity_per_item: 1,
           item_id: Item.first.id
         }
@@ -46,7 +49,9 @@ describe OrderItemsController do
 
       order = Order.first
 
-      order.destroy
+      order.destroy!
+
+      binding.pry
 
       new_order_item = order.order_items.new(
         order_item_data[:order_item]
