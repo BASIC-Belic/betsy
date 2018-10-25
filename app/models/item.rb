@@ -13,11 +13,8 @@ class Item < ApplicationRecord
   validates :price, presence: true
   validates :quantity_available,   presence: true
 
-  def decrement_quantity_available(num)
-    # if self.quantity_available.nil?
-    #   #error message here, user this self.name item is sold out?
-    # end
 
+  def decrement_quantity_available(num)
     self.quantity_available -= num
     self.s ave
   end
@@ -56,10 +53,5 @@ class Item < ApplicationRecord
     return item_subtotal
   end
 
-  def total_reviews
-    reviews = []
-    reviews << self.reviews
-    return reviews
-  end
 
 end

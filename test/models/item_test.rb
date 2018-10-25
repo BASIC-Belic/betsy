@@ -23,38 +23,116 @@ describe Item do
   end
 
 
-  #
-  # describe 'validations' do
-  #
-  #   before do
-  #     @item_one = Item.new(
-  #       name: 'test work'
-  #       category:
-  #       price:
-  #       quantity_avaliable:
-  #       user_id:
-  #
-  #     )
-  #
-  #     @item_two = Item.new(
-  #       name: 'test work'
-  #       category:
-  #       price:
-  #       quantity_avaliable:
-  #       user_id:
-  #
-  #     )
-  #   end
-  #
-  #   it 'is valid when title is present and unique' do
-  #
-  #     is_valid = @wok.valid?
-  #     expect( is_valid ).must_equal true
-  #
-  #   end
-  #
-  #
-  #
-  # end
+
+  describe 'validations' do
+
+    before do
+      @user_one = Item.first.user
+      @category_one = Item.first.category
+      @category_two = Item.second.category
+
+      # no name
+      @nameless_item = Item.new(
+        name: nil,
+        category: @category_one,
+        price: 40,
+        quantity_available: 2,
+        user: @user_one
+
+      )
+      # no price
+      @priceless_item = Item.new(
+        name: 'no price',
+        category: @category_one,
+        price: nil,
+        quantity_available: 3,
+        user: @user_one
+
+      )
+      # no quantitiy
+      @quantityless_item = Item.new(
+        name: 'no quantitiy',
+        category: @category_one,
+        price: 30,
+        quantity_available: nil,
+        user: @user_one
+      )
+      # same name, same qty, same category (duplicate)
+
+      @thing_one = Item.new(
+        name: 'twin',
+        category: @category_one,
+        price: 30,
+        quantity_available: 2,
+        user: @user_one
+      )
+
+      @thing_two = Item.new(
+        name: 'twin',
+        category: @category_one,
+        price: 30,
+        quantity_available: 2,
+        user: @user_one
+      )
+
+      # same everything diff category is valid
+
+      @same_name_diff_cat = Item.new(
+        name: 'cat',
+        category: @category_two,
+        price: 30,
+        quantity_available: 3,
+        user: @user_one
+      )
+
+      @diff_cat = Item.new(
+        name: 'cat',
+        category: @category_one,
+        price: 30,
+        quantity_available: 3,
+        user: @user_one
+
+      )
+
+    end
+
+    it 'is valid when title, category, and price is present' do
+      @valid_item = Item.first
+      is_valid = @valid_item.valid?
+      expect( is_valid ).must_equal true
+
+    end
+
+    it 'is not valid without a name' do
+      is_valid = @nameless_item.valid?
+      expect( is_valid ).must_equal false
+
+    end
+
+    it 'is not valid without a price' do
+      is_valid = @priceless_item.valid?
+      expect( is_valid ).must_equal false
+    end
+
+    it 'is not valid without a quantitiy' do
+      is_valid = @quantityless_item.valid?
+      expect( is_valid ).must_equal false
+    end
+
+    # it 'is not valid with same name, quantity, and price' do
+    #   is_valid = @thing_two.valid?
+    #
+    #   expect( is_valid ).must_equal false
+    # end
+
+    it 'is valid with same name, diff category' do
+      is_valid = @same_name_diff_cat.valid?
+      expect ( is_valid ).must_equal true
+
+    end
+
+
+  end
+
 
 end
