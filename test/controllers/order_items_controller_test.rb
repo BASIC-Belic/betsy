@@ -59,7 +59,31 @@ describe OrderItemsController do
 
     ##it sets initial status to "pending"
 
+  end
 
+  describe "update" do
+
+    it "can create an order item with good data" do
+
+
+    end
+  end
+
+
+  describe "destroy" do
+
+    it "can destroy an existing order item" do
+
+      orderitem = order_items(:orderitem1)
+
+      # binding.pry
+
+      expect {
+        delete order_item_path(orderitem)
+      }.must_change('OrderItem.count', -1)
+
+
+    end
   end
 
 end
