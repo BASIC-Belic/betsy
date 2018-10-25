@@ -20,7 +20,7 @@ describe OrderItemsController do
 
       new_order_item = order.order_items.new(
         order_item_data[:order_item]
-        )
+      )
 
       new_order_item.must_be :valid?, "Data was invalid. Please come fix this test."
 
@@ -44,7 +44,7 @@ describe OrderItemsController do
       }
 
 
-     OrderItem.new(order_item_data[:order_item]).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
+      OrderItem.new(order_item_data[:order_item]).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
 
       # binding.pry
 

@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # @item = Item.find_by(params[:id])
   end
 
   def new
@@ -14,20 +15,26 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    success = @item.destroy
-    if success
-      flash[:success] = "Item successfully deleted."
-      redirect_to root_path
+
+    in_order = OrderItem.find_by(item_id: @item.id)
+
+
+    if in_order
+      flash[:error] = "Item cannot be deleted. There is a pending order with this item"
+      # redirect_back (fallback_location: root_path)
+      redirect_back(fallback_location: root_path)
     else
-      flash[:error] = "Item not deleted."
-      redirect_back fallback_location: root_path
+      success = @item.destroy
+      flash[:success] = "Item successfully deleted."
+      redirect_back(fallback_location: root_path)
     end
+
   end
+
 
   # a name must be unique
 
   def create
-
     category = Category.find_by(category_type: item_params[:category_type])
 
     @item = Item.new(get_filtered_params(item_params, category))
@@ -91,4 +98,5 @@ class ItemsController < ApplicationController
   def find_item_category
     @item_category = Category.find(@item.category_id).category_type
   end
+
 end

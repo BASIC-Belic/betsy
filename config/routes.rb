@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get "/status/findform", to: 'status#findform'
   get "/status/:id", to: 'status#show', as: 'status'
   post "/status/detail", to: 'status#detail', as: 'detail'
+
+  get "users/pending", to: 'users#merchant_pending_orders', as: 'pending'
+  post "/users/:item_id/paid", to: 'users#paid', as: 'paid'
+
   # resources :status
   resources :users, only: [:show, :shop, :orders]
   resources :orders, :items, :reviews, :category
@@ -18,8 +22,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  get "/auth/:provider/callback", to: "sessions#create"
-  post '/logout', to: 'sessions#logout', as: 'logout'
+get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
+post '/logout', to: 'sessions#logout', as: 'logout'
 
-  get '/shop', to: 'users#shop', as: 'shop'
+get '/shop', to: 'users#shop', as: 'shop'
 end

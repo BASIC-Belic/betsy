@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     @merchant_ids = distinct_merchant_objects.map do |merchant|
       merchant.user_id
     end
+
   end
 
   def require_login

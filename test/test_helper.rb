@@ -10,6 +10,12 @@ Minitest::Reporters.use!(
   Minitest.backtrace_filter
 )
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/test/' # for minitest
+end
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -30,11 +36,13 @@ class ActiveSupport::TestCase
   def mock_auth_hash(user)
     return{
       uid: user.uid,
-      name: user.name,
-      nickname: user.nickname,
-      email: user.email,
-      image_url: user.image_url,
-      provider: user.provider
+      provider: user.provider,
+      info: {
+        name: user.name,
+        nickname: user.nickname,
+        email: user.email,
+        image_url: user.image_url
+      }
     }
   end
 end
