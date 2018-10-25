@@ -14,20 +14,24 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    # if @item.user_created_product?
     success = @item.destroy
     if success
       flash[:success] = "Item successfully deleted."
-      redirect_to root_path
+      redirect_to shop_path
     else
       flash[:error] = "Item not deleted."
       redirect_back fallback_location: root_path
     end
+    # else
+    #   flash[:error] = "An item can only be removed by the merchant that created it"
+    #   redirect_back fallback_location: root_path
   end
+
 
   # a name must be unique
 
   def create
-
     category = Category.find_by(category_type: item_params[:category_type])
 
     @item = Item.new(get_filtered_params(item_params, category))
@@ -91,4 +95,5 @@ class ItemsController < ApplicationController
   def find_item_category
     @item_category = Category.find(@item.category_id).category_type
   end
+
 end

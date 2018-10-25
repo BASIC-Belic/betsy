@@ -1,8 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+<<<<<<< HEAD
 
 luggage:
   category_type: luggage
 
+=======
+luggage:
+  category_type: luggage
+
+>>>>>>> item_testing
 shoes:
   category_type: shoes
