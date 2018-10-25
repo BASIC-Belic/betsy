@@ -12,13 +12,13 @@ describe UsersController do
   end
 
   describe "show" do
-    it "succeeds for an exisiting user / merchant" do
+    it "succeeds for an exisiting user / merchant with items" do
 
       get user_path(@linda)
       must_respond_with :success
     end
 
-    it "succeeds for an exisiting user / not merchant" do
+    it "succeeds for an exisiting user / merchant without items" do
 
       get user_path(@june)
       must_respond_with :success
@@ -32,13 +32,15 @@ describe UsersController do
   end
 
   describe "shop" do
-    it "succeeds for an exisiting user / merchant" do
+    it "succeeds for an exisiting user / merchant with items" do
 
-      # get shop_path(@linda)
-      # must_respond_with :success
+      @current_user = @linda
+
+      get shop_path(@linda)
+
     end
 
-    it "succeeds for an exisiting user / not merchant" do
+    it "succeeds for an exisiting user / merchant without items" do
 
       # get shop_path(@june)
       # must_respond_with :success
@@ -49,6 +51,5 @@ describe UsersController do
       # expect(get shop_path(0)).must_redirect_to root_path
     end
   end
-
 
 end

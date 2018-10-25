@@ -45,9 +45,9 @@ class UsersController < ApplicationController
 
   def find_current_user_unfulfilled_items
 
-    @current_merchant_unfulfilled_order_items = @current_user_items.map do |item|
-      OrderItem.where(item_id: item.id) && OrderItem.where(status: "ordered")
-    end
-    @current_merchant_unfulfilled_order_items.flatten!
+    # @current_merchant_unfulfilled_order_items = @current_user_items.map do |item|
+    #   OrderItem.where(item_id: item.id) && OrderItem.where(status: "ordered")
+    # end
+    # @current_merchant_unfulfilled_order_items.flatten!
   end
 end
