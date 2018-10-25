@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/status/detail", to: 'status#detail', as: 'detail'
 
   get "users/pending", to: 'users#merchant_pending_orders', as: 'pending'
+  post "/users/:item_id/paid", to: 'users#paid', as: 'paid'
 
   # resources :status
   resources :users, only: [:show, :shop, :orders]

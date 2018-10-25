@@ -29,13 +29,21 @@ class UsersController < ApplicationController
 
     @pending_order_items = []
     item_ids.each do |x|
-      order_items = OrderItem.where(item_id: x, status: "paid")
+      order_items = OrderItem.where(item_id: x)
 
       order_items.each do |order_item|
         @pending_order_items << order_item
       end
     end
 
+  end
+
+  def paid
+    order_item_id = params[:item_id]
+    order_item = OrderItem.find_by(id: order_item_id)
+    order_item.status = "shipped"
+    order_item.save
+    redirect_back(fallback_location: root_path)
   end
 
   private
