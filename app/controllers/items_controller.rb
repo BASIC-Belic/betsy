@@ -14,18 +14,20 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    # if @item.user_created_product?
-    success = @item.destroy
-    if success
-      flash[:success] = "Item successfully deleted."
-      redirect_to shop_path
+
+    in_order = OrderItem.find_by(item_id: @item.id)
+
+
+    if in_order
+      flash[:error] = "Item cannot be deleted. There is a pending order with this item"
+      # redirect_back (fallback_location: root_path)
+      redirect_back(fallback_location: root_path)
     else
-      flash[:error] = "Item not deleted."
-      redirect_back fallback_location: root_path
+      success = @item.destroy
+      flash[:success] = "Item successfully deleted."
+      redirect_back(fallback_location: root_path)
     end
-    # else
-    #   flash[:error] = "An item can only be removed by the merchant that created it"
-    #   redirect_back fallback_location: root_path
+    
   end
 
 

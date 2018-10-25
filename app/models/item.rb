@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   has_many :reviews
   belongs_to :category
 
+
   VALID_CATEGORIES = ["accessories", "books", "clothing", "seasonal", "luggage", "shoes", "tech", "miscellaneous"]
 
   validates :name, presence: true, uniqueness: {
