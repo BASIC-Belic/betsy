@@ -33,22 +33,24 @@ describe UsersController do
 
   describe "shop" do
     it "succeeds for an exisiting user / merchant with items" do
-
-      @current_user = @linda
-
-      get shop_path(@linda)
+      #
+      # @current_user = @linda
+      # get shop_path(@linda)
+      # must_redirect_to shop_path
 
     end
 
     it "succeeds for an exisiting user / merchant without items" do
 
       # get shop_path(@june)
-      # must_respond_with :success
+      # must_redirect_to shop_path
     end
 
     it "redirects with flash error message for a non exiting user" do
 
-      # expect(get shop_path(0)).must_redirect_to root_path
+      get shop_path(0)
+      must_redirect_to root_path
+      assert_equal 'You need to sign up to create a shop.', flash[:error]
     end
   end
 
