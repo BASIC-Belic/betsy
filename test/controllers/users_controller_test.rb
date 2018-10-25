@@ -33,7 +33,7 @@ describe UsersController do
 
   describe "shop" do
     it "succeeds for an exisiting user / merchant with items" do
-      #
+      skip
       # @current_user = @linda
       # get shop_path(@linda)
       # must_redirect_to shop_path
@@ -41,7 +41,7 @@ describe UsersController do
     end
 
     it "succeeds for an exisiting user / merchant without items" do
-
+      skip
       # get shop_path(@june)
       # must_redirect_to shop_path
     end
