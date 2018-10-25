@@ -49,6 +49,7 @@ class Item < ApplicationRecord
 
     return quantity_options
   end
+  
 
   def item_subtotal(price,qty)
     item_subtotal = price * qty
@@ -58,7 +59,7 @@ class Item < ApplicationRecord
 
   def total_reviews
     reviews = []
-    reviews << self.reviews.all
+    reviews << self.reviews
     return reviews
   end
 

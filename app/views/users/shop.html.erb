@@ -21,16 +21,38 @@
         <%@current_user_items.each do |item| %>
         <li><strong>For sale: </strong><%=item.name%><%= link_to "(details)", item_path(item)%><%= link_to "(edit)", edit_item_path(item)%><%= link_to "(delete)", item_path(item), method: :delete, data: { confirm: "Are you sure you want to delete this product: #{item.name}? You have #{item.quantity_available} of them"} %></li>
         <li><strong>Stock: </strong><%=item.quantity_available%></li>
-        <%if !item.price.nil? %>
         <li><strong>Price: </strong>$<%= '%.2f' % item.price%></li>
-        <% end %>
         <li><strong>Category:  </strong><%=item.category_id%></li>
         <% end %>
       </ul>
     </div>
   </section>
-  <%else%>
+
+
   <section>
+    <h2>Orders Pending</h2>
+
+
+    <div class="">
+      <ul>
+
+        <li><% @current_merchant_unfulfilled_order_items.each do |order_item| %>
+          <li>Item Name<%=Item.find_by(id: order_item.item_id).name%></li>
+          <li>Num Ordered: <%=order_item.quantity_per_item %></li>
+          <li>Customer Name: <%=Order.find_by(id: order_item.order_id).name%></li>
+          <li>Customer Address: <%=Order.find_by(id: order_item.order_id).mailing_address%></li>
+          <% end %>
+        </li>
+
+      </ul>
+    </div>
+
+
+  </section>
+
+
+  <%else%>
+  <section><!-- Non Merchant View Only-->
     <h2>Create your first product in your shop!</h2>
     <p><%= link_to "Add Product", new_item_path %></p>
   </section>

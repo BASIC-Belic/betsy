@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   #remove shop from below filter once conenct user_login
   before_action :find_searched_user, only: [:show]
   before_action :find_current_user_items, only: [:shop]
+  before_action :find_current_user_unfulfilled_items, only: [:shop]
 
   #user profile / merchant page that is visible to all
   def show
@@ -42,8 +43,11 @@ class UsersController < ApplicationController
     end
   end
 
-  # def find_current_user_unfulfilled_items
-  #   @current_user_unfulfilled_items =
-  # OrderItem.where(shipped: "false")
-  # end
+  def find_current_user_unfulfilled_items
+
+    @current_merchant_unfulfilled_order_items = @current_user_items.map do |item|
+      OrderItem.where(item_id: item.id) && OrderItem.where(status: "ordered")
+    end
+    @current_merchant_unfulfilled_order_items.flatten!
+  end
 end

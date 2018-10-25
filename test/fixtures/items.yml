@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  category: MyString
-  price: 1
-  image: MyString
-  quantity_available: 1
-  name: MyString
-  description: MyString
-  avg_rating: 1
+suitcase:
+  category: luggage
+  price: 150
+  image: https://i03.hsncdn.com/is/image/HomeShoppingNetwork/prodgrid230/joy-lightweight-nylon-tufftech-luxury-pinstripe-3-piece-d-20180208141055963~590535_2L0.jpg
+  quantity_available: 4
+  name: Marron Case
+  description: A bunch of suitcases
+  avg_rating: 3
 
-two:
-  category: MyString
-  price: 1
-  image: MyString
-  quantity_available: 1
-  name: MyString
-  description: MyString
-  avg_rating: 1
+shoes:
+  category: shoes
+  price: 40
+  image: https://cdn.shopify.com/s/files/1/0758/2735/products/TB2FjLqdmFmpuFjSZFrXXayOXXa__40028512_1024x1024_88870111-fda4-4eb0-9fef-963934c180e6.jpg?v=1510932598
+  quantity_available: 2
+  name: Bunny Shoes
+  description: Cute bunny shoes
+  avg_rating: 4
