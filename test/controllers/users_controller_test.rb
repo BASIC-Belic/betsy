@@ -31,19 +31,38 @@ describe UsersController do
     end
   end
 
-  describe "shop" do
-    it "succeeds for an exisiting user / merchant with items" do
-      skip
-      # @current_user = @linda
-      # get shop_path(@linda)
-      # must_redirect_to shop_path
+  let (:logged_in_merchant) {
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@linda))
 
+    get auth_callback_path(:github)
+  }
+
+  let (:logged_in_user) {
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@june))
+
+    get auth_callback_path(:github)
+  }
+
+  describe "shop" do
+    it "succeeds for a logged in user / merchant with items" do
+      # skip
+
+      logged_in_merchant
+
+      expect(session[:user_id]).must_equal @linda.id
+
+      get shop_path(@linda)
+      must_respond_with :success
     end
 
     it "succeeds for an exisiting user / merchant without items" do
-      skip
-      # get shop_path(@june)
-      # must_redirect_to shop_path
+
+      logged_in_user
+
+      expect(session[:user_id]).must_equal @june.id
+
+      get shop_path(@june)
+      must_respond_with :success
     end
 
     it "redirects with flash error message for a non exiting user" do
