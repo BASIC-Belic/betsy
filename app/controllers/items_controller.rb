@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # @item = Item.find_by(params[:id])
   end
 
   def new
@@ -27,7 +28,7 @@ class ItemsController < ApplicationController
       flash[:success] = "Item successfully deleted."
       redirect_back(fallback_location: root_path)
     end
-    
+
   end
 
 
