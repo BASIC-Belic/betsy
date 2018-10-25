@@ -44,6 +44,7 @@ describe ItemsController do
   #       quantity_available: 2,
   #       user: merchant
   #     }
+  #
   #     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(users))
   #
   #     get auth_callback_path(:github)
@@ -51,13 +52,12 @@ describe ItemsController do
   #
   #     test_item = Item.new(item_details)
   #
-  #
+  #     must_respond_with :redirect
   #     expect {
   #       post item_path, params: item_details }.must_change 'Item.count', 1
   #
   #       expect(Product.last.name).must_equal item_details[:item][:name]
   #     end
-  #
   #   end
 
     describe "edit" do
@@ -94,7 +94,7 @@ describe ItemsController do
       #
       #   get item_path(id)
       #
-      #   must_respond_with :not_found
+      #   must_respond_with :not_fou
       # end
     end
     #
@@ -108,6 +108,6 @@ describe ItemsController do
 
 
       end
-  end
+    end
 
-end
+  end

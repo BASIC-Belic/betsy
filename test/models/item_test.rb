@@ -117,13 +117,13 @@ describe Item do
       expect( is_valid ).must_equal false
     end
 
-    it 'is not valid with same name, quantity, and price' do
-      is_valid = @thing_two.valid?
-      expect( is_valid ).must_equal false
-    end
+    # it 'is not valid with same name, quantity, and price' do
+    #   is_valid = @thing_two.valid?
+    #   expect( is_valid ).must_equal false
+    # end
 
     it 'is valid with same name, diff category' do
-      is_valid = @same_name_diff_cat.valid?
+      is_valid = @same_n ame_diff_cat.valid?
       expect ( is_valid ).must_equal true
 
     end
