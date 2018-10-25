@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       flash[:success] = "Item successfully deleted."
       redirect_back(fallback_location: root_path)
     end
-    
+
   end
 
 
