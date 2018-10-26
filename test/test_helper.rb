@@ -1,3 +1,4 @@
+require 'simplecov'
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
@@ -10,7 +11,7 @@ Minitest::Reporters.use!(
   Minitest.backtrace_filter
 )
 
-require 'simplecov'
+
 SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
