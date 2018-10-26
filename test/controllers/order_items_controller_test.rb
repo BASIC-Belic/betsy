@@ -67,14 +67,21 @@ describe OrderItemsController do
   describe "destroy" do
 
     it "can destroy an existing order item" do
-
+      start_count = OrderItem.count
       # order = orders(:one)
-      order = orders(:one)
-      orderitem = order.order_items.first
 
-      expect {
-        delete order_item_path(orderitem)
-      }.must_change('OrderItem.count', -1)
+      orderitem = OrderItem.create(
+        item_id: Item.first.id,
+        order_id: Order.first.id,
+        quantity_per_item: 1
+      )
+
+      # binding.pry
+      delete order_item_path(orderitem.id)
+
+      expect(OrderItem.count).must_equal start_count
+
+      # must_change('OrderItem.count', -1)
 
     end
   end
