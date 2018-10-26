@@ -81,7 +81,7 @@ describe ItemsController do
     end
 
   end
-  #
+
   describe "destroy" do
     it "can destroy an existing item" do
       item = Item.first
