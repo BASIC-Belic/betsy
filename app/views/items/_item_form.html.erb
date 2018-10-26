@@ -24,7 +24,16 @@ locals: {
   <%= f.label :description %> <br>
   <%= f.text_area :description %>
 
+  <%categories = Category.all %>
+    <% category_ids = categories.map do |cat| %>
+    <% cat.id %>
+    <% end %>
 
+    <%category_type = categories.map do |cat| %>
+    <% cat.id %>
+    <% end %>
+
+    <%= f.collection_check_boxes Category.all, category_ids, categories%>
 
   <%= f.submit action_type, class: "item-form-submit-button" %>
 
