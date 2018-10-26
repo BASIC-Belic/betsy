@@ -14,19 +14,15 @@ describe OrderItemsController do
     it "can create an order item with good data" do
 
       order_item_data = {
-
-        order_item: {
           item_id: Item.first.id,
-          quantity_per_item: 1,
-          order_id: Order.first.id
-
-        }
+          order_id: Order.first.id,
+          quantity_per_item: 1
       }
 
-      new_order_item = OrderItem.new(order_item_data[:order_item])
+
+      new_order_item = OrderItem.new(order_item_data)
 
       new_order_item.must_be :valid?, "Data was invalid. Please come fix this test."
-      # binding.pry
 
 
       expect {
@@ -60,8 +56,9 @@ describe OrderItemsController do
       # Assert
       # must_respond_with :bad_request
     end
-
   end
+
+  # end
 
   # describe "update" do
   #
@@ -71,21 +68,21 @@ describe OrderItemsController do
   # end
 
 
-  # describe "destroy" do
-  #
-  #   it "can destroy an existing order item" do
-  #
-  #     @order = orders(:one)
-  #     orderitem1 = order_items(:orderitem1)
-  #     orderitem2 = order_items(:orderitem2)
-  #
-  #     # binding.pry
-  #
-  #     expect {
-  #       delete order_item_path(orderitem1.id)
-  #     }.must_change('@order.order_items.count', -1)
-  #
-  #   end
-  # end
+  describe "destroy" do
+
+    it "can destroy an existing order item" do
+
+      @order = orders(:one)
+      orderitem1 = order_items(:orderitem1)
+      orderitem2 = order_items(:orderitem2)
+
+      # binding.pry
+
+      expect {
+        delete order_item_path(orderitem1.id)
+      }.must_change('@order.order_items.count', -1)
+
+    end
+  end
 
 end
