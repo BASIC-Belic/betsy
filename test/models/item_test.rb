@@ -28,6 +28,7 @@ describe Item do
       @user_one = Item.first.user
       @category_one = Category.first
       @category_two = Category.first
+      @created_user = Item.first
 
       # no name
       @nameless_item = Item.new(
@@ -57,20 +58,12 @@ describe Item do
       )
       # same name, same qty, same category (duplicate)
 
-      @thing_one = Item.new(
-        name: 'twin',
-        category: @category_one,
-        price: 30,
-        quantity_available: 2,
-        user: @user_one
-      )
-
-      @thing_two = Item.new(
-        name: 'twin',
-        category: @category_one,
-        price: 30,
-        quantity_available: 2,
-        user: @user_one
+      @duplicate_user = Item.new(
+        name: @created_user.name,
+        category: @created_user.category,
+        price: @created_user.price,
+        quantity_available: @created_user.quantity_available,
+        user: @created_user.user
       )
 
       # same everything diff category is valid
@@ -116,10 +109,10 @@ describe Item do
       expect( is_valid ).must_equal false
     end
 
-    # it 'is not valid with same name, quantity, and price' do
-    #   is_valid = @thing_two.valid?
-    #   expect( is_valid ).must_equal false
-    # end
+    it 'is not valid with same name, quantity, and price' do
+      is_valid = @duplicate_user.valid?
+      expect( is_valid ).must_equal false
+    end
 
     it 'is valid with same name, diff category' do
       is_valid = @same_name_diff_cat.valid?
@@ -129,7 +122,7 @@ describe Item do
 
 
   end
-
+  #
   # describe 'custom methods' do
   #
   #   it 'decreases an item quantity by 1' do

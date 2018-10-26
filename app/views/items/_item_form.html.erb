@@ -9,21 +9,20 @@ locals: {
 
 
 
-  <%= f.label :Name %>
-  <%= f.text_field :name %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <%= f.label :quantity_available %>
-  <%= f.text_field :quantity_available %>
-  <%= f.label :image_url %>
-  <%= f.text_field :image %>
-  <%= f.label :active %>
-  <%= f.text_field :active %>
-  <%= f.label :categories%>
-  <%= f.select :category_type, selections: Item::VALID_CATEGORIES %>
-  <%= f.label :description %>
+  <%= f.label :Name %> <br>
+  <%= f.text_field :name %> <br>
+  <%= f.label :price %> <br>
+  <%= f.text_field :price %> <br>
+  <%= f.label :quantity_available %> <br>
+  <%= f.text_field :quantity_available %> <br>
+  <%= f.label :image_url %> <br>
+  <%= f.text_field :image %> <br>
+  <%= f.label :active %> <br>
+  <%= f.text_field :active %> <br>
+  <%= f.label :categories%> <br>
+  <%=f.collection_check_boxes :category_id, Category.all, :id, :category_type %> <br>
+  <%= f.label :description %> <br>
   <%= f.text_area :description %>
-
 
 
 
