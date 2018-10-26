@@ -5,11 +5,7 @@ class OrderItemsController < ApplicationController
     order_id = session[:order_id].to_i
     item_id = params[:item_id].to_i
 
-
     @order_item = OrderItem.new(status: "pending", quantity_per_item: params[:quantity_per_item].to_i, order_id: order_id, item_id: item_id)
-
-
-    @order_item = OrderItem.new(status: "pending", quantity_per_item: params[:quantity_per_item].to_i, order_id: session[:order_id], item_id: params[:item_id].to_i)
 
     if @order_item.save
 
@@ -68,7 +64,6 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
     success = @order_item.destroy
-
 
     if success
       flash[:success] = "Item successfully deleted."

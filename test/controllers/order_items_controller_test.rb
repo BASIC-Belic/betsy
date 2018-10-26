@@ -8,7 +8,6 @@ describe OrderItemsController do
 
   end
 
-
   describe "create" do
 
     it "can create an order item with good data" do
@@ -19,11 +18,9 @@ describe OrderItemsController do
           quantity_per_item: 1
       }
 
-
       new_order_item = OrderItem.new(order_item_data)
 
       new_order_item.must_be :valid?, "Data was invalid. Please come fix this test."
-
 
       expect {
         post item_order_items_path(Item.first.id),
@@ -38,17 +35,16 @@ describe OrderItemsController do
     it "does not create a new order item with bad data" do
 
       order_item_data = {
-
-        order_item: {
-          item_id: Item.last.id,
-        }
+          item_id: Item.first.id,
+          order_id: Order.first.id,
+          quantity_per_item: nil
       }
 
-      OrderItem.new(order_item_data[:order_item]).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
+      OrderItem.new(order_item_data).wont_be :valid?, "Data wasn't invalid. Please come fix this test."
 
       # Act
       expect {
-        post item_order_items_path(Item.last.id),
+        post item_order_items_path(Item.first.id),
         params: order_item_data
       }.wont_change('OrderItem.count')
 
@@ -72,17 +68,36 @@ describe OrderItemsController do
 
     it "can destroy an existing order item" do
 
-      @order = orders(:one)
-      orderitem1 = order_items(:orderitem1)
-      orderitem2 = order_items(:orderitem2)
+      orderitem = order_items(:orderitem1)
 
       # binding.pry
 
       expect {
-        delete order_item_path(orderitem1.id)
-      }.must_change('@order.order_items.count', -1)
+        delete order_item_path(orderitem.id)
+      }.must_change('OrderItem.count', -1)
 
     end
   end
 
 end
+
+# describe "destroy" do
+#   it "can destroy an existing book" do
+#     # Arrange
+#     book = books(:poodr)
+#     # before_book_count = Book.count
+#
+#     # Act
+#     expect {
+#       delete book_path(book)
+#     }.must_change('puts "inside the must_change argument"; Book.count', -1)
+#
+#     # Assert
+#     must_respond_with :redirect
+#     must_redirect_to books_path
+#
+#     # expect(Book.count).must_equal(
+#     #   before_book_count - 1,
+#     #   "book count did not decrease"
+#     # )
+#   end
