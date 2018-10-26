@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe ItemsController do
+
   describe 'index' do
     it "succeeds when there are items" do
       get items_path
@@ -58,18 +59,15 @@ describe ItemsController do
     end
   end
 
-
-
   describe "edit" do
     it "responds with success for an existing item" do
       get edit_item_path(Item.first)
 
       must_respond_with :success
     end
-
-
   end
-  #
+
+
   describe "update" do
     it "should show success when showing an existing product" do
 
@@ -83,16 +81,34 @@ describe ItemsController do
   end
 
   describe "destroy" do
-    it "can destroy an existing item" do
-      item = Item.first
 
+    it 'destroy an existing item' do
+      item = Item.first
+      # testing the database change
       expect {
         delete item_path(item)
       }.must_change('Item.count', -1)
+      # testing the flash message
+      expect flash[:success].must_equal "Item successfully deleted."
+      # testing the path
+      must_redirect_to root_path
+    end
 
+    it 'will not destroy an item that is part of an OrderItem' do
+      @item = items(:shoes)
+      @order = orders(:one)
+      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
 
+      item_count = Item.count
+
+      delete item_path(@item)
+      # database not changed
+      expect(Item.count).must_equal item_count
+      # flash error appears
+      flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
+      # redirect back
+      must_redirect_to root_path
     end
   end
-
 
 end
