@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
-
+  # Kat - testing success. Barbara - testing not successful
   def destroy
 
     in_order = OrderItem.find_by(item_id: @item.id)
@@ -31,11 +31,8 @@ class ItemsController < ApplicationController
 
   end
 
-
-  # a name must be unique
-
   def create
-
+    # to be refactored later...chantelle can you write a test for this? if not no worries
     if item_params_no_cat_type[:category_id]
       category = Category.find(item_params_no_cat_type[:category_id])
     else
@@ -47,7 +44,7 @@ class ItemsController < ApplicationController
     else
       @item = Item.new(get_filtered_params(item_params, category))
     end
-
+    # Kat - Testing this part, success and no success
     save_success = @item.save
 
     if save_success
