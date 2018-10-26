@@ -105,8 +105,21 @@ describe ItemsController do
         expect {
           delete item_path(item)
         }.must_change('Item.count', -1)
+        flash[:success].must_equal "Item successfully deleted."
+      end
 
 
+      it 'will not destroy an item that is part of an OrderItem' do
+        @item = items(:shoes)
+        @order = orders(:one)
+        @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+
+        item_count = Item.count
+
+        delete item_path(@item)
+
+        expect(Item.count).must_equal item_count
+        flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
       end
     end
 
