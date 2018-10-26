@@ -127,6 +127,21 @@ describe Item do
 
     end
 
+    describe 'custom methods' do
+      before do
+        @item = items(:shoes)
+        @order = orders(:one)
+        @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id, quantity_per_item: 2)
+      end
+
+      it 'returns an items subtotal' do
+        quantity_purchased = @new_order_item.quantity_per_item
+        price_of_item = @item.price
+        subtotal = @item.item_subtotal(price_of_item, quantity_purchased)
+
+        expect(subtotal).must_equal @item.price * 2
+      end
+    end
 
   end
 
