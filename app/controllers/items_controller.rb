@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :find_searched_item, only: [:show, :edit, :update, :destroy, :find_item_category,]
+  before_action :find_searched_item, only: [:show, :edit, :update, :destroy, :find_item_category]
   before_action :find_item_category, only: [:show]
 
   def index
@@ -35,11 +35,21 @@ class ItemsController < ApplicationController
   # a name must be unique
 
   def create
-    category = Category.find_by(category_type: item_params[:category_type])
 
-    @item = Item.new(get_filtered_params(item_params, category))
+    if item_params_no_cat_type[:category_id]
+      category = Category.find(item_params_no_cat_type[:category_id])
+    else
+      category = Category.find_by(category_type: item_params[:category_type])
+    end
+
+    if item_params_no_cat_type[:category_id]
+      @item = Item.new(item_params_no_cat_type)
+    else
+      @item = Item.new(get_filtered_params(item_params, category))
+    end
 
     save_success = @item.save
+
     if save_success
       flash[:success] = "Item #{@item.name} successfully saved."
       redirect_to shop_path
@@ -47,7 +57,6 @@ class ItemsController < ApplicationController
       flash.now[:error] =  "Item was not saved."
       render :new, status: :bad_request
     end
-
   end
 
   def show
@@ -57,9 +66,17 @@ class ItemsController < ApplicationController
 
   def update
 
-    category = Category.find_by(category_type: item_params[:category_type])
+    if item_params[:category]
+      category = Category.find(item_params[:category].id)
+    else
+      category = Category.find_by(category_type: item_params[:category_type])
+    end
 
-    success_save = @item.update(get_filtered_params(item_params, category))
+    if item_params_no_cat_type[:category_id]
+      success_save = @item.update(item_params_no_cat_type)
+    else
+      success_save = @item.update(get_filtered_params(item_params, category))
+    end
 
     if success_save
       flash[:success] = "Item #{@item.name} successfully updated."
@@ -68,13 +85,12 @@ class ItemsController < ApplicationController
       flash.now[:error] =  "Error in updating product"
       render :edit, status: 400
     end
-
   end
-
 
   private
 
   def item_params
+
     return params.require(:item).permit(
       :name,
       :category_type,
@@ -82,9 +98,25 @@ class ItemsController < ApplicationController
       :quantity_available,
       :description,
       :image,
-      :active
-
+      :active,
+      :category
     )
+
+  end
+
+  def item_params_no_cat_type
+
+    return params.require(:item).permit(
+      :name,
+      :price,
+      :quantity_available,
+      :description,
+      :image,
+      :active,
+      :user_id,
+      :category_id
+    )
+
   end
 
   def find_searched_item

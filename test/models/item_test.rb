@@ -90,7 +90,6 @@ describe Item do
         quantity_available: 3,
         user: @user_one
       )
-
     end
 
     it 'is valid when title, category, and price is present' do
@@ -126,23 +125,35 @@ describe Item do
       expect ( is_valid ).must_equal true
 
     end
+  end
+
+  describe 'decrement_quantity_available(num)' do
+
+    it 'will decrement quantity in instance of item by num' do
+      valid_item = Item.first
+
+      starting_quant = valid_item.quantity_available
+      num = 1
+
+      valid_item.decrement_quantity_available(num)
+      ending_quant = valid_item.quantity_available
+
+      expect(ending_quant).must_equal starting_quant - num
+    end
+
+    it 'will not decrement quantity in instance of item if num is nil' do
+
+      valid_item = Item.first
+
+      starting_quant = valid_item.quantity_available
+      num = nil
+
+      valid_item.decrement_quantity_available(num)
+      ending_quant = valid_item.quantity_available
+
+      expect(ending_quant).must_equal starting_quant
+    end
 
 
   end
-
-  # describe 'custom methods' do
-  #
-  #   it 'decreases an item quantity by 1' do
-  #     test_item = Item.first
-  #     start_quantity = test_item.quantity_available
-  #     end_quantity = start_quantity.decrement_quantity_available(1)
-  #     decremented_quantity = start_quantity - 1
-  #
-  #     expect ( end_quantity ).must_equal decremented_quantity
-  #
-  #   end
-  #
-  # end
-
-
 end
