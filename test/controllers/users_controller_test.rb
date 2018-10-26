@@ -107,4 +107,10 @@ describe UsersController do
     end
   end
 
+  # describe 'find_searched_user' do
+  #   it 'finds a specific user' do
+  #
+  #   end
+  # end
+
 end
