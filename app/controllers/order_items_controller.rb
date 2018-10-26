@@ -2,19 +2,20 @@ class OrderItemsController < ApplicationController
 
   def create
 
-    @order = Order.find_by(id: session[:order_id])
-    @item = Item.find_by(id: params[:item_id])
+    order_id = session[:order_id].to_i
+    item_id = params[:item_id].to_i
 
-
-    @order_item = @order.order_items.new(
-      item_id: @item.id,
-      quantity_per_item: params[:quantity_per_item]
-    )
+    @order_item = OrderItem.new(status: "pending", quantity_per_item: params[:quantity_per_item].to_i, order_id: order_id, item_id: item_id)
 
     if @order_item.save
+
       # session[:order_id] = @order.id
       flash[:success] = "Item successfully added to your cart!"
-      redirect_to order_path(@order.id)
+      redirect_to order_path(order_id)
+
+    else
+      flash.now[:error] = "Order item contains bad data."
+      redirect_to item_path(item_id), status: :bad_request
     end
 
   end
@@ -28,6 +29,9 @@ class OrderItemsController < ApplicationController
 
     if success
       flash[:success] = "Item successfully updated."
+      redirect_to order_path(@order)
+    else
+      flash.now[:error] = "Invalid order item data"
       redirect_to order_path(@order)
     end
   end
@@ -52,6 +56,7 @@ class OrderItemsController < ApplicationController
         redirect_to order_path(@order)
       end
     end
+
   end
 
 
@@ -68,8 +73,6 @@ class OrderItemsController < ApplicationController
 
 
   private
-  def order_item_params
-    params.require(:order_item).permit(:shipped, :order_id, :item_id, :quantity_per_item)
-  end
+
 
 end

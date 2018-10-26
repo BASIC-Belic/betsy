@@ -21,7 +21,7 @@ class Order < ApplicationRecord
     return @valid_years
   end
 
-  
+
   # def greater_than_zero
   #   if self.field_name < 1
   #     self.errors.add(:field_name, "#{field_name} can't less than one")
