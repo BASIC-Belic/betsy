@@ -20,7 +20,8 @@ locals: {
   <%= f.label :active %> <br>
   <%= f.text_field :active %> <br>
   <%= f.label :categories%> <br>
-  <%=f.collection_check_boxes :category_id, Category.all, :id, :category_type %> <br>
+  <%= f.label :categories%>
+ <%= f.select :category_type, selections: Item::VALID_CATEGORIES %><br>
   <%= f.label :description %> <br>
   <%= f.text_area :description %>
 
