@@ -12,6 +12,7 @@ class OrderItemsController < ApplicationController
     )
 
     if @order_item.save
+
       # session[:order_id] = @order.id
       flash[:success] = "Item successfully added to your cart!"
       redirect_to order_path(@order.id)
@@ -32,6 +33,9 @@ class OrderItemsController < ApplicationController
 
     if success
       flash[:success] = "Item successfully updated."
+      redirect_to order_path(@order)
+    else
+      flash.now[:error] = "Invalid order item data"
       redirect_to order_path(@order)
     end
   end
@@ -56,6 +60,7 @@ class OrderItemsController < ApplicationController
         redirect_to order_path(@order)
       end
     end
+
   end
 
 
@@ -63,6 +68,7 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
     success = @order_item.destroy
+
 
     if success
       flash[:success] = "Item successfully deleted."

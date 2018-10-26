@@ -1,8 +1,9 @@
 class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :item
-  validates :item_id, presence: true
-  validates :order_id, presence: true
+
+  validates :quantity_per_item, presence: true
+
 
   def submit_order_item
 

@@ -3,6 +3,12 @@ require "pry"
 
 describe OrderItemsController do
 
+  describe "validations" do
+
+
+  end
+
+
   describe "create" do
 
     it "can create an order item with good data" do
@@ -11,23 +17,23 @@ describe OrderItemsController do
 
         order_item: {
           item_id: Item.first.id,
-          quantity_per_item: 1
+          quantity_per_item: 1,
+          order_id: Order.first.id
 
         }
       }
 
-      order = Order.last
-
-      new_order_item = order.order_items.new(
-        order_item_data[:order_item]
-      )
+      new_order_item = OrderItem.new(order_item_data[:order_item])
 
       new_order_item.must_be :valid?, "Data was invalid. Please come fix this test."
+      # binding.pry
+
 
       expect {
         post item_order_items_path(Item.first.id),
         params: order_item_data
       }.must_change('OrderItem.count', +1)
+
 
       # FIX THIS
       # must_redirect_to order_path(order.id)
@@ -38,7 +44,6 @@ describe OrderItemsController do
       order_item_data = {
 
         order_item: {
-          quantity_per_item: 1,
           item_id: Item.last.id,
         }
       }
@@ -51,39 +56,36 @@ describe OrderItemsController do
         params: order_item_data
       }.wont_change('OrderItem.count')
 
-      binding.pry
+
       # Assert
       # must_respond_with :bad_request
     end
 
-
-    ##it sets initial status to "pending"
-
   end
 
-  describe "update" do
-
-    it "can create an order item with good data" do
-
-
-    end
-  end
-
-
-  describe "destroy" do
-
-    it "can destroy an existing order item" do
-
-      orderitem = order_items(:orderitem1)
-
-      # binding.pry
-
-      expect {
-        delete order_item_path(orderitem)
-      }.must_change('OrderItem.count', -1)
+  # describe "update" do
+  #
+  #   it "can create an order item with good data" do
+  #
+  #   end
+  # end
 
 
-    end
-  end
+  # describe "destroy" do
+  #
+  #   it "can destroy an existing order item" do
+  #
+  #     @order = orders(:one)
+  #     orderitem1 = order_items(:orderitem1)
+  #     orderitem2 = order_items(:orderitem2)
+  #
+  #     # binding.pry
+  #
+  #     expect {
+  #       delete order_item_path(orderitem1.id)
+  #     }.must_change('@order.order_items.count', -1)
+  #
+  #   end
+  # end
 
 end
