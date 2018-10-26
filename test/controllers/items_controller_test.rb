@@ -33,7 +33,7 @@ describe ItemsController do
 
   describe "create" do
 
-    it "creates an item with valid data for a real logged in user and real category" do
+    it "create success" do
 
       item_data = {
         item:
@@ -56,6 +56,18 @@ describe ItemsController do
       }.must_change('Item.count', +1)
 
       must_redirect_to shop_path
+
+      expect flash[:success].must_equal"Item successfully saved."
+    end
+
+    it 'does not create an item' do
+
+
+
+
+
+
+
     end
   end
 
@@ -79,37 +91,6 @@ describe ItemsController do
     end
 
   end
-
-  # describe "destroy" do
-  #
-  #     it 'destroy an existing item' do
-  #       item = Item.first
-  #       # testing the database change
-  #       expect {
-  #         delete item_path(item)
-  #       }.must_change('Item.count', -1)
-  #       # testing the flash message
-  #       expect flash[:success].must_equal "Item successfully deleted."
-  #       # testing the path
-  #       must_redirect_to root_path
-  #     end
-  #
-  #     it 'will not destroy an item that is part of an OrderItem' do
-  #       @item = items(:shoes)
-  #       @order = orders(:one)
-  #       @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
-  #
-  #       item_count = Item.count
-  #
-  #       delete item_path(@item)
-  #       # database not changed
-  #       expect(Item.count).must_equal item_count
-  #       # flash error appears
-  #       flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
-  #       # redirect back
-  #       must_redirect_to root_path
-  #     end
-  #   end
 
   describe 'destroy' do
 

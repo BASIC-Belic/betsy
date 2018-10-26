@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
     save_success = @item.save
 
     if save_success
-      flash[:success] = "Item #{@item.name} successfully saved."
+      flash[:success] = "Item successfully saved."
       redirect_to shop_path
     else
       flash.now[:error] =  "Item was not saved."
