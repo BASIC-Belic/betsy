@@ -15,8 +15,10 @@ class Item < ApplicationRecord
 
 
   def decrement_quantity_available(num)
-    self.quantity_available -= num
-    self.save
+    if num
+      self.quantity_available -= num
+      self.save
+    end
   end
 
 

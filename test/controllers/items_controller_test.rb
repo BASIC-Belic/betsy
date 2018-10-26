@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe ItemsController do
+
   describe 'index' do
     it "succeeds when there are items" do
       get items_path
@@ -18,7 +19,6 @@ describe ItemsController do
 
       must_respond_with :success
     end
-
   end
 
   describe "new" do
@@ -31,96 +31,115 @@ describe ItemsController do
     end
   end
 
-  # describe "create" do
-  #
-  #   it "creates new item when logged in and given valid data" do
-  #
-  #     @category_one = Category.first
-  #     merchant = users(:one)
-  #     item_details = {
-  #       name: 'test',
-  #       category: @category_one,
-  #       price: 30,
-  #       quantity_available: 2,
-  #       user: merchant
-  #     }
-  #
-  #     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(users))
-  #
-  #     get auth_callback_path(:github)
-  #
-  #
-  #     test_item = Item.new(item_details)
-  #
-  #     must_respond_with :redirect
-  #     expect {
-  #       post item_path, params: item_details }.must_change 'Item.count', 1
-  #
-  #       expect(Product.last.name).must_equal item_details[:item][:name]
-  #     end
-  #   end
+  describe "create" do
 
-    describe "edit" do
-      it "responds with success for an existing item" do
-        get edit_item_path(Item.first)
+    it "creates an item with valid data for a real logged in user and real category" do
 
-        must_respond_with :success
-      end
+      item_data = {
+        item:
+        {
+          user_id: User.first.id,
+          name: "A BRAND NEW THING",
+          category_id: Category.first.id,
+          price: 100,
+          quantity_available: 100
+        }
+      }
 
-      # it "responds with not_found for a product that doesn't exist" do
-      #   item = Item.first.destroy
-      #
-      #   get edit_item_path(item)
-      #
-      #   must_respond_with :not_found
-      # end
+      test_item = Item.new(item_data[:item])
+      test_item.must_be :valid?, "Test data was invalid. Please come fix this test."
+
+      expect {
+
+        post items_path, params: item_data
+
+      }.must_change('Item.count', +1)
+
+      must_redirect_to shop_path
     end
-    #
-    describe "update" do
-      it "should show success when showing an existing product" do
+  end
 
-        item = Item.first
+  describe "edit" do
+    it "responds with success for an existing item" do
+      get edit_item_path(Item.first)
 
-        get item_path(item.id)
-
-        must_respond_with :success
-      end
-
-      # it "should return error message if product doesn't exist" do
-      #
-      #   item = Item.first
-      #   id = item.id
-      #   item.destroy
-      #
-      #   get item_path(id)
-      #
-      #   must_respond_with :not_fou
-      # end
+      must_respond_with :success
     end
-    #
-    describe "destroy" do
-      it "can destroy an existing item" do
-        item = Item.first
-
-        expect {
-          delete item_path(item)
-        }.must_change('Item.count', -1)
-        flash[:success].must_equal "Item successfully deleted."
-      end
+  end
 
 
-      it 'will not destroy an item that is part of an OrderItem' do
-        @item = items(:shoes)
-        @order = orders(:one)
-        @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+  describe "update" do
+    it "should show success when showing an existing product" do
 
-        item_count = Item.count
+      item = Item.first
 
-        delete item_path(@item)
+      get item_path(item.id)
 
-        expect(Item.count).must_equal item_count
-        flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
-      end
+      must_respond_with :success
     end
 
   end
+
+  # describe "destroy" do
+  #
+  #     it 'destroy an existing item' do
+  #       item = Item.first
+  #       # testing the database change
+  #       expect {
+  #         delete item_path(item)
+  #       }.must_change('Item.count', -1)
+  #       # testing the flash message
+  #       expect flash[:success].must_equal "Item successfully deleted."
+  #       # testing the path
+  #       must_redirect_to root_path
+  #     end
+  #
+  #     it 'will not destroy an item that is part of an OrderItem' do
+  #       @item = items(:shoes)
+  #       @order = orders(:one)
+  #       @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+  #
+  #       item_count = Item.count
+  #
+  #       delete item_path(@item)
+  #       # database not changed
+  #       expect(Item.count).must_equal item_count
+  #       # flash error appears
+  #       flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
+  #       # redirect back
+  #       must_redirect_to root_path
+  #     end
+  #   end
+
+  describe 'destroy' do
+
+
+    it 'destroy an existing item' do
+      item = Item.create(name: "SOOO Unique", category: Category.first, user: User.first, price: 10, quantity_available: 10)
+      # testing the database change
+      expect {
+        delete item_path(item)
+      }.must_change('Item.count', -1)
+      # testing the flash message
+      expect flash[:success].must_equal "Item successfully deleted."
+      # testing the path
+      must_redirect_to root_path
+    end
+
+    it 'will not destroy an item that is part of an OrderItem' do
+      @item = items(:shoes)
+      @order = orders(:one)
+      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+
+      item_count = Item.count
+
+      delete item_path(@item)
+      # database not changed
+      expect(Item.count).must_equal item_count
+      # flash error appears
+      flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
+      # redirect back
+      must_redirect_to root_path
+    end
+  end
+end
