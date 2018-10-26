@@ -73,4 +73,38 @@ describe UsersController do
     end
   end
 
+  describe 'merchant pending orders' do
+    # before do
+    #   @item = items(:shoes)
+    #   @order = orders(:one)
+    #   @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+    #   @linda = users(:one)
+    # end
+
+    let (:logged_in_user) {
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@linda))
+
+      get auth_callback_path(:github)
+    }
+
+    it 'succeeds if a merchant has a pending order' do
+      logged_in_user
+
+      get pending_path
+      must_respond_with :success
+    end
+
+    it 'changes the status of an order to shipped'do
+      @item = items(:shoes)
+      @order = orders(:one)
+      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+
+      post paid_path(@new_order_item.id)
+      # binding.pry
+       find_shipped_orderitem = OrderItem.find_by(status: "shipped")
+
+       expect(find_shipped_orderitem.id).must_equal @new_order_item.id
+    end
+  end
+
 end
