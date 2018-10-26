@@ -68,36 +68,15 @@ describe OrderItemsController do
 
     it "can destroy an existing order item" do
 
-      orderitem = order_items(:orderitem1)
-
-      # binding.pry
+      # order = orders(:one)
+      order = orders(:one)
+      orderitem = order.order_items.first
 
       expect {
-        delete order_item_path(orderitem.id)
+        delete order_item_path(orderitem)
       }.must_change('OrderItem.count', -1)
 
     end
   end
 
 end
-
-# describe "destroy" do
-#   it "can destroy an existing book" do
-#     # Arrange
-#     book = books(:poodr)
-#     # before_book_count = Book.count
-#
-#     # Act
-#     expect {
-#       delete book_path(book)
-#     }.must_change('puts "inside the must_change argument"; Book.count', -1)
-#
-#     # Assert
-#     must_respond_with :redirect
-#     must_redirect_to books_path
-#
-#     # expect(Book.count).must_equal(
-#     #   before_book_count - 1,
-#     #   "book count did not decrease"
-#     # )
-#   end

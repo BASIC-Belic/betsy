@@ -61,8 +61,11 @@ class OrderItemsController < ApplicationController
 
 
   def destroy
+
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find(params[:id])
+
+
     success = @order_item.destroy
 
     if success
@@ -71,8 +74,6 @@ class OrderItemsController < ApplicationController
     end
   end
 
-
-  private
 
 
 end
