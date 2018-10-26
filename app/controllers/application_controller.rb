@@ -1,3 +1,4 @@
+
 class ApplicationController < ActionController::Base
 
 
@@ -20,7 +21,9 @@ class ApplicationController < ActionController::Base
   #find all merchants
   def find_all_merchants
     active_products = Item.where(active: true)
+
     distinct_merchant_objects = active_products.select(:user_id).distinct
+
     @merchant_ids = distinct_merchant_objects.map do |merchant|
       merchant.user_id
     end
