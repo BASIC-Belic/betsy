@@ -16,8 +16,10 @@ class Item < ApplicationRecord
 
 
   def decrement_quantity_available(num)
-    self.quantity_available -= num
-    self.save
+    if num
+      self.quantity_available -= num
+      self.save
+    end
   end
 
 
@@ -48,7 +50,7 @@ class Item < ApplicationRecord
 
     return quantity_options
   end
-  
+
 
   def item_subtotal(price,qty)
     item_subtotal = price * qty
