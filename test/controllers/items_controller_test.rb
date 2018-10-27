@@ -1,6 +1,9 @@
 require "test_helper"
 
 describe ItemsController do
+  before do
+    @linda = users(:one)
+  end
 
   describe 'index' do
     it "succeeds when there are items" do
@@ -31,28 +34,33 @@ describe ItemsController do
     end
   end
 
+  let (:logged_in_linda) {
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@linda))
+
+    get auth_callback_path(:github)
+  }
+
   describe "create" do
 
     it "creates an item with valid data for a real logged in user and real category" do
 
+      logged_in_linda
+      # @current_user = @linda
+
       item_data = {
         item:
         {
-          user_id: User.first.id,
           name: "A BRAND NEW THING",
           category_id: Category.first.id,
           price: 100,
           quantity_available: 100
         }
       }
-
       test_item = Item.new(item_data[:item])
-      test_item.must_be :valid?, "Test data was invalid. Please come fix this test."
 
       expect {
-
         post items_path, params: item_data
-
+      
       }.must_change('Item.count', +1)
 
       must_redirect_to shop_path
