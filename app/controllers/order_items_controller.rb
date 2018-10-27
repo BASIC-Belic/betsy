@@ -25,6 +25,7 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
     @order_item = @order.order_items.find_by(id: params[:id])
 
+    binding.pry
     success = @order_item.update(quantity_per_item: params[:quantity_per_item])
 
     if success
