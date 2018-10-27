@@ -7,15 +7,29 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    # @item = Item.find_by(params[:id])
   end
 
   def new
-    @item = Item.new
+    @item = Item.new()
   end
+
+  def create
+    @item = Item.new(user_id: @current_user.id)
+
+    save_success = @item.update(item_params)
+
+    if save_success
+      flash[:success] = "Item #{@item.name} successfully saved."
+      redirect_to shop_path
+    else
+      flash.now[:error] =  "Item was not saved."
+      render :new, status: :bad_request
+    end
+  end
+
   # Kat - testing success. Barbara - testing not successful
   def destroy
-
+    raise
     in_order = OrderItem.find_by(item_id: @item.id)
 
 
@@ -28,32 +42,6 @@ class ItemsController < ApplicationController
       flash[:success] = "Item successfully deleted."
       redirect_back(fallback_location: root_path)
     end
-
-  end
-
-  def create
-    # to be refactored later...chantelle can you write a test for this? if not no worries
-    if item_params_no_cat_type[:category_id]
-      category = Category.find(item_params_no_cat_type[:category_id])
-    else
-      category = Category.find_by(category_type: item_params[:category_type])
-    end
-
-    if item_params_no_cat_type[:category_id]
-      @item = Item.new(item_params_no_cat_type)
-    else
-      @item = Item.new(get_filtered_params(item_params, category))
-    end
-    # Kat - Testing this part, success and no success
-    save_success = @item.save
-
-    if save_success
-      flash[:success] = "Item successfully saved."
-      redirect_to shop_path
-    else
-      flash.now[:error] =  "Item was not saved."
-      render :new, status: :bad_request
-    end
   end
 
   def show
@@ -62,18 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-
-    if item_params[:category]
-      category = Category.find(item_params[:category].id)
-    else
-      category = Category.find_by(category_type: item_params[:category_type])
-    end
-
-    if item_params_no_cat_type[:category_id]
-      success_save = @item.update(item_params_no_cat_type)
-    else
-      success_save = @item.update(get_filtered_params(item_params, category))
-    end
+  success_save = @item.update(item_params)
 
     if success_save
       flash[:success] = "Item #{@item.name} successfully updated."
@@ -87,45 +64,22 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-
     return params.require(:item).permit(
       :name,
-      :category_type,
+      :category_id,
       :price,
       :quantity_available,
       :description,
       :image,
-      :active,
-      :category
+      :active
     )
-
-  end
-
-  def item_params_no_cat_type
-
-    return params.require(:item).permit(
-      :name,
-      :price,
-      :quantity_available,
-      :description,
-      :image,
-      :active,
-      :user_id,
-      :category_id
-    )
-
   end
 
   def find_searched_item
     @item = Item.find_by(id: params[:id])
   end
 
-  def get_filtered_params(filtered_params, category)
-    return { name: filtered_params[:name], price: filtered_params[:price], quantity_available: filtered_params[:quantity_available], description: filtered_params[:description], image: filtered_params[:image], active: filtered_params[:active], category: category, user_id: @current_user.id }
-  end
-
   def find_item_category
     @item_category = Category.find(@item.category_id).category_type
   end
-
 end
