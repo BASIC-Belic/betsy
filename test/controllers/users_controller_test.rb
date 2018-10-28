@@ -97,7 +97,9 @@ describe UsersController do
     it 'changes the status of an order to shipped'do
       @item = items(:shoes)
       @order = orders(:one)
-      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id, quantity_per_item: 3)
+
+    
 
       post paid_path(@new_order_item.id)
       # binding.pry

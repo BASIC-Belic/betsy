@@ -23,10 +23,11 @@ class ApplicationController < ActionController::Base
     active_products = Item.where(active: true)
 
     distinct_merchant_objects = active_products.select(:user_id).distinct
-
     @merchant_ids = distinct_merchant_objects.map do |merchant|
       merchant.user_id
     end
+
+    return @merchant_ids
 
   end
 
@@ -38,13 +39,15 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    # raise
+
     if session[:order_id]
-      # raise
+
       # Order.find_by(id: session[:order_id])
       @current_shopper_order_id = session[:order_id]
+    
     else
       new_order = Order.create
+
       session[:order_id] = new_order.id
       @current_shopper_order_id = session[:order_id]
       # raise
