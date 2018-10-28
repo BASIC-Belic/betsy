@@ -18,7 +18,7 @@ class Order < ApplicationRecord
 
   private
 
-  def valid_years
+  def self.valid_years
 
     two_digit_date = Date.today.year % 1000
     @valid_years = (two_digit_date .. two_digit_date + 8).to_a
@@ -26,7 +26,7 @@ class Order < ApplicationRecord
   end
 
   def validate_years
-   valid_years = valid_years
+   valid_years = Order.valid_years
    errors.add("Credit cared exp year", "is invalid.") unless valid_years.include?(self.credit_card_exp_year)
  end
 end
