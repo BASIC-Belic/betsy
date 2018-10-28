@@ -32,7 +32,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Kat - testing success. Barbara - testing not successful
   def destroy
     in_order = OrderItem.find_by(item_id: @item.id)
 
