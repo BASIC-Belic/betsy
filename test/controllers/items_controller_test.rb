@@ -72,25 +72,28 @@ describe ItemsController do
       must_redirect_to shop_path
     end
 
-    # Dee - I dont understand how to write this test, I can't figure out how to make it it fail because of the validations.
+    it "renders bad_request and does not update the DB for bogus data" do
 
-    # it 'returns a bad_request status and renders another form if item not saved' do
-    #
-    #   bad_data = {
-    #     name: nil,
-    #     catetory_id: Category.first.id,
-    #     price: 20,
-    #     quantity_available: 3
-    #   }
-    #
-    #   bad_item = Item.create!(bad_data[:item])
-    #   # status: :bad_request
-    #
-    #     expect flash[:error].must_equal "Item was not saved."
-    #     must_respond_with :bad_request
-    #
-    #
-    # end
+      logged_in_linda
+      # @current_user = @linda
+
+      item_data = {
+        item:
+        {
+          name: "A BRAND NEW THING",
+          category_id: Category.first.id
+        }
+      }
+
+      test_item = Item.new(item_data[:item])
+
+      expect {
+        post items_path, params: item_data
+      }.wont_change 'Item.count'
+
+      must_respond_with :bad_request
+      assert_equal "Item was not saved.", flash[:error]
+    end
   end
 
   describe "edit" do
@@ -103,13 +106,13 @@ describe ItemsController do
 
   end
 
-# Dee - I'm also confused about how to write this one. 
+  # Dee - I'm also confused about how to write this one.
   describe "update" do
   end
 
   describe 'destroy' do
 
-  it 'destroy an existing item' do
+    it 'destroy an existing item' do
       item = Item.create(name: "SOOO Unique", category: Category.first, user: User.first, price: 10, quantity_available: 10)
       # testing the database change
       expect {
