@@ -57,7 +57,7 @@ class ItemsController < ApplicationController
   success_save = @item.update(item_params)
 
     if success_save
-      flash[:success] = "Item #{@item.name} successfully updated."
+      flash[:success] = "Item successfully updated."
       redirect_to shop_path
     else
       flash.now[:error] =  "Error in updating product"

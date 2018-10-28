@@ -94,7 +94,9 @@ describe ItemsController do
       must_respond_with :bad_request
       assert_equal "Item was not saved.", flash[:error]
     end
+
   end
+
 
   describe "edit" do
 
@@ -104,42 +106,53 @@ describe ItemsController do
       must_respond_with :success
     end
 
+
+  # Can't figure this one out :(
+  # describe "update" do
+  #
+  #   it "successful update displays flash and redirects" do
+  #     test_item = Item.create(name: "name",
+  #       category: Category.first,
+  #       user: User.first,
+  #       price: 10,
+  #       quantity_available: 10)
+  #
+  #       expect {test_item.update(name: "changed name")}.must_route_to shop_path
+  #       # expect flash[:success].must_equal "Item successfully updated."
+  #     end
+
+end
+
+describe 'destroy' do
+
+  it 'destroy an existing item' do
+    item = Item.create(name: "SOOO Unique", category: Category.first, user: User.first, price: 10, quantity_available: 10)
+    # testing the database change
+    expect {
+      delete item_path(item)
+    }.must_change('Item.count', -1)
+    # testing the flash message
+    expect flash[:success].must_equal "Item successfully deleted."
+    # testing the path
+    must_redirect_to root_path
   end
 
-  #[Kat] Dee - I'm also confused about how to write this one.
-  describe "update" do
+  it 'will not destroy an item that is part of an OrderItem' do
+    @item = items(:shoes)
+    @order = orders(:one)
+    @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+
+    item_count = Item.count
+
+    delete item_path(@item)
+    # database not changed
+    expect(Item.count).must_equal item_count
+    # flash error appears
+    flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
+    # redirect back
+    must_redirect_to root_path
   end
 
-  describe 'destroy' do
-
-    it 'destroy an existing item' do
-      item = Item.create(name: "SOOO Unique", category: Category.first, user: User.first, price: 10, quantity_available: 10)
-      # testing the database change
-      expect {
-        delete item_path(item)
-      }.must_change('Item.count', -1)
-      # testing the flash message
-      expect flash[:success].must_equal "Item successfully deleted."
-      # testing the path
-      must_redirect_to root_path
-    end
-
-    it 'will not destroy an item that is part of an OrderItem' do
-      @item = items(:shoes)
-      @order = orders(:one)
-      @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
-
-      item_count = Item.count
-
-      delete item_path(@item)
-      # database not changed
-      expect(Item.count).must_equal item_count
-      # flash error appears
-      flash[:error].must_equal "Item cannot be deleted. There is a pending order with this item"
-      # redirect back
-      must_redirect_to root_path
-    end
-
-  end
+end
 
 end
