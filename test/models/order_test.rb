@@ -63,6 +63,27 @@ describe Order do
       @pending.update(status: "paid")
       expect(@pending.valid?).must_equal true
     end
+  end
 
+  describe 'self.valid_years' do
+    it 'will an array of length 8 with years' do
+      valid_years = Order.valid_years
+      expect(valid_years.length).must_equal 9
+    end
+    it 'will include today\'s date until 8 years from today' do
+      valid_years = Order.valid_years
+      first = Date.today.year % 1000
+      last = first + 8
+      range = (first..last).to_a
+
+      expect(valid_years).must_equal range
+    end
+  end
+
+  describe 'self.valid_years' do
+    it 'will an array of length 8 with years' do
+      valid_years = Order.valid_years
+      expect(valid_years.length).must_equal 9
+    end
   end
 end
