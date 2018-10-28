@@ -16,3 +16,9 @@ orderitem3:
  item: suitcase
  quantity_per_item: 2
  status: pending
+
+orderitem3:
+  order: one
+  item: suitcase
+  quantity_per_item: 3
+  status: pending

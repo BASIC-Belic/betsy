@@ -14,6 +14,7 @@ class Order < ApplicationRecord
 
   validates :order_items, length: { minimum: 1 }, on: :update
 
+
   private
 
   def self.valid_years

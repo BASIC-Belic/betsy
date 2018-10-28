@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   #submit order button
   def update
 
-    @order = Order.find_by(id: params[:id])
+    @order = Order.find_by(id: session[:order_id])
 
     successful = @order.update(parsed_order_data(order_params))
 

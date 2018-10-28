@@ -26,7 +26,7 @@ locals: {
   <%= f.label :credit_card_exp_month%>
   <%= f.select :credit_card_exp_month, selections: Order::VALID_MONTHS %>
   <%= f.label :credit_card_exp_year %>
-  <%= f.select :credit_card_exp_year, selections: @order.valid_years %>
+  <%= f.select :credit_card_exp_year, selections: Order.valid_years %>
   <%= f.label :cvv_num %>
   <%= f.text_area :cvv_num %>
   <%= f.label :zipcode %>
