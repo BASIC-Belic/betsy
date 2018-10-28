@@ -9,7 +9,7 @@ describe OrdersController do
 
     @empty = Order.new
 
-    @pending = orders(:two)
+    @paid = orders(:two)
 
     @shipped = orders(:three)
     @shipped.credit_card_exp_month = Date.today.month
@@ -63,23 +63,32 @@ describe OrdersController do
   describe 'update' do
     it 'will redirect to status_path and save valid order info' do
       skip
-      # updated_year = Date.today.year % 1000
-      # updated_month = Date.today.month
-      #
-      #   order_data = {
-      #     order:
-      #       credit_card_exp_year: Date.today.year % 1000,
-      #       credit_card_exp_month: Date.today.month
-      #     }
-      #   }
-      #
-      #   expect {
-      #     put order_path(@pending.id), params: order_data
-      #
-      #   }.wont_change 'Order.count'
+      logged_in_linda
 
-        # assert_equal updated_year, @pending.credit_card_exp_year
-        # assert_equal updated_month, @pending.credit_card_exp_month
+      starting_session = session[:order_id]
+      order = Order.find_by(id: session[:order_id])
+      updated_year = Date.today.year % 1000
+      updated_month = Date.today.month
+
+      order_data = {
+        order: {
+          credit_card_exp_year: updated_year,
+          credit_card_exp_month: updated_month
+        }
+      }
+
+      patch order_path(order.id), params: order_data
+      ending_session = session[:order_id]
+
+      # expect(starting_session).wont_equal ending_session
+      # expect(ending_session).wont_equal starting_session
+
+      # assert_equal flash[:success], "Thank you for your order. Order confirmation number: #{this_order.id}. Please save this number to view your order status. Disclaimer: This site is for demonstration purposes only."
+
+      must_redirect_to status_path(order.id)
+
+      assert_equal updated_year, order.credit_card_exp_year
+      assert_equal updated_month, order.credit_card_exp_month
     end
 
     it 'will render the page again status for bad request' do
