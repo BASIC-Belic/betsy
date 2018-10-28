@@ -6,25 +6,24 @@ class Order < ApplicationRecord
 
   attr_reader :valid_years
 
+  validate :validate_years, on: :update
+
   validates_inclusion_of :credit_card_exp_month, :in => VALID_MONTHS, message: "Please enter a valid month.", on: :update
 
   validates :credit_card_exp_year, :in => @valid_years, on: :update
 
-  # validates :order_items, numericality: :greater_than_zero, on: :update
-  #shorter way to do the above?
   validates :order_items, length: { minimum: 1 }, on: :update
 
-  def valid_years
+  private
 
+  def self.valid_years
     two_digit_date = Date.today.year % 1000
     @valid_years = (two_digit_date .. two_digit_date + 8).to_a
     return @valid_years
   end
 
-
-  # def greater_than_zero
-  #   if self.field_name < 1
-  #     self.errors.add(:field_name, "#{field_name} can't less than one")
-  #   end
-  # end
+  def validate_years
+   valid_years = Order.valid_years
+   errors.add("Credit cared exp year", "is invalid.") unless valid_years.include?(self.credit_card_exp_year)
+ end
 end
