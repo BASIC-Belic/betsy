@@ -1,9 +1,12 @@
 <main>
+  <section class="user-profile">
 
-  <section>
-    <h2><%=@user.name%>'s Shop</h2>
-    <%= image_tag "#{@user.image_url}", alt: "user image", title: "#{@user.name}'s profile'", style: 'float:right;'%>
-    <div class="product">
+    <div class="user-pic">
+    <%= image_tag "#{@user.image_url}", alt: "user image", title: "#{@user.name}'s profile'" %>
+  </div>
+  <div class="user-product">
+<h2><%=@user.name%>'s Shop</h2>
+    
       <h3> Product List</h3>
       <ul>
         <%@user.items.each do |item| %>
