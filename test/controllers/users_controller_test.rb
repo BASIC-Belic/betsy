@@ -74,12 +74,6 @@ describe UsersController do
   end
 
   describe 'merchant pending orders' do
-    # before do
-    #   @item = items(:shoes)
-    #   @order = orders(:one)
-    #   @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
-    #   @linda = users(:one)
-    # end
 
     let (:logged_in_user) {
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@linda))
@@ -99,20 +93,10 @@ describe UsersController do
       @order = orders(:one)
       @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id, quantity_per_item: 3)
 
-    
-
       post paid_path(@new_order_item.id)
-      # binding.pry
        find_shipped_orderitem = OrderItem.find_by(status: "shipped")
 
        expect(find_shipped_orderitem.id).must_equal @new_order_item.id
     end
   end
-
-  # describe 'find_searched_user' do
-  #   it 'finds a specific user' do
-  #
-  #   end
-  # end
-
 end

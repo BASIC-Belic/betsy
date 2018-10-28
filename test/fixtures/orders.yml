@@ -6,8 +6,8 @@ one:
   mailing_address: MyString
   name_on_card: MyString
   credit_card_num: 1
-  credit_card_exp_month: 1
-  credit_card_exp_year: 2025
+  credit_card_exp_month: 0
+  credit_card_exp_year: 0
   cvv_num: 1
   zipcode: 1
   status: pending
@@ -18,8 +18,8 @@ two:
   mailing_address: MyString
   name_on_card: MyString
   credit_card_num: 1
-  credit_card_exp_month: 1
-  credit_card_exp_year: 2025
+  credit_card_exp_month: 0
+  credit_card_exp_year: 0
   cvv_num: 1
   zipcode: 1
   status: paid
@@ -30,8 +30,8 @@ three:
   mailing_address: MyString
   name_on_card: MyString
   credit_card_num: 1
-  credit_card_exp_month: 1
-  credit_card_exp_year: 2025
+  credit_card_exp_month: 0
+  credit_card_exp_year: 0
   cvv_num: 1
   zipcode: 1
   status: shipped
