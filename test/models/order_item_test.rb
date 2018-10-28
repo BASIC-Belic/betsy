@@ -125,7 +125,7 @@ describe OrderItem do
           @order = orders(:one)
           @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
 
-          
+
           item_name = @item.name
           find_item_name = @new_order_item.find_item_name(@new_order_item.item_id)
 
@@ -136,9 +136,9 @@ describe OrderItem do
 
           @item = items(:shoes)
           @order = orders(:one)
-          @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id)
+          @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id, quantity_per_item: 4)
 
-          find_order = @new_order_item.find_order(@new_order_item.order_id)
+          find_order = Order.find_by(id: @new_order_item.order_id)
 
           expect(find_order).must_equal @order
 
