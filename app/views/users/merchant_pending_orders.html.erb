@@ -22,7 +22,7 @@
 
     <div class="customer_info">
       <h5>Customer Information:</h5>
-      <% order = order_item.find_order(order_item.order_id) %>
+      <% order = Order.find_by(id: order_item.order_id) %>
       Name: <%= order.name %><br>
       Email: <%= order.email %><br>
       Address: <%= order.mailing_address %><br>
