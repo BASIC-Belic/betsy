@@ -73,7 +73,7 @@ describe UsersController do
     end
   end
 
-  describe 'merchant pending orders' do
+  describe 'User#merchant pending orders and User#paid' do
 
     let (:logged_in_user) {
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@linda))
@@ -94,9 +94,10 @@ describe UsersController do
       @new_order_item = OrderItem.create(order_id: @order.id, item_id: @item.id, quantity_per_item: 3)
 
       post paid_path(@new_order_item.id)
-       find_shipped_orderitem = OrderItem.find_by(status: "shipped")
+       find_shipped_order_item = OrderItem.find_by(status: "shipped")
 
-       expect(find_shipped_orderitem.id).must_equal @new_order_item.id
+       expect(find_shipped_order_item.id).must_equal @new_order_item.id
+       must_respond_with :redirect
     end
   end
 end

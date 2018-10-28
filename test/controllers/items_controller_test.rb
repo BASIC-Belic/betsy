@@ -106,7 +106,7 @@ describe ItemsController do
 
   end
 
-  # Dee - I'm also confused about how to write this one.
+  #[Kat] Dee - I'm also confused about how to write this one.
   describe "update" do
   end
 
