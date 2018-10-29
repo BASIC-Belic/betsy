@@ -57,6 +57,26 @@ describe Order do
     end
   end
 
+  describe 'submit_order' do
+    it 'will change order and order items to pending' do
+      expect(@pending.order_items.length).must_be :>=, 1
+      expect(@pending.status).must_equal "pending"
+
+      item_ids = @pending.order_items.map { |item| item.item_id }
+      statuses = @pending.order_items.map {|item| item.status}.uniq
+      expect(statuses.length).must_equal 1
+      expect(statuses[0]).must_equal "pending"
+
+      @pending.submit_order
+
+      expect(@pending.status).must_equal "paid"
+      new_statuses = @pending.order_items.map {|item| item.status}.uniq
+      expect(new_statuses.length).must_equal 1
+      expect(new_statuses[0]).must_equal "paid"
+
+    end
+  end
+
   describe 'self.valid_years' do
     it 'will an array of length 8 with years' do
       valid_years = Order.valid_years

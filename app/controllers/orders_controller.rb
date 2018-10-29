@@ -21,9 +21,10 @@ class OrdersController < ApplicationController
     successful = @order.update(parsed_order_data(order_params))
 
     #to do --> MOVE logic into instance method in Order
-    @order.order_items.each do |order_item|
-      order_item.submit_order_item
-    end
+    # @order.order_items.each do |order_item|
+    #   order_item.submit_order_item
+    # end
+    @order.sumbit_order
 
     if successful
       #clear session data
