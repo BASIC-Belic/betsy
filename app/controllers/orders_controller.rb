@@ -1,40 +1,44 @@
 class OrdersController < ApplicationController
 
-before_action :find_searched_order, only: [:show, :edit]
-
   def show
-    @order_items = OrderItem.where(order_id: @order.id)
+    current_order = Order.find_by(id: params[:id])
+    # @order_items = @current_order.order_items
+
+    @order_items = OrderItem.where(order_id: current_order.id)
+    # @order_items = current_order.order_items
   end
 
   #fill out order details
   def edit
+    @order = Order.find_by(id: params[:id])
   end
 
   #submit order button
   def update
-    @order = Order.find_by(id: session[:order_id])
+
+    @order = Order.find_by(id: params[:id])
 
     successful = @order.update(parsed_order_data(order_params))
 
+    #to do --> MOVE logic into instance method in Order
+    @order.order_items.each do |order_item|
+      order_item.submit_order_item
+    end
+
     if successful
-    #submit order
-    @order.submit_order
-    #clear session data
-    temp_id = session[:order_id]
-    session[:order_id] = nil
+      #clear session data
+      temp_id = session[:order_id]
+      session[:order_id] = nil
       flash[:success] = "Thank you for your order. Order confirmation number: #{@order.id}. Please save this number to view your order status. Disclaimer: This site is for demonstration purposes only."
       redirect_to status_path(temp_id)
     else
+
       flash.now[:error] =  "Error in submitting order."
       render :edit, status: 400
     end
   end
 
   private
-
-  def find_searched_order
-    @user = Order.find_by(id: params[:id])
-  end
 
   def order_params
     return params.require(:order).permit(
