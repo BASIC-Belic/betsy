@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     # @order.order_items.each do |order_item|
     #   order_item.submit_order_item
     # end
-    @order.sumbit_order
+    @order.submit_order
 
     if successful
       #clear session data
